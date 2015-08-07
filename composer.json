@@ -1,0 +1,23 @@
+{
+    "name": "gong023/shippo-client",
+    "authors": [
+        {
+            "name": "gong023",
+            "email": "gon.gong.gone@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "gong023/assert_chain": "dev-master",
+        "fabpot/php-cs-fixer": "1.*",
+        "mockery/mockery": "0.9.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ShippoClient\\": "src"
+        }
+    }
+}

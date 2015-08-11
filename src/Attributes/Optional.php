@@ -37,7 +37,7 @@ class Optional implements AttributeInterface
      */
     public function asInteger(callable $validate = null)
     {
-        if (empty($this->optonalValue)) {
+        if (empty($this->optionalValue)) {
             return 0;
         }
 

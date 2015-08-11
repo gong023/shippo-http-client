@@ -66,6 +66,11 @@ class Response
         return $this->attributes->mayHave('street2')->asString();
     }
 
+    public function getStreetNo()
+    {
+        return $this->attributes->mayHave('street_no')->asString();
+    }
+
     public function getCity()
     {
         return $this->attributes->mayHave('city')->asString();
@@ -135,6 +140,7 @@ class Response
             "company"        => $this->getCompany(),
             "street1"        => $this->getStreet1(),
             "street2"        => $this->getStreet2(),
+            "street_no"      => $this->getStreetNo(),
             "city"           => $this->getCity(),
             "state"          => $this->getState(),
             "zip"            => $this->getZip(),

@@ -1,4 +1,5 @@
 <?php
+
 namespace ShippoClient;
 
 class ShippoClientTest extends \PHPUnit_Framework_TestCase
@@ -32,6 +33,28 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
         $response = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
 
         $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+        $responseArray = $response->toArray();
+        $this->assertSame('VALID', $responseArray['object_state']);
+        $this->assertSame('FULLY_ENTERED', $responseArray['object_source']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_created']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_updated']);
+        $this->assertNotEmpty($responseArray['object_id']);
+        $this->assertNotEmpty($responseArray['object_owner']);
+        $this->assertSame('Shawn Ippotle', $responseArray['name']);
+        $this->assertSame('Shippo', $responseArray['company']);
+        $this->assertSame("", $responseArray['street_no']);
+        $this->assertSame("215 Clayton St.", $responseArray['street1']);
+        $this->assertSame("", $responseArray['street2']);
+        $this->assertSame("San Francisco", $responseArray['city']);
+        $this->assertSame("CA", $responseArray['state']);
+        $this->assertSame("94117", $responseArray['zip']);
+        $this->assertSame("US", $responseArray['country']);
+        $this->assertSame("0015553419393", $responseArray['phone']); // casted
+        $this->assertSame("api@goshippo.com", $responseArray['email']); // casted
+        $this->assertTrue($responseArray['is_residential']);
+        $this->assertSame("", $responseArray['ip']);
+        $this->assertInternalType('array', $responseArray['messages']);
+        $this->assertSame("Customer ID 123456", $responseArray['metadata']);
 
         return $response->getObjectId();
     }
@@ -45,5 +68,32 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
         $response = ShippoClient::provider(self::$accessToken)->addresses()->retrieve($objectId);
 
         $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+    }
+
+    /**
+     * @depends testCreateAddress
+     * @param $objectId
+     * @return string
+     */
+    public function testValidate($objectId)
+    {
+        $response = ShippoClient::provider(self::$accessToken)->addresses()->validate($objectId);
+
+        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+    }
+
+    /**
+     * @depends testCreateAddress
+     */
+    public function testGetList()
+    {
+        $response = ShippoClient::provider(self::$accessToken)->addresses()->getList();
+
+        $this->assertInstanceOf('ShippoClient\\Addresses\\ResponseCollection', $response);
+        $responseArray = $response->toArray();
+        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
+        $this->assertArrayHasKey('next', $responseArray);
+        $this->assertArrayHasKey('previous', $responseArray);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Addresses\\Response', $responseArray['results']);
     }
 }

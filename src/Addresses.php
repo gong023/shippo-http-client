@@ -20,4 +20,11 @@ class Addresses
 
         return new AddressesResponse($responseArray);
     }
+
+    public function retrieve($objectId)
+    {
+        $responseArray = $this->request->get("addresses/$objectId");
+
+        return new AddressesResponse($responseArray);
+    }
 }

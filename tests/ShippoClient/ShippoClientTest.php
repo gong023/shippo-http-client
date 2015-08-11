@@ -3,8 +3,17 @@ namespace ShippoClient;
 
 class ShippoClientTest extends \PHPUnit_Framework_TestCase
 {
+    private static $accessToken = null;
+
+    public function setUp()
+    {
+        self::$accessToken = getenv('SHIPPO_PRIVATE_ACCESS_TOKEN');
+    }
+
     public function testCreateAddress()
     {
+        $this->assertNotNull(self::$accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+
         $param = array(
             "object_purpose" => "PURCHASE",
             "name" => "Shawn Ippotle",
@@ -20,9 +29,20 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
             "is_residential" => true,
             "metadata" => "Customer ID 123456"
         );
-        $accessToken = getenv('SHIPPO_PRIVATE_ACCESS_TOKEN');
+        $response = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
 
-        $response = ShippoClient::provider($accessToken)->addresses()->create($param);
+        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+
+        return $response->getObjectId();
+    }
+
+    /**
+     * @depends testCreateAddress
+     * @param $objectId
+     */
+    public function testRetrieve($objectId)
+    {
+        $response = ShippoClient::provider(self::$accessToken)->addresses()->retrieve($objectId);
 
         $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
     }

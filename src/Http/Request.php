@@ -28,10 +28,19 @@ class Request
         return $this->accessToken;
     }
 
-    public function post($endPoint, array $body)
+    public function post($endPoint, $body = array())
     {
         $guzzleResponse = $this->delegated->post($endPoint, null, $body)->send();
         $this->checkError($guzzleResponse, $body);
+
+        return $guzzleResponse->json();
+    }
+
+    public function get($endPoint, $parameter = array())
+    {
+        $queryString = http_build_query($parameter);
+        $guzzleResponse = $this->delegated->get("$endPoint?$queryString")->send();
+        $this->checkError($guzzleResponse, $parameter);
 
         return $guzzleResponse->json();
     }

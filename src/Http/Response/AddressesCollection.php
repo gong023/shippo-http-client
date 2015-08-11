@@ -1,10 +1,10 @@
 <?php
 
-namespace ShippoClient\Addresses;
+namespace ShippoClient\Http\Response;
 
 use ShippoClient\Attributes;
 
-class ResponseCollection
+class AddressesCollection
 {
     public function __construct(array $attributes)
     {
@@ -27,13 +27,13 @@ class ResponseCollection
     }
 
     /**
-     * @return Response[]
+     * @return Addresses[]
      */
     public function getResults()
     {
         $results = array();
-        foreach($this->attributes->mayHave('results')->asArray() as $result) {
-            $results[] = new Response($result);
+        foreach ($this->attributes->mayHave('results')->asArray() as $result) {
+            $results[] = new Addresses($result);
         }
 
         return $results;
@@ -49,4 +49,3 @@ class ResponseCollection
         );
     }
 }
-

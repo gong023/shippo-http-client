@@ -1,6 +1,6 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Exception;
 
 class ClientErrorException extends BadResponseException
 {

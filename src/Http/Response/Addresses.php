@@ -1,10 +1,10 @@
 <?php
 
-namespace ShippoClient\Addresses;
+namespace ShippoClient\Http\Response;
 
 use ShippoClient\Attributes;
 
-class Response
+class Addresses
 {
     public function __construct(array $rawResponse)
     {

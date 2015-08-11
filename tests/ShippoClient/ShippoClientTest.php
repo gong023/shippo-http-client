@@ -32,7 +32,7 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
         );
         $response = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
 
-        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $response);
         $responseArray = $response->toArray();
         $this->assertSame('VALID', $responseArray['object_state']);
         $this->assertSame('FULLY_ENTERED', $responseArray['object_source']);
@@ -67,7 +67,7 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->retrieve($objectId);
 
-        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $response);
     }
 
     /**
@@ -79,7 +79,7 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->validate($objectId);
 
-        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $response);
     }
 
     /**
@@ -89,11 +89,11 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->getList();
 
-        $this->assertInstanceOf('ShippoClient\\Addresses\\ResponseCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\AddressesCollection', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Addresses\\Response', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Addresses', $responseArray['results']);
     }
 }

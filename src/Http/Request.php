@@ -3,8 +3,8 @@ namespace ShippoClient\Http;
 
 use Guzzle\Http\Client;
 use Guzzle\Http\Message\Response as GuzzleResponse;
-use ShippoClient\Http\Response\ClientErrorException;
-use ShippoClient\Http\Response\ServerErrorException;
+use ShippoClient\Http\Response\Exception\ClientErrorException;
+use ShippoClient\Http\Response\Exception\ServerErrorException;
 
 class Request
 {

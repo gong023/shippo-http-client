@@ -1,11 +1,11 @@
 <?php
 
-namespace ShippoClient\Addresses;
+namespace ShippoClient\Http\Request\Addresses;
 
 use ShippoClient\Attributes\InvalidAttributeException;
 use ShippoClient\Attributes;
 
-class CreateRequest
+class CreateObject
 {
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';

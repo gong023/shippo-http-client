@@ -5,7 +5,7 @@ namespace ShippoClient\Addresses;
 use ShippoClient\Attributes\InvalidAttributeException;
 use ShippoClient\Attributes;
 
-class Request
+class CreateRequest
 {
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';
@@ -29,7 +29,7 @@ class Request
     {
         $allowed = array(static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE);
 
-        return $this->attributes->mustHave('object_purpose')->toString(function ($value) use ($allowed) {
+        return $this->attributes->mustHave('object_purpose')->asString(function ($value) use ($allowed) {
             return in_array($value, $allowed);
         });
     }
@@ -42,7 +42,7 @@ class Request
      */
     public function getName()
     {
-        return $this->attributes->mustHave('name')->toString();
+        return $this->attributes->mustHave('name')->asString();
     }
 
     /**
@@ -52,7 +52,7 @@ class Request
      */
     public function getCompany()
     {
-        return $this->attributes->mayHave('company')->toString();
+        return $this->attributes->mayHave('company')->asString();
     }
 
     /**
@@ -64,7 +64,7 @@ class Request
      */
     public function getStreet1()
     {
-        return $this->attributes->mustHave('street1')->toString();
+        return $this->attributes->mustHave('street1')->asString();
     }
 
     /**
@@ -75,7 +75,7 @@ class Request
      */
     public function getStreetNo()
     {
-        return $this->attributes->mayHave('street_no')->toString();
+        return $this->attributes->mayHave('street_no')->asString();
     }
 
     /**
@@ -85,7 +85,7 @@ class Request
      */
     public function getStreet2()
     {
-        return $this->attributes->mayHave('street2')->toString();
+        return $this->attributes->mayHave('street2')->asString();
     }
 
     /**
@@ -98,7 +98,7 @@ class Request
      */
     public function getCity()
     {
-        return $this->attributes->mustHave('city')->toString();
+        return $this->attributes->mustHave('city')->asString();
     }
 
     /**
@@ -109,7 +109,7 @@ class Request
      */
     public function getZip()
     {
-        return $this->attributes->mustHave('zip')->toString();
+        return $this->attributes->mustHave('zip')->asString();
     }
 
     /**
@@ -122,7 +122,7 @@ class Request
      */
     public function getState()
     {
-        return $this->attributes->mustHave('state')->toString();
+        return $this->attributes->mustHave('state')->asString();
     }
 
     /**
@@ -135,7 +135,7 @@ class Request
      */
     public function getCountry()
     {
-        return $this->attributes->mustHave('country')->toString();
+        return $this->attributes->mustHave('country')->asString();
     }
 
     /**
@@ -147,7 +147,7 @@ class Request
      */
     public function getPhone()
     {
-        return $this->attributes->mustHave('phone')->toString();
+        return $this->attributes->mustHave('phone')->asString();
     }
 
     /**
@@ -158,7 +158,7 @@ class Request
      */
     public function getEmail()
     {
-        return $this->attributes->mustHave('email')->toString(function ($email) {
+        return $this->attributes->mustHave('email')->asString(function ($email) {
             return filter_var($email, FILTER_VALIDATE_EMAIL);
         });
     }
@@ -170,12 +170,12 @@ class Request
      */
     public function getIsResidential()
     {
-        $is_residential = $this->attributes->mayHave('is_residential')->toBoolean();
-        if (! $is_residential) {
+        $is_residential = $this->attributes->mayHave('is_residential')->value();
+        if ($is_residential === null) {
             return null;
         }
 
-        return $is_residential;
+        return (bool)$is_residential;
     }
 
     /**
@@ -186,13 +186,13 @@ class Request
      */
     public function getMetadata()
     {
-        return $this->attributes->mayHave('metadata')->toString(function ($metadata) {
+        return $this->attributes->mayHave('metadata')->asString(function ($metadata) {
 //            return mb_strlen($metadata) <= 100;
               return strlen($metadata) <= 100;
         });
     }
 
-    public function getRequestArray()
+    public function toArray()
     {
         return array_filter(array(
             'object_purpose' => $this->getObjectPurpose(),

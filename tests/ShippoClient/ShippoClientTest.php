@@ -3,7 +3,7 @@ namespace ShippoClient;
 
 class ShippoClientTest extends \PHPUnit_Framework_TestCase
 {
-    public function testPostAddress()
+    public function testCreateAddress()
     {
         $param = array(
             "object_purpose" => "PURCHASE",
@@ -23,6 +23,7 @@ class ShippoClientTest extends \PHPUnit_Framework_TestCase
         $accessToken = getenv('SHIPPO_PRIVATE_ACCESS_TOKEN');
 
         $response = ShippoClient::provider($accessToken)->addresses()->create($param);
-        $this->assertTrue(true);
+
+        $this->assertInstanceOf('ShippoClient\\Addresses\\Response', $response);
     }
 }

@@ -5,7 +5,7 @@ namespace ShippoClient\Attributes;
 class Required implements AttributeInterface
 {
     /**
-     * @var null|mixed
+     * @var mixed|null
      */
     private $requiredValue = null;
 
@@ -19,13 +19,13 @@ class Required implements AttributeInterface
      * @return string
      * @throws InvalidAttributeException
      */
-    public function toString(callable $validate = null)
+    public function asString(callable $validate = null)
     {
         if (empty($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
-        if (! is_null($validate) && ! $validate($this->requiredValue)) {
+        if ($validate !== null && ! $validate($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
@@ -37,13 +37,13 @@ class Required implements AttributeInterface
      * @return int
      * @throws InvalidAttributeException
      */
-    public function toInteger(callable $validate = null)
+    public function asInteger(callable $validate = null)
     {
-        if (empty($value)) {
+        if ($this->requiredValue === null) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
-        if (! is_null($validate) && ! $validate($this->requiredValue)) {
+        if ($validate !== null && ! $validate($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
@@ -55,16 +55,34 @@ class Required implements AttributeInterface
      * @return bool
      * @throws InvalidAttributeException
      */
-    public function toBoolean(callable $validate = null)
+    public function asBoolean(callable $validate = null)
     {
-        if (empty($value)) {
+        if ($this->requiredValue === null) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
-        if (! is_null($validate) && ! $validate($this->requiredValue)) {
+        if ($validate !== null && ! $validate($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);
         }
 
         return (bool)$this->requiredValue;
+    }
+
+    /**
+     * @param callable $validate
+     * @return array
+     * @throws InvalidAttributeException
+     */
+    public function asArray(callable $validate = null)
+    {
+        if (! is_array($this->requiredValue)) {
+            throw new InvalidAttributeException($this->requiredValue);
+        }
+
+        if ($validate !== null && ! $validate($this->requiredValue)) {
+            throw new InvalidAttributeException($this->requiredValue);
+        }
+
+        return $this->requiredValue;
     }
 }

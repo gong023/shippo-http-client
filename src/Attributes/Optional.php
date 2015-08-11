@@ -18,13 +18,13 @@ class Optional implements AttributeInterface
      * @param callable $validate
      * @return string
      */
-    public function toString(callable $validate = null)
+    public function asString(callable $validate = null)
     {
         if (empty($this->optionalValue)) {
             return '';
         }
 
-        if (! is_null($validate) && ! $validate($this->optionalValue)) {
+        if ($validate !== null && ! $validate($this->optionalValue)) {
             return '';
         }
 
@@ -35,13 +35,13 @@ class Optional implements AttributeInterface
      * @param callable $validate
      * @return int
      */
-    public function toInteger(callable $validate = null)
+    public function asInteger(callable $validate = null)
     {
         if (empty($this->optonalValue)) {
             return 0;
         }
 
-        if (! is_null($validate) && ! $validate($this->optionalValue)) {
+        if ($validate !== null && ! $validate($this->optionalValue)) {
             return 0;
         }
 
@@ -52,16 +52,38 @@ class Optional implements AttributeInterface
      * @param callable $validate
      * @return bool
      */
-    public function toBoolean(callable $validate = null)
+    public function asBoolean(callable $validate = null)
     {
-        if (empty($this->optionalValue)) {
+        if ($this->optionalValue === null) {
             return false;
         }
 
-        if (! is_null($validate) && ! $validate($this->optionalValue)) {
+        if ($validate !== null && ! $validate($this->optionalValue)) {
             return false;
         }
 
         return (bool)$this->optionalValue;
+    }
+
+    /**
+     * @param callable $validate
+     * @return array
+     */
+    public function asArray(callable $validate = null)
+    {
+        if (! is_array($this->optionalValue)) {
+            return array();
+        }
+
+        if ($validate !== null && ! $validate($this->optionalValue)) {
+            return array();
+        }
+
+        return $this->optionalValue;
+    }
+
+    public function value()
+    {
+        return $this->optionalValue;
     }
 }

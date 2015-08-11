@@ -2,8 +2,9 @@
 
 namespace ShippoClient;
 
+use ShippoClient\Addresses\Response as AddressesResponse;
 use ShippoClient\Http\Request;
-use ShippoClient\Addresses\Request as RequestObj;
+use ShippoClient\Addresses\CreateRequest;
 
 class Addresses
 {
@@ -14,8 +15,9 @@ class Addresses
 
     public function create(array $attributes)
     {
-        $requestObj = new RequestObj($attributes);
+        $requestObj = new CreateRequest($attributes);
+        $responseArray = $this->request->post('addresses', $requestObj->toArray());
 
-        return $this->request->post('addresses', $requestObj->getRequestArray());
+        return new AddressesResponse($responseArray);
     }
 }

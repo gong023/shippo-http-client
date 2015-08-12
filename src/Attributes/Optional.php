@@ -15,7 +15,7 @@ class Optional implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return string
      */
     public function asString(callable $validate = null)
@@ -28,11 +28,11 @@ class Optional implements AttributeInterface
             return '';
         }
 
-        return $this->optionalValue;
+        return (string)$this->optionalValue;
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return int
      */
     public function asInteger(callable $validate = null)
@@ -45,11 +45,28 @@ class Optional implements AttributeInterface
             return 0;
         }
 
-        return $this->optionalValue;
+        return (int)$this->optionalValue;
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
+     * @return float
+     */
+    public function asFloat(callable $validate = null)
+    {
+        if (empty($this->optionalValue)) {
+            return 0.0;
+        }
+
+        if ($validate !== null && ! $validate($this->optionalValue)) {
+            return 0.0;
+        }
+
+        return (float)$this->optionalValue;
+    }
+
+    /**
+     * @param callable|null $validate
      * @return bool
      */
     public function asBoolean(callable $validate = null)
@@ -66,7 +83,7 @@ class Optional implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return array
      */
     public function asArray(callable $validate = null)

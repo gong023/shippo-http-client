@@ -9,6 +9,8 @@ use ShippoClient\Http\Request\Addresses\CreateObject;
 
 class Addresses
 {
+    private $request;
+
     public function __construct(Request $request)
     {
         $this->request = $request;

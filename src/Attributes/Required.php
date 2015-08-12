@@ -15,7 +15,7 @@ class Required implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return string
      * @throws InvalidAttributeException
      */
@@ -33,7 +33,7 @@ class Required implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return int
      * @throws InvalidAttributeException
      */
@@ -51,7 +51,25 @@ class Required implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
+     * @return float
+     * @throws InvalidAttributeException
+     */
+    public function asFloat(callable $validate = null)
+    {
+        if ($this->requiredValue === null) {
+            throw new InvalidAttributeException($this->requiredValue);
+        }
+
+        if ($validate !== null && ! $validate($this->requiredValue)) {
+            throw new InvalidAttributeException($this->requiredValue);
+        }
+
+        return (float)$this->requiredValue;
+    }
+
+    /**
+     * @param callable|null $validate
      * @return bool
      * @throws InvalidAttributeException
      */
@@ -69,7 +87,7 @@ class Required implements AttributeInterface
     }
 
     /**
-     * @param callable $validate
+     * @param callable|null $validate
      * @return array
      * @throws InvalidAttributeException
      */

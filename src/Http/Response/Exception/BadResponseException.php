@@ -11,8 +11,8 @@ class BadResponseException extends \Exception
   /**
    * @param string $message
    * @param int $statusCode
-   * @param mixed $request
-   * @param mixed $response
+   * @param array $request
+   * @param array $response
    */
     public function __construct($message, $statusCode, $request, $response)
     {

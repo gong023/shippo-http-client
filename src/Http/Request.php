@@ -2,7 +2,9 @@
 namespace ShippoClient\Http;
 
 use Guzzle\Http\Client;
-use Guzzle\Http\Message\Response as GuzzleResponse;
+use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Exception\ClientErrorResponseException as GuzzleClientErrorException;
+use Guzzle\Http\Exception\ServerErrorResponseException as GuzzleServerErrorException;
 use ShippoClient\Http\Response\Exception\ClientErrorException;
 use ShippoClient\Http\Response\Exception\ServerErrorException;
 
@@ -30,8 +32,8 @@ class Request
 
     public function post($endPoint, $body = array())
     {
-        $guzzleResponse = $this->delegated->post($endPoint, null, $body)->send();
-        $this->checkError($guzzleResponse, $body);
+        $request = $this->delegated->post($endPoint, null, $body);
+        $guzzleResponse = $this->sendWithCheck($request);
 
         return $guzzleResponse->json();
     }
@@ -39,32 +41,30 @@ class Request
     public function get($endPoint, $parameter = array())
     {
         $queryString = http_build_query($parameter);
-        $guzzleResponse = $this->delegated->get("$endPoint?$queryString")->send();
-        $this->checkError($guzzleResponse, $parameter);
+        $request = $this->delegated->get("$endPoint?$queryString");
+        $guzzleResponse = $this->sendWithCheck($request);
 
         return $guzzleResponse->json();
     }
 
-    private function checkError(GuzzleResponse $response, array $request)
+    private function sendWithCheck(RequestInterface $request)
     {
-        if ($response->isClientError()) {
-            $responseArray = $response->serialize();
+        try {
+            return $request->send();
+        } catch (GuzzleClientErrorException $e) {
             throw new ClientErrorException(
-              $response->getMessage(),
-              $responseArray['status'],
-              $request,
-              $responseArray['body']
-          );
-        }
-
-        if ($response->isServerError()) {
-            $responseArray = $response->serialize();
+                $e->getMessage(),
+                $e->getResponse()->getStatusCode(),
+                explode("\r\n", $e->getRequest()->__toString()),
+                explode("\r\n", $e->getResponse()->__toString())
+            );
+        } catch (GuzzleServerErrorException $e) {
             throw new ServerErrorException(
-              $response->getMessage(),
-              $responseArray['status'],
-              $request,
-              $responseArray['body']
-          );
+                $e->getMessage(),
+                $e->getResponse()->getStatusCode(),
+                explode("\r\n", $e->getRequest()->__toString()),
+                explode("\r\n", $e->getResponse()->__toString())
+            );
         }
     }
 }

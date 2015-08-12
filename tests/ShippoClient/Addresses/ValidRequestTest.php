@@ -1,8 +1,10 @@
 <?php
 
-namespace ShippoClient;
+namespace ShippoClient\Addresses;
 
-class ShippoClientTest extends \PHPUnit_Framework_TestCase
+use ShippoClient\ShippoClient;
+
+class ValidRequestTest extends \PHPUnit_Framework_TestCase
 {
     private static $accessToken = null;
 

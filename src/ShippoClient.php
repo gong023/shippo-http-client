@@ -15,6 +15,11 @@ class ShippoClient
         return new Addresses($this->request);
     }
 
+    public function parcels()
+    {
+        return new Parcels($this->request);
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken

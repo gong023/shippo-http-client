@@ -29,7 +29,7 @@ class InvalidRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveWithInvalidObjectId()
     {
-        $this->assertNotNull($this->accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+        $this->assertNotFalse($this->accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
         try {
             ShippoClient::provider($this->accessToken)->addresses()->retrieve('invalid objectId');
             $this->fail('ClientErrorException is expected');
@@ -43,7 +43,7 @@ class InvalidRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateWithInvalidObjectId()
     {
-        $this->assertNotNull($this->accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+        $this->assertNotFalse($this->accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
         try {
             ShippoClient::provider($this->accessToken)->addresses()->validate('invalid objectId');
             $this->fail('ClientErrorException is expected');

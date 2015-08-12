@@ -102,6 +102,8 @@ class Parcels
             "height"         => $this->getHeight(),
             "distance_unit"  => $this->getDistanceUnit(),
             "weight"         => $this->getWeight(),
+            "value_amount"   => $this->getValueAmount(),
+            "value_currency" => $this->getValueCurrency(),
             "mass_unit"      => $this->getMassUnit(),
             "metadata"       => $this->getMetadata(),
         );

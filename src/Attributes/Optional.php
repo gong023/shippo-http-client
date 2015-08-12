@@ -99,6 +99,11 @@ class Optional implements AttributeInterface
         return $this->optionalValue;
     }
 
+    /**
+     * Only Optional value is allowed to return null
+     *
+     * @return mixed|null
+     */
     public function value()
     {
         return $this->optionalValue;

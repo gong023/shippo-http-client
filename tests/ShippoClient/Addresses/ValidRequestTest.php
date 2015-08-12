@@ -15,22 +15,22 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateAddress()
     {
-        $this->assertNotNull(self::$accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+        $this->assertNotFalse(self::$accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
 
         $param = array(
             "object_purpose" => "PURCHASE",
-            "name" => "Shawn Ippotle",
-            "company" => "Shippo",
-            "street1" => "215 Clayton St.",
-            "street2" => "",
-            "city" => "San Francisco",
-            "state" => "CA",
-            "zip" => "94117",
-            "country" => "US",
-            "phone" => "+1 555 341 9393",
-            "email" => "api@goshippo.com",
+            "name"           => "Shawn Ippotle",
+            "company"        => "Shippo",
+            "street1"        => "215 Clayton St.",
+            "street2"        => "",
+            "city"           => "San Francisco",
+            "state"          => "CA",
+            "zip"            => "94117",
+            "country"        => "US",
+            "phone"          => "+1 555 341 9393",
+            "email"          => "api@goshippo.com",
             "is_residential" => true,
-            "metadata" => "Customer ID 123456"
+            "metadata"       => "Customer ID 123456"
         );
         $response = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
 

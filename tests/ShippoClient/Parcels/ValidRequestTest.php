@@ -76,4 +76,3 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Addresses', $responseArray['results']);
     }
 }
-

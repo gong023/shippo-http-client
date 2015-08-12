@@ -5,6 +5,11 @@ namespace ShippoClient\Http\Request\Parcels;
 use ShippoClient\Attributes;
 use ShippoClient\Attributes\InvalidAttributeException;
 
+/**
+ * Parcel objects are used for creating Shipments, obtaining Rates and printing Labels,
+ * and thus are one of the fundamental building blocks of the Shippo API.
+ * Parcels are created with their basic dimensions and their weight.
+ */
 class CreateObject
 {
     private $attributes;
@@ -64,7 +69,7 @@ class CreateObject
      */
     public function getDistanceUnit()
     {
-        return $this->attributes->mustHave('distance_unit')->asString(function($distanceUnit) {
+        return $this->attributes->mustHave('distance_unit')->asString(function ($distanceUnit) {
             return in_array($distanceUnit, array('cm', 'in', 'ft', 'mm', 'm', 'yd'));
         });
     }
@@ -88,7 +93,7 @@ class CreateObject
      */
     public function getMassUnit()
     {
-        return $this->attributes->mustHave('mass_unit')->asString(function($massUnit) {
+        return $this->attributes->mustHave('mass_unit')->asString(function ($massUnit) {
             return in_array($massUnit, array('g', 'oz', 'lb', 'kg'));
         });
     }
@@ -113,7 +118,7 @@ class CreateObject
      */
     public function getMetadata()
     {
-        return $this->attributes->mayHave('metadata')->asString(function($metadata) {
+        return $this->attributes->mayHave('metadata')->asString(function ($metadata) {
 //            return mb_strlen($metadata) <= 100;
             return strlen($metadata) <= 100;
         });

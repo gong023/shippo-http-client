@@ -5,6 +5,10 @@ namespace ShippoClient\Http\Request\Addresses;
 use ShippoClient\Attributes\InvalidAttributeException;
 use ShippoClient\Attributes;
 
+/**
+ * Address objects are used for creating Shipments, obtaining Rates and printing Labels,
+ * and thus are one of the fundamental building blocks of the Shippo API.
+ */
 class CreateObject
 {
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';

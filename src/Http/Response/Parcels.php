@@ -78,4 +78,3 @@ class Parcels extends Response
         );
     }
 }
-

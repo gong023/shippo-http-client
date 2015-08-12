@@ -3,41 +3,10 @@
 namespace ShippoClient\Http\Response;
 
 use ShippoClient\Attributes;
+use ShippoClient\Http\Response;
 
-class Parcels
+class Parcels extends Response
 {
-    private $attributes;
-
-    public function __construct(array $attributes)
-    {
-        $this->attributes = new Attributes($attributes);
-    }
-
-    public function getObjectState()
-    {
-        return $this->attributes->mayHave('object_state')->asString();
-    }
-
-    public function getObjectCreated()
-    {
-        return $this->attributes->mayHave('object_created')->asString();
-    }
-
-    public function getObjectUpdated()
-    {
-        return $this->attributes->mayHave('object_updated')->asString();
-    }
-
-    public function getObjectId()
-    {
-        return $this->attributes->mayHave('object_id')->asString();
-    }
-
-    public function getObjectOwner()
-    {
-        return $this->attributes->mayHave('object_owner')->asString();
-    }
-
     public function getTemplate()
     {
         return $this->attributes->mayHave('template')->asString();

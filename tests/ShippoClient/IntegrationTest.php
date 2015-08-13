@@ -269,6 +269,9 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Rates objects are created asynchronously. Below tests may fail.
+     * But they success in most cases.
+     *
      * @test
      * @depends createShipment
      * @param $objectIds

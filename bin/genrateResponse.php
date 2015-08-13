@@ -34,7 +34,8 @@ $attributes = array(
     "messages"=> array("type" => "array", "required" => false,),
 );
 
-function snakeToCamel($val) {
+function snakeToCamel($val)
+{
     return str_replace(' ', '', ucwords(str_replace('_', ' ', $val)));
 }
 
@@ -95,5 +96,3 @@ echo <<<FOOTER
 
 
 FOOTER;
-
-

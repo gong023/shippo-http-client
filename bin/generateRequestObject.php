@@ -64,7 +64,6 @@ if ($config['retrieve']['exist']) {
 
 
 RETRIVEMETHOD;
-
 }
 
 if ($config['getList']['exist']) {
@@ -77,12 +76,11 @@ if ($config['getList']['exist']) {
     {
         \$responseArray = \$this->request->get("$domain", array('results' => \$results));
 
-        return new {$upperDomain}Collection(\$responseArray);
+        return new {$upperDomain}ResponseCollection(\$responseArray);
     }
 
 
 GETLISTMETHOD;
-
 }
 
 echo <<<FOOTER

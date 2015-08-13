@@ -115,15 +115,16 @@ class CreateObject
      */
     public function getSubmissionDate()
     {
-        $dateValidation = function ($datetime) {
-            return preg_match("/" . \DateTime::ISO8601. "/", $datetime);
+        $isIOS8601Format = function ($datetime) {
+            // this pattern is not strict but is sufficient
+            return preg_match('/^(\d{4}-\d{2}-\d{2}|\d{8})[t|T]\d{2}:\d{2}:\d{2}([,|\.]\d+[z|Z]|\+\d+)$/', $datetime);
         };
 
         if ($this->getSubmissionType() === static::SUBMISSION_TYPE_PICKUP) {
-            return $this->attributes->mustHave('submission_date')->asString($dateValidation);
+            return $this->attributes->mustHave('submission_date')->asString($isIOS8601Format);
         }
 
-        return $this->attributes->mayHave('submission_date')->asString($dateValidation);
+        return $this->attributes->mayHave('submission_date')->asString($isIOS8601Format);
     }
 
     /**

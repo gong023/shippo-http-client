@@ -53,7 +53,7 @@ class Shipments extends Response
 
     public function getInsuranceAmount()
     {
-        return $this->attributes->mayHave('insurance_amount')->asString();
+        return $this->attributes->mayHave('insurance_amount')->asInteger();
     }
 
     public function getInsuranceCurrency()
@@ -63,7 +63,7 @@ class Shipments extends Response
 
     public function getExtra()
     {
-        return $this->attributes->mayHave('extra')->asString();
+        return $this->attributes->mayHave('extra')->asArray();
     }
 
     public function getReference1()
@@ -74,6 +74,11 @@ class Shipments extends Response
     public function getReference2()
     {
         return $this->attributes->mayHave('reference_2')->asString();
+    }
+
+    public function getReturnOf()
+    {
+        return $this->attributes->mayHave('return_of')->asString();
     }
 
     public function getCarrierAccounts()
@@ -114,6 +119,7 @@ class Shipments extends Response
             "reference_1"         => $this->getReference1(),
             "reference_2"         => $this->getReference2(),
             "rates_url"           => $this->getRatesUrl(),
+            "return_of"           => $this->getReturnOf(),
             "carrier_accounts"    => $this->getCarrierAccounts(),
             "messages"            => $this->getMessages(),
             "metadata"            => $this->getMetadata()

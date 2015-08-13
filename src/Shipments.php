@@ -39,8 +39,6 @@ class Shipments
     {
         $responseArray = $this->request->get("shipments", array('results' => $results));
 
-        return new ShipmentsCollection($responseArray);
+        return new ShipmentsResponseCollection($responseArray);
     }
-
 }
-

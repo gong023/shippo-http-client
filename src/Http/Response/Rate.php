@@ -5,9 +5,8 @@ namespace ShippoClient\Http\Response;
 use ShippoClient\Attributes;
 use ShippoClient\Http\Response;
 
-class Rates extends Response
+class Rate extends Response
 {
-
     public function getObjectState()
     {
         return $this->attributes->mayHave('object_state')->asString();

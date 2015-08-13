@@ -9,7 +9,8 @@ $attributes = array(
     "metadata"=> array("type" => "string", "required" => false,),
 );
 
-function snakeToCamel($val) {
+function snakeToCamel($val)
+{
     return str_replace(' ', '', ucwords(str_replace('_', ' ', $val)));
 }
 

@@ -20,6 +20,11 @@ class ShippoClient
         return new Parcels($this->request);
     }
 
+    public function shipments()
+    {
+        return new Shipments($this->request);
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken

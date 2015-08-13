@@ -3,11 +3,12 @@
  * WARNING!! THIS SCRIPT IS ONLY FOR DEVELOP.
  */
 
-$domain = 'shipments';
+$domain = 'rates';
+$singleUpperDomain = 'Rate';
 $upperDomain = ucfirst($domain);
 $config = array(
     'create' => array(
-        'exist' => true,
+        'exist' => false,
     ),
     'retrieve' => array(
         'exist' => true,
@@ -22,8 +23,8 @@ echo <<<HEADER
 
 namespace ShippoClient;
 
-use ShippoClient\Http\Response\\{$upperDomain} as {$upperDomain}Response;
-use ShippoClient\Http\Response\\{$upperDomain}Collection as {$upperDomain}ResponseCollection;
+use ShippoClient\Http\Response\\{$upperDomain}\\{$singleUpperDomain} as {$singleUpperDomain}Response;
+use ShippoClient\Http\Response\\{$upperDomain}\\{$singleUpperDomain}Collection as {$singleUpperDomain}ResponseCollection;
 use ShippoClient\Http\Request;
 use ShippoClient\Http\Request\\{$upperDomain}\CreateObject;
 
@@ -46,7 +47,7 @@ if ($config['create']['exist']) {
         \$createObj = new CreateObject(\$attributes);
         \$responseArray = \$this->request->post('$domain', \$createObj->toArray());
 
-        return new {$upperDomain}Response(\$responseArray);
+        return new {$singleUpperDomain}Response(\$responseArray);
     }
 
 
@@ -59,7 +60,7 @@ if ($config['retrieve']['exist']) {
     {
         \$responseArray = \$this->request->get("$domain/\$objectId");
 
-        return new {$upperDomain}Response(\$responseArray);
+        return new {$singleUpperDomain}Response(\$responseArray);
     }
 
 
@@ -70,13 +71,13 @@ if ($config['getList']['exist']) {
     echo <<<GETLISTMETHOD
     /**
      * @param null|int \$results
-     * @return {$upperDomain}ResponseCollection
+     * @return {$singleUpperDomain}ResponseCollection
      */
     public function getList(\$results = null)
     {
         \$responseArray = \$this->request->get("$domain", array('results' => \$results));
 
-        return new {$upperDomain}ResponseCollection(\$responseArray);
+        return new {$singleUpperDomain}ResponseCollection(\$responseArray);
     }
 
 

@@ -267,4 +267,80 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('previous', $responseArray);
         $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $responseArray['results']);
     }
+
+    /**
+     * @test
+     * @depends createShipment
+     * @param $objectIds
+     */
+    public function getListOfRateByShipment($objectIds)
+    {
+        $response = ShippoClient::provider(self::$accessToken)->shipments()->getRatesList($objectIds['shipment'], 'USD');
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\RateCollection', $response);
+        $responseArray = $response->toArray();
+        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
+        $this->assertArrayHasKey('next', $responseArray);
+        $this->assertArrayHasKey('previous', $responseArray);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Rates\\Rate', $responseArray['results']);
+
+        return $responseArray['results'][0];
+    }
+
+    /**
+     * @test
+     * @depends getListOfRateByShipment
+     * @param \ShippoClient\Http\Response\Rates\Rate $rate
+     */
+    public function retrieveRate($rate)
+    {
+        $response = ShippoClient::provider(self::$accessToken)->rates()->retrieve($rate->getObjectId());
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\Rate', $response);
+        $responseArray = $response->toArray();
+        $this->assertSame("VALID", $responseArray['object_state']);
+        $this->assertSame("PURCHASE", $responseArray['object_purpose']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_created']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_updated']);
+        $this->assertNotEmpty($responseArray['object_id']);
+        $this->assertNotEmpty($responseArray['object_owner']);
+        $this->assertNotEmpty($responseArray['shipment']);
+        $this->assertTrue($responseArray['available_shippo']);
+        $this->assertInternalType('array', $responseArray['attributes']);
+        $this->assertInternalType('float', $responseArray['amount']);
+        $this->assertSame("USD", $responseArray['currency']);
+        $this->assertInternalType('float', $responseArray['amount_local']);
+        $this->assertSame("USPS", $responseArray['provider']);
+        $this->assertNotEmpty($responseArray['provider_image_75']);
+        $this->assertNotEmpty($responseArray['provider_image_200']);
+        $this->assertArrayHasKey('servicelevel_name', $responseArray);
+        $this->assertArrayHasKey('servicelevel_terms', $responseArray);
+        $this->assertInternalType('int', $responseArray['days']);
+        $this->assertArrayHasKey('arrives_by', $responseArray);
+        $this->assertNotEmpty($responseArray['duration_terms']);
+        $this->assertTrue($responseArray['trackable']);
+        $this->assertFalse($responseArray['insurance']);
+        $this->assertSame(0.0, $responseArray['insurance_amount']);
+        $this->arrayHasKey($responseArray['insurance_currency']);
+        $this->assertSame(0.0, $responseArray['insurance_amount_local']);
+        $this->arrayHasKey($responseArray['insurance_currency_local']);
+        $this->arrayHasKey($responseArray['delivery_attempts']);
+        $this->arrayHasKey($responseArray['outbound_endpoint']);
+        $this->arrayHasKey($responseArray['inbound_endpoint']);
+        $this->assertInternalType('array', $responseArray['messages']);
+        $this->assertNotEmpty($responseArray['carrier_account']);
+    }
+
+    /**
+     * @test
+     * @depends createShipment
+     */
+    public function getRateList()
+    {
+        $response = ShippoClient::provider(self::$accessToken)->rates()->getList();
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\RateCollection', $response);
+        $responseArray = $response->toArray();
+        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
+        $this->assertArrayHasKey('next', $responseArray);
+        $this->assertArrayHasKey('previous', $responseArray);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Rates\\Rate', $responseArray['results']);
+    }
 }

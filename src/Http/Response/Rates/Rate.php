@@ -5,38 +5,20 @@ namespace ShippoClient\Http\Response\Rates;
 use ShippoClient\Attributes;
 use ShippoClient\Http\Response;
 
+/**
+ * Each valid Shipment object will automatically trigger the calculation of all available Rates.
+ * Depending on your Addresses and Parcel, there may be none, one or multiple Rates.
+ *
+ * By default, the calculated Rates will return the price in two currencies under the "amount" and "amount_local" keys, respectively.
+ * The "amount" key will contain the price of a Rate expressed in the currency that is used in the country from which Parcel originates,
+ * and the "amount_local" key will contain the price expressed in the currency that is used in the country the Parcel is shipped to.
+ * You can request Rates with prices expressed in a different currency by adding the desired currency code in the end of the resource URL.
+ * The full list of supported currencies along with their codes can be viewed on open exchange rates.
+ *
+ * Rates are created asynchronously. The response time depends exclusively on the carrier's server.
+ */
 class Rate extends Response
 {
-    public function getObjectState()
-    {
-        return $this->attributes->mayHave('object_state')->asString();
-    }
-
-    public function getObjectPurpose()
-    {
-        return $this->attributes->mayHave('object_purpose')->asString();
-    }
-
-    public function getObjectCreated()
-    {
-        return $this->attributes->mayHave('object_created')->asString();
-    }
-
-    public function getObjectUpdated()
-    {
-        return $this->attributes->mayHave('object_updated')->asString();
-    }
-
-    public function getObjectId()
-    {
-        return $this->attributes->mayHave('object_id')->asString();
-    }
-
-    public function getObjectOwner()
-    {
-        return $this->attributes->mayHave('object_owner')->asString();
-    }
-
     public function getShipment()
     {
         return $this->attributes->mayHave('shipment')->asString();
@@ -94,7 +76,7 @@ class Rate extends Response
 
     public function getDays()
     {
-        return $this->attributes->mayHave('days')->asString();
+        return $this->attributes->mayHave('days')->asInteger();
     }
 
     public function getDurationTerms()
@@ -142,6 +124,56 @@ class Rate extends Response
         return $this->attributes->mayHave('messages')->asArray();
     }
 
+    /**
+     * Description is not found in Shippo API doc, but this key is returned in fact.
+     *
+     * @return mixed|null
+     */
+    public function getAvailableShippo()
+    {
+        return $this->attributes->mayHave('available_shippo')->value();
+    }
+
+    /**
+     * Description is not found in Shippo API doc, but this key is returned in fact.
+     *
+     * @return mixed|null
+     */
+    public function getOutboundEndpoint()
+    {
+        return $this->attributes->mayHave('outbound_endpoint')->value();
+    }
+
+    /**
+     * Description is not found in Shippo API doc, but this key is returned in fact.
+     *
+     * @return mixed|null
+     */
+    public function getInboundEndpoint()
+    {
+        return $this->attributes->mayHave('inbound_endpoint')->value();
+    }
+
+    /**
+     * Description is not found in Shippo API doc, but this key is returned in fact.
+     *
+     * @return mixed|null
+     */
+    public function getArrivesBy()
+    {
+        return $this->attributes->mayHave('arrives_by')->value();
+    }
+
+    /**
+     * Description is not found in Shippo API doc, but this key is returned in fact.
+     *
+     * @return mixed|null
+     */
+    public function getDeliveryAttempts()
+    {
+        return $this->attributes->mayHave('delivery_attempts')->value();
+    }
+
     public function toArray()
     {
         return array(
@@ -172,6 +204,11 @@ class Rate extends Response
             'insurance_currency'       => $this->getInsuranceCurrency(),
             'carrier_account'          => $this->getCarrierAccount(),
             'messages'                 => $this->getMessages(),
+            'available_shippo'         => $this->getAvailableShippo(),
+            'outbound_endpoint'        => $this->getOutboundEndpoint(),
+            'inbound_endpoint'         => $this->getInboundEndpoint(),
+            'arrives_by'               => $this->getArrivesBy(),
+            'delivery_attempts'        => $this->getDeliveryAttempts(),
         );
     }
 }

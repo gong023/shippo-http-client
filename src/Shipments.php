@@ -4,6 +4,7 @@ namespace ShippoClient;
 
 use ShippoClient\Http\Response\Shipments\Shipment as ShipmentResponse;
 use ShippoClient\Http\Response\Shipments\ShipmentCollection as ShipmentResponseCollection;
+use ShippoClient\Http\Response\Rates\RateCollection as RateResponseCollection;
 use ShippoClient\Http\Request;
 use ShippoClient\Http\Request\Shipments\CreateObject;
 
@@ -24,6 +25,11 @@ class Shipments
         return new ShipmentResponse($responseArray);
     }
 
+    public function createReturn()
+    {
+        // TODO
+    }
+
     public function retrieve($objectId)
     {
         $responseArray = $this->request->get("shipments/$objectId");
@@ -40,5 +46,12 @@ class Shipments
         $responseArray = $this->request->get("shipments", array('results' => $results));
 
         return new ShipmentResponseCollection($responseArray);
+    }
+
+    public function getRatesList($objectId, $currencyCode = '')
+    {
+        $responseArray = $this->request->get("shipments/$objectId/rates/$currencyCode");
+
+        return new RateResponseCollection($responseArray);
     }
 }

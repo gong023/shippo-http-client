@@ -25,6 +25,11 @@ class ShippoClient
         return new Shipments($this->request);
     }
 
+    public function rates()
+    {
+        return new Rates($this->request);
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken

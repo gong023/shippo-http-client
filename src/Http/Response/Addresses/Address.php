@@ -1,11 +1,11 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Addresses;
 
 use ShippoClient\Attributes;
 use ShippoClient\Http\Response;
 
-class Addresses extends Response
+class Address extends Response
 {
     public function getName()
     {

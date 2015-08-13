@@ -6,9 +6,9 @@ use ShippoClient\Attributes;
 use ShippoClient\Attributes\InvalidAttributeException;
 
 /**
- * Parcel objects are used for creating Shipments, obtaining Rates and printing Labels,
+ * Parcel objects are used for creating Shipment, obtaining Rates and printing Labels,
  * and thus are one of the fundamental building blocks of the Shippo API.
- * Parcels are created with their basic dimensions and their weight.
+ * Parcel are created with their basic dimensions and their weight.
  */
 class CreateObject
 {

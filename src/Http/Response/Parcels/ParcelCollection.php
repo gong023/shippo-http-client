@@ -1,19 +1,20 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Parcels;
 
 use ShippoClient\Attributes;
+use ShippoClient\Http\ResponseCollection;
 
-class ParcelsCollection extends Collection
+class ParcelCollection extends ResponseCollection
 {
     /**
-     * @return Parcels[]
+     * @return Parcel[]
      */
     public function getResults()
     {
         $results = array();
         foreach ($this->attributes->mayHave('results')->asArray() as $result) {
-            $results[] = new Parcels($result);
+            $results[] = new Parcel($result);
         }
 
         return $results;

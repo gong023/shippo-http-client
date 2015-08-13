@@ -1,17 +1,19 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Shipments;
 
-class ShipmentsCollection extends Collection
+use ShippoClient\Http\ResponseCollection;
+
+class ShipmentCollection extends ResponseCollection
 {
     /**
-     * @return Shipments[]
+     * @return Shipment[]
      */
     public function getResults()
     {
         $results = array();
         foreach ($this->attributes->mayHave('results')->asArray() as $result) {
-            $results[] = new Shipments($result);
+            $results[] = new Shipment($result);
         }
 
         return $results;

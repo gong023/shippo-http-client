@@ -1,10 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http;
 
 use ShippoClient\Attributes;
 
-abstract class Collection
+abstract class ResponseCollection
 {
     public function __construct(array $attributes)
     {

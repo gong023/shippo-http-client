@@ -1,10 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Shipments;
 
 use ShippoClient\Http\Response;
 
-class Shipments extends Response
+class Shipment extends Response
 {
     public function getObjectStatus()
     {

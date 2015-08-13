@@ -1,11 +1,11 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Parcels;
 
 use ShippoClient\Attributes;
 use ShippoClient\Http\Response;
 
-class Parcels extends Response
+class Parcel extends Response
 {
     public function getTemplate()
     {

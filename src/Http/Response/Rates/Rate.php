@@ -1,6 +1,6 @@
 <?php
 
-namespace ShippoClient\Http\Response;
+namespace ShippoClient\Http\Response\Rates;
 
 use ShippoClient\Attributes;
 use ShippoClient\Http\Response;
@@ -145,33 +145,33 @@ class Rate extends Response
     public function toArray()
     {
         return array(
-            'object_state' => $this->getObjectState(),
-            'object_purpose' => $this->getObjectPurpose(),
-            'object_created' => $this->getObjectCreated(),
-            'object_updated' => $this->getObjectUpdated(),
-            'object_id' => $this->getObjectId(),
-            'object_owner' => $this->getObjectOwner(),
-            'shipment' => $this->getShipment(),
-            'attributes' => $this->getAttributes(),
-            'amount_local' => $this->getAmountLocal(),
-            'currency_local' => $this->getCurrencyLocal(),
-            'amount' => $this->getAmount(),
-            'currency' => $this->getCurrency(),
-            'provider' => $this->getProvider(),
-            'provider_image_75' => $this->getProviderImage75(),
-            'provider_image_200' => $this->getProviderImage200(),
-            'servicelevel_name' => $this->getServicelevelName(),
-            'servicelevel_terms' => $this->getServicelevelTerms(),
-            'days' => $this->getDays(),
-            'duration_terms' => $this->getDurationTerms(),
-            'trackable' => $this->getTrackable(),
-            'insurance' => $this->getInsurance(),
-            'insurance_amount_local' => $this->getInsuranceAmountLocal(),
+            'object_state'             => $this->getObjectState(),
+            'object_purpose'           => $this->getObjectPurpose(),
+            'object_created'           => $this->getObjectCreated(),
+            'object_updated'           => $this->getObjectUpdated(),
+            'object_id'                => $this->getObjectId(),
+            'object_owner'             => $this->getObjectOwner(),
+            'shipment'                 => $this->getShipment(),
+            'attributes'               => $this->getAttributes(),
+            'amount_local'             => $this->getAmountLocal(),
+            'currency_local'           => $this->getCurrencyLocal(),
+            'amount'                   => $this->getAmount(),
+            'currency'                 => $this->getCurrency(),
+            'provider'                 => $this->getProvider(),
+            'provider_image_75'        => $this->getProviderImage75(),
+            'provider_image_200'       => $this->getProviderImage200(),
+            'servicelevel_name'        => $this->getServicelevelName(),
+            'servicelevel_terms'       => $this->getServicelevelTerms(),
+            'days'                     => $this->getDays(),
+            'duration_terms'           => $this->getDurationTerms(),
+            'trackable'                => $this->getTrackable(),
+            'insurance'                => $this->getInsurance(),
+            'insurance_amount_local'   => $this->getInsuranceAmountLocal(),
             'insurance_currency_local' => $this->getInsuranceCurrencyLocal(),
-            'insurance_amount' => $this->getInsuranceAmount(),
-            'insurance_currency' => $this->getInsuranceCurrency(),
-            'carrier_account' => $this->getCarrierAccount(),
-            'messages' => $this->getMessages(),
+            'insurance_amount'         => $this->getInsuranceAmount(),
+            'insurance_currency'       => $this->getInsuranceCurrency(),
+            'carrier_account'          => $this->getCarrierAccount(),
+            'messages'                 => $this->getMessages(),
         );
     }
 }

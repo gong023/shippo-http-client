@@ -6,7 +6,7 @@ use ShippoClient\Attributes;
 use ShippoClient\Attributes\InvalidAttributeException;
 
 /**
- * The heart of the Shippo API, a Shipment is made up of "to" and "from" Addresses and the Parcel to be shipped.
+ * The heart of the Shippo API, a Shipment is made up of "to" and "from" Address and the Parcel to be shipped.
  * Once created, a Shipment object can be used to retrieve shipping Rates and purchase a shipping Label.
  */
 class CreateObject
@@ -24,10 +24,10 @@ class CreateObject
     }
 
     /**
-     * Quote Shipments can only be used to obtain quote Rates;
+     * Quote Shipment can only be used to obtain quote Rates;
      * at the same time, they accept any valid or completed Address object.
-     * Purchase Shipments can be used to obtain Rates and purchase Labels,
-     * but only accept purchase Addresses that have been fully entered.
+     * Purchase Shipment can be used to obtain Rates and purchase Labels,
+     * but only accept purchase Address that have been fully entered.
      *
      * @return string
      * @throws InvalidAttributeException

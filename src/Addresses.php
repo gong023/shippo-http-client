@@ -2,8 +2,8 @@
 
 namespace ShippoClient;
 
-use ShippoClient\Http\Response\Addresses as AddressesResponse;
-use ShippoClient\Http\Response\AddressesCollection as AddressesResponseCollection;
+use ShippoClient\Http\Response\Addresses\Address as AddressResponse;
+use ShippoClient\Http\Response\Addresses\AddressCollection as AddressResponseCollection;
 use ShippoClient\Http\Request;
 use ShippoClient\Http\Request\Addresses\CreateObject;
 
@@ -21,31 +21,31 @@ class Addresses
         $createObj = new CreateObject($attributes);
         $responseArray = $this->request->post('addresses', $createObj->toArray());
 
-        return new AddressesResponse($responseArray);
+        return new AddressResponse($responseArray);
     }
 
     public function retrieve($objectId)
     {
         $responseArray = $this->request->get("addresses/$objectId");
 
-        return new AddressesResponse($responseArray);
+        return new AddressResponse($responseArray);
     }
 
     public function validate($objectId)
     {
         $responseArray = $this->request->get("addresses/$objectId/validate");
 
-        return new AddressesResponse($responseArray);
+        return new AddressResponse($responseArray);
     }
 
     /**
      * @param null|int $results
-     * @return AddressesResponseCollection
+     * @return AddressResponseCollection
      */
     public function getList($results = null)
     {
         $responseArray = $this->request->get("addresses", array('results' => $results));
 
-        return new AddressesResponseCollection($responseArray);
+        return new AddressResponseCollection($responseArray);
     }
 }

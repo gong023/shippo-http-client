@@ -38,7 +38,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "metadata"       => "integration test"
         );
         $addressFrom = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $addressFrom);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $addressFrom);
 
         $addressFromArray = $addressFrom->toArray();
         $this->assertSame('VALID', $addressFromArray['object_state']);
@@ -79,7 +79,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "metadata"       => "integration test"
         );
         $addressTo = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $addressTo);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $addressTo);
 
         return array(
             'address_from' => $addressFrom->getObjectId(),
@@ -95,7 +95,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveAddress($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->retrieve($objectIds['address_from']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $response);
     }
 
     /**
@@ -106,7 +106,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function validateAddress($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->validate($objectIds['address_from']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $response);
     }
 
     /**
@@ -117,12 +117,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->getList();
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\AddressesCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\AddressCollection', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Addresses', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Addresses\\Address', $responseArray['results']);
     }
 
     /**
@@ -144,7 +144,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         );
         $parcel = ShippoClient::provider(self::$accessToken)->parcels()->create($param);
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels', $parcel);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $parcel);
         $parcelArray = $parcel->toArray();
         $this->assertSame('VALID', $parcelArray['object_state']);
         $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $parcelArray['object_created']);
@@ -175,7 +175,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveParcel($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->parcels()->retrieve($objectIds['parcel']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $response);
     }
 
     /**
@@ -185,12 +185,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function getListOfParcel()
     {
         $response = ShippoClient::provider(self::$accessToken)->parcels()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\ParcelsCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\ParcelCollection', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Parcels', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $responseArray['results']);
     }
 
     /**
@@ -211,7 +211,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $shipment = ShippoClient::provider(self::$accessToken)->shipments()->create($param);
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments', $shipment);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $shipment);
         $shipmentArray = $shipment->toArray();
         $this->assertInternalType('array', $shipmentArray['carrier_accounts']);
         $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $shipmentArray['object_created']);
@@ -250,7 +250,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveShipment($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->shipments()->retrieve($objectIds['shipment']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $response);
     }
 
     /**
@@ -260,11 +260,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function getListOfShipment()
     {
         $response = ShippoClient::provider(self::$accessToken)->shipments()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\ShipmentsCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\ShipmentCollection', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Shipments', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $responseArray['results']);
     }
 }

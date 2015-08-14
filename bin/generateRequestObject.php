@@ -3,8 +3,8 @@
  * WARNING!! THIS SCRIPT IS ONLY FOR DEVELOP.
  */
 
-$domain = 'rates';
-$singleUpperDomain = 'Rate';
+$domain = 'transactions';
+$singleUpperDomain = 'Transactions';
 $upperDomain = ucfirst($domain);
 $config = array(
     'create' => array(

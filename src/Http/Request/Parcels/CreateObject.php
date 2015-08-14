@@ -4,21 +4,15 @@ namespace ShippoClient\Http\Request\Parcels;
 
 use ShippoClient\Attributes;
 use ShippoClient\Attributes\InvalidAttributeException;
+use ShippoClient\Http\Request\CommonParameter;
 
 /**
  * Parcel objects are used for creating Shipment, obtaining Rates and printing Labels,
  * and thus are one of the fundamental building blocks of the Shippo API.
  * Parcel are created with their basic dimensions and their weight.
  */
-class CreateObject
+class CreateObject extends CommonParameter
 {
-    private $attributes;
-
-    public function __construct(array $attributes)
-    {
-        $this->attributes = new Attributes($attributes);
-    }
-
     /**
      * First dimension of the Parcel.
      * The length should always be the largest of the three dimensions length, width and height;
@@ -109,19 +103,6 @@ class CreateObject
     public function getTemplate()
     {
         return $this->attributes->mayHave('template')->asString();
-    }
-
-    /**
-     * A string of up to 100 characters that can be filled with any additional information you want to attach to the object.
-     *
-     * @return string
-     */
-    public function getMetadata()
-    {
-        return $this->attributes->mayHave('metadata')->asString(function ($metadata) {
-//            return mb_strlen($metadata) <= 100;
-            return strlen($metadata) <= 100;
-        });
     }
 
     public function toArray()

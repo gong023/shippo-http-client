@@ -4,24 +4,18 @@ namespace ShippoClient\Http\Request\Shipments;
 
 use ShippoClient\Attributes;
 use ShippoClient\Attributes\InvalidAttributeException;
+use ShippoClient\Http\Request\CommonParameter;
 
 /**
  * The heart of the Shippo API, a Shipment is made up of "to" and "from" Address and the Parcel to be shipped.
  * Once created, a Shipment object can be used to retrieve shipping Rates and purchase a shipping Label.
  */
-class CreateObject
+class CreateObject extends CommonParameter
 {
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';
     const SUBMISSION_TYPE_DROPOFF = 'DROPOFF';
     const SUBMISSION_TYPE_PICKUP = 'PICKUP';
-
-    protected $attributes;
-
-    public function __construct(array $attributes)
-    {
-        $this->attributes = new Attributes($attributes);
-    }
 
     /**
      * Quote Shipment can only be used to obtain quote Rates;
@@ -227,20 +221,6 @@ class CreateObject
     public function getCarrierAccounts()
     {
         return $this->attributes->mayHave('carrier_accounts')->asArray();
-    }
-
-    /**
-     * A string of up to 100 characters
-     * that can be filled with any additional information you want to attach to the object.
-     *
-     * @return string
-     */
-    public function getMetadata()
-    {
-        return $this->attributes->mayHave('metadata')->asString(function ($metadata) {
-//            return mb_strlen($metadata) <= 100;
-            return strlen($metadata) <= 100;
-        });
     }
 
     public function toArray()

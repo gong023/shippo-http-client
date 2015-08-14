@@ -30,6 +30,11 @@ class ShippoClient
         return new Rates($this->request);
     }
 
+    public function transactions()
+    {
+        return new Transactions($this->request);
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken

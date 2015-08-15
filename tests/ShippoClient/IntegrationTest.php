@@ -293,6 +293,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends getListOfRateByShipment
      * @param \ShippoClient\Http\Response\Rates\Rate $rate
+     * @return Http\Response\Rates\Rate
      */
     public function retrieveRate($rate)
     {
@@ -330,6 +331,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->arrayHasKey($responseArray['inbound_endpoint']);
         $this->assertInternalType('array', $responseArray['messages']);
         $this->assertNotEmpty($responseArray['carrier_account']);
+
+        return $rate;
     }
 
     /**
@@ -345,5 +348,70 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
         $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Rates\\Rate', $responseArray['results']);
+    }
+
+    /**
+     * @test
+     * @depends retrieveRate
+     * @param \ShippoClient\Http\Response\Rates\Rate $rate
+     * @return Http\Response\Transactions\Transaction
+     */
+    public function purchaseTransaction($rate)
+    {
+        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->purchase($rate->getObjectId());
+
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $transaction);
+        $transactionArray = $transaction->toArray();
+        $this->assertSame('VALID', $transactionArray['object_state']);
+        $this->assertSame('QUEUED', $transactionArray['object_status']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $transactionArray['object_created']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $transactionArray['object_updated']);
+        $this->assertNotEmpty($transactionArray['object_id']);
+        $this->assertNotEmpty($transactionArray['object_owner']);
+        $this->assertInternalType('bool', $transactionArray['was_test']);
+        $this->assertNotEmpty($transactionArray['rate']);
+        $this->assertArrayHasKey('pickup_date', $transactionArray);
+        $this->assertArrayHasKey('notification_email_from', $transactionArray);
+        $this->assertArrayHasKey('notification_email_to', $transactionArray);
+        $this->assertArrayHasKey('notification_email_other', $transactionArray);
+        $this->assertArrayHasKey('tracking_number', $transactionArray);
+        $this->assertArrayHasKey('tracking_status', $transactionArray);
+        $this->assertInternalType('array', $transactionArray['tracking_history']);
+        $this->assertArrayHasKey('tracking_url_provider', $transactionArray);
+        $this->assertArrayHasKey('label_url', $transactionArray);
+        $this->assertArrayHasKey('commercial_invoice_url', $transactionArray);
+        $this->assertInternalType('array', $transactionArray['messages']);
+        $this->assertArrayHasKey('customs_note', $transactionArray);
+        $this->assertArrayHasKey('submission_note', $transactionArray);
+        $this->assertArrayHasKey('order', $transactionArray);
+        $this->assertArrayHasKey('metadata', $transactionArray);
+
+        return $transaction;
+    }
+
+    /**
+     * @test
+     * @depends purchaseTransaction
+     * @param Http\Response\Transactions\Transaction $transaction
+     */
+    public function retrieveTransaction($transaction)
+    {
+        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->retrieve($transaction->getObjectId());
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $transaction);
+    }
+
+    /**
+     * @test
+     * @depends purchaseTransaction
+     */
+    public function getTransactionList()
+    {
+        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->getList();
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\TransactionCollection', $transaction);
+        $responseArray = $transaction->toArray();
+        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
+        $this->assertArrayHasKey('next', $responseArray);
+        $this->assertArrayHasKey('previous', $responseArray);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $responseArray['results']);
     }
 }

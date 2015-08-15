@@ -16,6 +16,14 @@ class Transactions
         $this->request = $request;
     }
 
+    public function purchase($rateObjectId)
+    {
+        $createObject = new CreateObject(array('rate' => $rateObjectId));
+        $responseArray = $this->request->post("transactions", $createObject->toArray());
+
+        return new TransactionsResponse($responseArray);
+    }
+
     public function retrieve($objectId)
     {
         $responseArray = $this->request->get("transactions/$objectId");

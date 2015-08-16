@@ -214,4 +214,3 @@ class Transaction extends Response
         );
     }
 }
-

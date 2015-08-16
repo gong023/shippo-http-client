@@ -41,6 +41,4 @@ class Transactions
 
         return new TransactionsResponseCollection($responseArray);
     }
-
 }
-

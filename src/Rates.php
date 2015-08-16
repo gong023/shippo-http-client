@@ -32,6 +32,4 @@ class Rates
 
         return new RateResponseCollection($responseArray);
     }
-
 }
-

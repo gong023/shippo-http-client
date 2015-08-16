@@ -27,5 +27,5 @@ abstract class CommonParameter
         });
     }
 
-    abstract function toArray();
+    abstract public function toArray();
 }

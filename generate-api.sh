@@ -1,5 +1,8 @@
+# Get ApiGen.phar
+wget http://www.apigen.org/apigen.phar
+
 # Generate Api
-bin/apigen generate -s src -d ../gh-pages
+php apigen.phar generate -s src -d ../gh-pages
 cd ../gh-pages
 
 # Set identity
@@ -8,10 +11,10 @@ git config --global user.name "Travis"
 
 # Add branch
 git init
-git remote add origin https://${GH_TOKEN}@github.com/ApiGen/api.git > /dev/null
+git remote add origin https://${GH_TOKEN}@github.com/gong023/shippo-http-client.git > /dev/null
 git checkout -B gh-pages
 
 # Push generated files
 git add .
-git commit -m "Api updated"
+git commit -m "API updated"
 git push origin gh-pages -fq > /dev/null

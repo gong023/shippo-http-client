@@ -5,6 +5,8 @@ use ShippoClient\Http\Request;
 
 class ShippoClient
 {
+    private $request;
+
     public function __construct(Request $request)
     {
         $this->request = $request;

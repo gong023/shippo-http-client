@@ -1,6 +1,7 @@
 language: php
 sudo: false
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -12,3 +13,7 @@ script:
 before_script:
   - mkdir -p build/logs
   - composer install
+
+env:
+  global:
+    - secure: "5+cPF8XZTjRXsLRLSoIXCjZaiK42eviHa3V7AQBodtnOgo9PYyJS8qgIFRxPVOJbTZfGBngcgWqZu5n1D6ojRGtSdGL1LwV3u1TWNHMY8TXlZUoDpyyY6Yc1Zr0Zr/94eITVF7kHHBTV7aNCmqN9tAURRpJecQKVMEN5tdrALGq6LbqTejO8f72V1xshfvMHFNv5QSAZSwhJqzBPq/4DU3RQnlEd1LvEwk/SR+vkvLXIjob4nXWQfVSyWXub0ZVyHcsaPbLnErNVhFjSdPP4fkl1wsTvs65oDJiBxxO8OgL5eu4Ub0Z+pXbcJW6ciOVdmWKd1yCAzzGur+IHHbV+wduf5Hs7ll8ZxEQl/3zsvA79F501aKOZskfcQ4VkorKDHarBBQM9t/n98ijTFKnc5AmNkiQqXoiq5CK6Yq6GKTwjzix1txPG85HFKfJ8xAPF/PhQNpIqUf4qsFVR8lSEskpssXgG0uzg7W/G6fIbEQ5qaGOxX7jnU0O+ZiQxHFQwcE1smJVLRgY3sHEPuWlqA5+tCYINrLvsdTlOVkaBpFvgq0P/NaiwZharLn1ndtdScE70Gaucfdu/tuIvnxSBEv5EDXxs3Su6BWK513P/qJ8+JpcbAEOjEPwiqH52uRrBvcaTQyJu8ObImy05z6pNLXldB+DwtiIAsjtXTjjl41E="

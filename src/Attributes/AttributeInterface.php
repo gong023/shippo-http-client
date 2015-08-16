@@ -8,29 +8,29 @@ interface AttributeInterface
      * @param callable|null $validate
      * @return string
      */
-    public function asString(callable $validate = null);
+    public function asString($validate = null);
 
     /**
      * @param callable|null $validate
      * @return int
      */
-    public function asInteger(callable $validate = null);
+    public function asInteger($validate = null);
 
     /**
      * @param callable|null $validate
      * @return mixed
      */
-    public function asFloat(callable $validate = null);
+    public function asFloat($validate = null);
 
     /**
      * @param callable|null $validate
      * @return bool
      */
-    public function asBoolean(callable $validate = null);
+    public function asBoolean($validate = null);
 
     /**
      * @param callable|null $validate
      * @return array
      */
-    public function asArray(callable $validate = null);
+    public function asArray($validate = null);
 }

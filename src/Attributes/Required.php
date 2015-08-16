@@ -19,7 +19,7 @@ class Required implements AttributeInterface
      * @return string
      * @throws InvalidAttributeException
      */
-    public function asString(callable $validate = null)
+    public function asString($validate = null)
     {
         if (empty($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);
@@ -37,7 +37,7 @@ class Required implements AttributeInterface
      * @return int
      * @throws InvalidAttributeException
      */
-    public function asInteger(callable $validate = null)
+    public function asInteger($validate = null)
     {
         if ($this->requiredValue === null) {
             throw new InvalidAttributeException($this->requiredValue);
@@ -55,7 +55,7 @@ class Required implements AttributeInterface
      * @return float
      * @throws InvalidAttributeException
      */
-    public function asFloat(callable $validate = null)
+    public function asFloat($validate = null)
     {
         if ($this->requiredValue === null) {
             throw new InvalidAttributeException($this->requiredValue);
@@ -73,7 +73,7 @@ class Required implements AttributeInterface
      * @return bool
      * @throws InvalidAttributeException
      */
-    public function asBoolean(callable $validate = null)
+    public function asBoolean($validate = null)
     {
         if ($this->requiredValue === null) {
             throw new InvalidAttributeException($this->requiredValue);
@@ -91,7 +91,7 @@ class Required implements AttributeInterface
      * @return array
      * @throws InvalidAttributeException
      */
-    public function asArray(callable $validate = null)
+    public function asArray($validate = null)
     {
         if (! is_array($this->requiredValue)) {
             throw new InvalidAttributeException($this->requiredValue);

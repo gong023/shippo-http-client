@@ -28,21 +28,41 @@ abstract class Response
         return $this->attributes->mayHave('object_source')->asString();
     }
 
+    /**
+     * Date and time of object creation.
+     *
+     * @return string
+     */
     public function getObjectCreated()
     {
         return $this->attributes->mayHave('object_created')->asString();
     }
 
+    /**
+     * Date and time of last object update.
+     *
+     * @return string
+     */
     public function getObjectUpdated()
     {
         return $this->attributes->mayHave('object_updated')->asString();
     }
 
+    /**
+     * Unique identifier of the given object.
+     *
+     * @return string
+     */
     public function getObjectId()
     {
         return $this->attributes->mayHave('object_id')->asString();
     }
 
+    /**
+     * Username of the user who created the object.
+     *
+     * @return string
+     */
     public function getObjectOwner()
     {
         return $this->attributes->mayHave('object_owner')->asString();

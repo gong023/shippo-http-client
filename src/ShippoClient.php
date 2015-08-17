@@ -37,6 +37,11 @@ class ShippoClient
         return new Transactions($this->request);
     }
 
+    public function refunds()
+    {
+        return new Refunds($this->request);
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken

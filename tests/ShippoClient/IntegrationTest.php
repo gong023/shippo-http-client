@@ -1,6 +1,7 @@
 <?php
 
 namespace ShippoClient;
+use ShippoClient\Http\Response\Transactions\Transaction;
 
 /**
  * ugly and helpful test class
@@ -413,5 +414,52 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
         $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $responseArray['results']);
+    }
+
+    /**
+     * @test
+     * @depends purchaseTransaction
+     * @param Transaction $transaction
+     * @return Http\Response\Refunds\Refund
+     */
+    public function createRefund($transaction)
+    {
+        $refund = ShippoClient::provider(self::$accessToken)->refunds()->create($transaction->getObjectId());
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Refunds\\Refund', $refund);
+        $refundArray = $refund->toArray();
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $refundArray['object_created']);
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $refundArray['object_updated']);
+        $this->assertNotEmpty($refundArray['object_id']);
+        $this->assertNotEmpty($refundArray['object_owner']);
+        $this->assertSame($transaction->getObjectId(), $refundArray['transaction']);
+        $this->assertNotEmpty($refundArray['object_status']); // maybe ERROR
+
+        return $refund;
+    }
+
+    /**
+     * @test
+     * @depends createRefund
+     * @param Http\Response\Refunds\Refund $refund
+     */
+    public function retrieveRefund($refund)
+    {
+        $refundResponse = ShippoClient::provider(self::$accessToken)->refunds()->retrieve($refund->getObjectId());
+        $this->assertEquals($refund, $refundResponse);
+    }
+
+    /**
+     * @test
+     * @depends createRefund
+     */
+    public function getRefundList()
+    {
+        $refund = ShippoClient::provider(self::$accessToken)->refunds()->getList();
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Refunds\\RefundCollection', $refund);
+        $responseArray = $refund->toArray();
+        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
+        $this->assertArrayHasKey('next', $responseArray);
+        $this->assertArrayHasKey('previous', $responseArray);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Refunds\\Refund', $responseArray['results']);
     }
 }

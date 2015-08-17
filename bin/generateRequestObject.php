@@ -3,12 +3,12 @@
  * WARNING!! THIS SCRIPT IS ONLY FOR DEVELOP.
  */
 
-$domain = 'transactions';
-$singleUpperDomain = 'Transactions';
+$domain = 'refunds';
+$singleUpperDomain = 'Refunds';
 $upperDomain = ucfirst($domain);
 $config = array(
     'create' => array(
-        'exist' => false,
+        'exist' => true,
     ),
     'retrieve' => array(
         'exist' => true,

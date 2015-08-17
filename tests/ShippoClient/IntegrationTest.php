@@ -1,6 +1,7 @@
 <?php
 
 namespace ShippoClient;
+
 use ShippoClient\Http\Response\Transactions\Transaction;
 
 /**

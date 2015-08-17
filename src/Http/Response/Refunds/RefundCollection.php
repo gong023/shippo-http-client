@@ -2,7 +2,6 @@
 
 namespace ShippoClient\Http\Response\Refunds;
 
-
 use ShippoClient\Http\ResponseCollection;
 
 class RefundCollection extends ResponseCollection

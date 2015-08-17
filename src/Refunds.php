@@ -39,6 +39,4 @@ class Refunds
 
         return new RefundResponseCollection($responseArray);
     }
-
 }
-

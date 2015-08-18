@@ -12,22 +12,15 @@ class Request
 {
     const BASE_URI = 'https://api.goshippo.com/v1/';
 
-    private $accessToken;
     private $delegated;
 
     public function __construct($accessToken)
     {
-        $this->accessToken = $accessToken;
         $this->delegated = new Client(static::BASE_URI, array(
             'request.options' => array(
-                'headers' => array('Authorization' => 'ShippoToken ' . $this->getAccessToken()),
+                'headers' => array('Authorization' => 'ShippoToken ' . $accessToken),
             )
         ));
-    }
-
-    public function getAccessToken()
-    {
-        return $this->accessToken;
     }
 
     public function post($endPoint, $body = array())

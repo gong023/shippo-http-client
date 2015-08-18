@@ -6,8 +6,10 @@ use ShippoClient\Http\Request;
 class ShippoClient
 {
     private $request;
+    private $accessToken;
+    private static $instance = null;
 
-    public function __construct(Request $request)
+    private function __construct(Request $request)
     {
         $this->request = $request;
     }
@@ -42,6 +44,11 @@ class ShippoClient
         return new Refunds($this->request);
     }
 
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
     /**
      * TODO:develop mode
      * @param string $accessToken
@@ -49,8 +56,16 @@ class ShippoClient
      */
     public static function provider($accessToken)
     {
+        if (static::$instance !== null) {
+            return static::$instance;
+        }
+
         $request = new Request($accessToken);
 
         return new static($request);
+    }
+
+    public static function setMock($endPoint, $status, $body)
+    {
     }
 }

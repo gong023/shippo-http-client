@@ -31,6 +31,15 @@ class Request
         return $guzzleResponse->json();
     }
 
+    public function postWithJsonBody($endPoint, $body = array())
+    {
+        $request = $this->delegated->post($endPoint, array('Content-Type' => 'application/json'));
+        $request->setBody(json_encode($body));
+        $guzzleResponse = $this->sendWithCheck($request);
+
+        return $guzzleResponse->json();
+    }
+
     public function get($endPoint, $parameter = array())
     {
         $queryString = http_build_query($parameter);

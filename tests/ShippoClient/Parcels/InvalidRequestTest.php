@@ -1,6 +1,6 @@
 <?php
 
-namespace ShippoClient\Addresses\Parcels;
+namespace ShippoClient\Parcels;
 
 use ShippoClient\Http\Response\Exception\ClientErrorException;
 use ShippoClient\ShippoClient;

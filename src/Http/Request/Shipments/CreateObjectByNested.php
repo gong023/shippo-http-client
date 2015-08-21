@@ -60,4 +60,3 @@ class CreateObjectByNested extends CommonParameter
         ));
     }
 }
-

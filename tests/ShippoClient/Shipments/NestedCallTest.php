@@ -91,4 +91,3 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Customer ID 123456', $shipmentArray['metadata']);
     }
 }
-

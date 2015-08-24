@@ -7,6 +7,10 @@ class ShippoClient
 {
     private $request;
     private $accessToken;
+
+    /**
+     * @var static|null
+     */
     private static $instance = null;
 
     private function __construct(Request $request)
@@ -56,16 +60,12 @@ class ShippoClient
      */
     public static function provider($accessToken)
     {
-        if (static::$instance !== null) {
+        if (static::$instance !== null && static::$instance->getAccessToken() === $accessToken) {
             return static::$instance;
         }
 
-        $request = new Request($accessToken);
+        static::$instance = new static(new Request($accessToken));
 
-        return new static($request);
-    }
-
-    public static function setMock($endPoint, $status, $body)
-    {
+        return static::$instance;
     }
 }

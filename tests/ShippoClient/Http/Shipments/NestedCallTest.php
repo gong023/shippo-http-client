@@ -1,6 +1,6 @@
 <?php
 
-namespace ShippoClient\Shipments;
+namespace ShippoClient\Http\Shipments;
 
 use ShippoClient\ShippoClient;
 

@@ -16,4 +16,3 @@ class MockRequestTest extends \PHPUnit_Framework_TestCase
         ShippoClient::provider('anything good because mock works')->addresses()->getList();
     }
 }
-

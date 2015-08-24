@@ -2,10 +2,18 @@
 namespace ShippoClient;
 
 use ShippoClient\Http\Request;
+use ShippoClient\Http\Request\MockCollection;
 
 class ShippoClient
 {
+    /**
+     * @var Request
+     */
     private $request;
+
+    /**
+     * @var string
+     */
     private $accessToken;
 
     /**
@@ -54,7 +62,6 @@ class ShippoClient
     }
 
     /**
-     * TODO:develop mode
      * @param string $accessToken
      * @return static
      */
@@ -67,5 +74,10 @@ class ShippoClient
         static::$instance = new static(new Request($accessToken));
 
         return static::$instance;
+    }
+
+    public static function mock()
+    {
+        return MockCollection::getInstance();
     }
 }

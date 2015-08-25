@@ -2,12 +2,26 @@
 namespace ShippoClient;
 
 use ShippoClient\Http\Request;
+use ShippoClient\Http\Request\MockCollection;
 
 class ShippoClient
 {
+    /**
+     * @var Request
+     */
     private $request;
 
-    public function __construct(Request $request)
+    /**
+     * @var string
+     */
+    private $accessToken;
+
+    /**
+     * @var static|null
+     */
+    private static $instance = null;
+
+    private function __construct(Request $request)
     {
         $this->request = $request;
     }
@@ -42,15 +56,28 @@ class ShippoClient
         return new Refunds($this->request);
     }
 
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
     /**
-     * TODO:develop mode
      * @param string $accessToken
      * @return static
      */
     public static function provider($accessToken)
     {
-        $request = new Request($accessToken);
+        if (static::$instance !== null && static::$instance->getAccessToken() === $accessToken) {
+            return static::$instance;
+        }
 
-        return new static($request);
+        static::$instance = new static(new Request($accessToken));
+
+        return static::$instance;
+    }
+
+    public static function mock()
+    {
+        return MockCollection::getInstance();
     }
 }

@@ -98,7 +98,8 @@ class Required implements AttributeInterface
         }
 
         if ($validate !== null && ! $validate($this->requiredValue)) {
-            throw new InvalidAttributeException($this->requiredValue);
+            // Exception class cannot take array at first argument.
+            throw new InvalidAttributeException($this->requiredValue[0]);
         }
 
         return $this->requiredValue;

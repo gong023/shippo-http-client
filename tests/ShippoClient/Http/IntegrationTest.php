@@ -1,8 +1,9 @@
 <?php
 
-namespace ShippoClient;
+namespace ShippoClient\Http;
 
 use ShippoClient\Http\Response\Transactions\Transaction;
+use ShippoClient\ShippoClient;
 
 /**
  * ugly and helpful test class
@@ -295,7 +296,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends getListOfRateByShipment
      * @param \ShippoClient\Http\Response\Rates\Rate $rate
-     * @return Http\Response\Rates\Rate
+     * @return \ShippoClient\Http\Response\Rates\Rate
      */
     public function retrieveRate($rate)
     {
@@ -356,7 +357,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends retrieveRate
      * @param \ShippoClient\Http\Response\Rates\Rate $rate
-     * @return Http\Response\Transactions\Transaction
+     * @return \ShippoClient\Http\Response\Transactions\Transaction
      */
     public function purchaseTransaction($rate)
     {
@@ -394,7 +395,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @depends purchaseTransaction
-     * @param Http\Response\Transactions\Transaction $transaction
+     * @param \ShippoClient\Http\Response\Transactions\Transaction $transaction
      */
     public function retrieveTransaction($transaction)
     {
@@ -421,7 +422,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends purchaseTransaction
      * @param Transaction $transaction
-     * @return Http\Response\Refunds\Refund
+     * @return \ShippoClient\Http\Response\Refunds\Refund
      */
     public function createRefund($transaction)
     {
@@ -441,7 +442,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @depends createRefund
-     * @param Http\Response\Refunds\Refund $refund
+     * @param \SHippoClient\Http\Response\Refunds\Refund $refund
      */
     public function retrieveRefund($refund)
     {

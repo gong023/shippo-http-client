@@ -1,11 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response\Addresses;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
-use ShippoClient\Http\Response;
 
-class Address extends Response
+class Address extends RootEntity
 {
     public function getName()
     {

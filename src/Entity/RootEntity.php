@@ -1,18 +1,11 @@
 <?php
 
-namespace ShippoClient\Http;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
 
-abstract class Response
+abstract class RootEntity extends Entity
 {
-    protected $attributes;
-
-    public function __construct(array $rawResponse)
-    {
-        $this->attributes = new Attributes($rawResponse);
-    }
-
     public function getObjectState()
     {
         return $this->attributes->mayHave('object_state')->asString();
@@ -67,6 +60,4 @@ abstract class Response
     {
         return $this->attributes->mayHave('object_owner')->asString();
     }
-
-    abstract public function toArray();
 }

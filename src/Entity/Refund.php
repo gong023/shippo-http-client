@@ -1,10 +1,8 @@
 <?php
 
-namespace ShippoClient\Http\Response\Refunds;
+namespace ShippoClient\Entity;
 
-use ShippoClient\Http\Response;
-
-class Refund extends Response
+class Refund extends RootEntity
 {
     /**
      * Indicates the status of the Refund.

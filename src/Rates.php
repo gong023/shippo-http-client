@@ -2,9 +2,9 @@
 
 namespace ShippoClient;
 
-use ShippoClient\Http\Response\Rates\Rate as RateResponse;
-use ShippoClient\Http\Response\Rates\RateCollection as RateResponseCollection;
+use ShippoClient\Entity\Rate;
 use ShippoClient\Http\Request;
+use ShippoClient\Http\Response\RateList;
 
 class Rates
 {
@@ -19,17 +19,17 @@ class Rates
     {
         $responseArray = $this->request->get("rates/$objectId");
 
-        return new RateResponse($responseArray);
+        return new Rate($responseArray);
     }
 
     /**
      * @param null|int $results
-     * @return RateResponseCollection
+     * @return RateList
      */
     public function getList($results = null)
     {
         $responseArray = $this->request->get("rates", array('results' => $results));
 
-        return new RateResponseCollection($responseArray);
+        return new RateList($responseArray);
     }
 }

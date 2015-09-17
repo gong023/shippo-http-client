@@ -1,10 +1,8 @@
 <?php
 
-namespace ShippoClient\Http\Response\Shipments;
+namespace ShippoClient\Entity;
 
-use ShippoClient\Http\Response;
-
-class Shipment extends Response
+class Shipment extends RootEntity
 {
     public function getObjectStatus()
     {

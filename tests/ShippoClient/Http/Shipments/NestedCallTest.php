@@ -63,7 +63,7 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
         );
 
         $shipment = ShippoClient::provider($this->accessToken)->shipments()->createByNestedCall($param);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $shipment);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Shipment', $shipment);
         $shipmentArray = $shipment->toArray();
         $this->assertInternalType('array', $shipmentArray['carrier_accounts']);
         $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $shipmentArray['object_created']);

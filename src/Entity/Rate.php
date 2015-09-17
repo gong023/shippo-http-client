@@ -1,9 +1,8 @@
 <?php
 
-namespace ShippoClient\Http\Response\Rates;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
-use ShippoClient\Http\Response;
 
 /**
  * Each valid Shipment object will automatically trigger the calculation of all available Rates.
@@ -17,7 +16,7 @@ use ShippoClient\Http\Response;
  *
  * Rates are created asynchronously. The response time depends exclusively on the carrier's server.
  */
-class Rate extends Response
+class Rate extends RootEntity
 {
     public function getShipment()
     {

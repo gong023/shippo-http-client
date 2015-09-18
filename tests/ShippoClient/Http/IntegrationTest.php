@@ -493,7 +493,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
                     "notification_email_other" => 'api@goshippo.com',
                 ),
             ),
-        ) );
+        ));
 
         $transaction = ShippoClient::provider(self::$accessToken)->transactions()->getList();
         $this->assertInstanceOf('ShippoClient\\Http\\Response\\TransactionList', $transaction);

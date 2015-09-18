@@ -57,4 +57,9 @@ class MockCollection
 
         return $this;
     }
+
+    public function clear()
+    {
+        static::$container = array();
+    }
 }

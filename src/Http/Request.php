@@ -85,6 +85,7 @@ class Request
     {
         if ($this->mockContainer->has($endPoint)) {
             $this->delegated->addSubscriber($this->mockContainer->getMockResponse($endPoint));
+            $this->mockContainer->clear();
         }
     }
 }

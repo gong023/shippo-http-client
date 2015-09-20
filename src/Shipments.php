@@ -52,7 +52,7 @@ class Shipments
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("shipments", array('results' => $results));
+        $responseArray = $this->request->get("shipments", ['results' => $results]);
 
         return new ShipmentList($responseArray);
     }

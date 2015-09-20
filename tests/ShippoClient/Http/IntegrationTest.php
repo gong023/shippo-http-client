@@ -25,7 +25,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNotFalse(self::$accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
 
-        $param = array(
+        $param = [
             "object_purpose" => "PURCHASE",
             "name"           => "Address From User",
             "company"        => "Shippo",
@@ -39,7 +39,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "email"          => "api@goshippo.com",
             "is_residential" => true,
             "metadata"       => "integration test"
-        );
+        ];
         $addressFrom = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
         $this->assertInstanceOf('ShippoClient\\Entity\\Address', $addressFrom);
 
@@ -66,7 +66,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $addressFromArray['messages']);
         $this->assertSame("integration test", $addressFromArray['metadata']);
 
-        $param = array(
+        $param = [
             "object_purpose" => "PURCHASE",
             "name"           => "Address To User",
             "company"        => "Shippo",
@@ -80,14 +80,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "email"          => "api@goshippo.com",
             "is_residential" => true,
             "metadata"       => "integration test"
-        );
+        ];
         $addressTo = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
         $this->assertInstanceOf('ShippoClient\\Entity\\Address', $addressTo);
 
-        return array(
+        return [
             'address_from' => $addressFrom->getObjectId(),
             'address_to' => $addressTo->getObjectId(),
-        );
+        ];
     }
 
     /**
@@ -135,7 +135,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function createParcel($objectIds)
     {
-        $param = array(
+        $param = [
             'length'        => 5,
             'width'         => 5,
             'height'        => 5,
@@ -144,7 +144,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             'mass_unit'     => 'lb',
             'template'      => '',
             'metadata'      => 'Customer ID 123456',
-        );
+        ];
         $parcel = ShippoClient::provider(self::$accessToken)->parcels()->create($param);
 
         $this->assertInstanceOf('ShippoClient\\Entity\\Parcel', $parcel);
@@ -203,14 +203,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function createShipment($objectIds)
     {
-        $param = array(
+        $param = [
             'object_purpose'  => 'PURCHASE',
             'address_from'    => $objectIds['address_from'],
             'address_to'      => $objectIds['address_to'],
             'parcel'          => $objectIds['parcel'],
             'submission_type' => 'PICKUP',
             'submission_date' => date(\DateTime::ISO8601),
-        );
+        ];
 
         $shipment = ShippoClient::provider(self::$accessToken)->shipments()->create($param);
 
@@ -363,7 +363,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function purchaseTransaction($rate)
     {
         // required purchased account...
-        ShippoClient::mock()->add("transactions", 200, array(
+        ShippoClient::mock()->add("transactions", 200, [
             "object_state"             => "VALID",
             "object_status"            => "QUEUED",
             "object_created"           => "2014-07-25T02:09:34.422Z",
@@ -375,10 +375,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "tracking_number"          => "",
             "tracking_status"          => null,
             "tracking_url_provider"    => "",
-            "tracking_history"         => array(),
+            "tracking_history"         => [],
             "label_url"                => "",
             "commercial_invoice_url"   =>  "",
-            "messages"                 => array(),
+            "messages"                 => [],
             "customs_note"             => "",
             "order"                    => "",
             "submission_note"          => "",
@@ -387,7 +387,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "notification_email_from"  => 'api@goshippo.com',
             "notification_email_to"    => 'api@goshippo.com',
             "notification_email_other" => 'api@goshippo.com',
-        ));
+        ]);
         $transaction = ShippoClient::provider(self::$accessToken)->transactions()->purchase($rate->getObjectId());
 
         $this->assertInstanceOf('ShippoClient\\Entity\\Transaction', $transaction);
@@ -426,7 +426,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function retrieveTransaction($transaction)
     {
-        ShippoClient::mock()->add("transactions/" . $transaction->getObjectId(), 200, array(
+        ShippoClient::mock()->add("transactions/" . $transaction->getObjectId(), 200, [
             "object_state"             => "VALID",
             "object_status"            => "QUEUED",
             "object_created"           => "2014-07-25T02:09:34.422Z",
@@ -438,10 +438,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "tracking_number"          => "",
             "tracking_status"          => null,
             "tracking_url_provider"    => "",
-            "tracking_history"         => array(),
+            "tracking_history"         => [],
             "label_url"                => "",
             "commercial_invoice_url"   =>  "",
-            "messages"                 => array(),
+            "messages"                 => [],
             "customs_note"             => "",
             "order"                    => "",
             "submission_note"          => "",
@@ -450,7 +450,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "notification_email_from"  => 'api@goshippo.com',
             "notification_email_to"    => 'api@goshippo.com',
             "notification_email_other" => 'api@goshippo.com',
-        ));
+        ]);
 
         $transaction = ShippoClient::provider(self::$accessToken)->transactions()->retrieve($transaction->getObjectId());
         $this->assertInstanceOf('ShippoClient\\Entity\\Transaction', $transaction);
@@ -462,12 +462,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function getTransactionList()
     {
-        ShippoClient::mock()->add("transactions", 200, array(
+        ShippoClient::mock()->add("transactions", 200, [
             'count'    => 1,
             'next'     => null,
             'previous' => null,
-            'results'  => array(
-                array(
+            'results'  => [
+                [
                     "object_state"             => "VALID",
                     "object_status"            => "QUEUED",
                     "object_created"           => "2014-07-25T02:09:34.422Z",
@@ -479,10 +479,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
                     "tracking_number"          => "",
                     "tracking_status"          => null,
                     "tracking_url_provider"    => "",
-                    "tracking_history"         => array(),
+                    "tracking_history"         => [],
                     "label_url"                => "",
                     "commercial_invoice_url"   =>  "",
-                    "messages"                 => array(),
+                    "messages"                 => [],
                     "customs_note"             => "",
                     "order"                    => "",
                     "submission_note"          => "",
@@ -491,9 +491,9 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
                     "notification_email_from"  => 'api@goshippo.com',
                     "notification_email_to"    => 'api@goshippo.com',
                     "notification_email_other" => 'api@goshippo.com',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
 
         $transaction = ShippoClient::provider(self::$accessToken)->transactions()->getList();
         $this->assertInstanceOf('ShippoClient\\Http\\Response\\TransactionList', $transaction);
@@ -512,14 +512,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function createRefund($transaction)
     {
-        ShippoClient::mock()->add("refunds", 200, array(
+        ShippoClient::mock()->add("refunds", 200, [
             "object_created" =>  "2014-04-21T07:12:41.044Z",
             "object_updated" =>  "2014-04-21T07:12:41.045Z",
             "object_id"      =>  "bd7b8379a2e847bcb0818125943dde5d",
             "object_owner"   =>  "tech@goshippo.com",
             "object_status"  =>  "QUEUED",
             "transaction"    =>  "35ed59f23a514ecfa2faeaed93a00086"
-        ));
+        ]);
 
         $refund = ShippoClient::provider(self::$accessToken)->refunds()->create($transaction->getObjectId());
         $this->assertInstanceOf('ShippoClient\\Entity\\Refund', $refund);
@@ -541,14 +541,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function retrieveRefund($refund)
     {
-        ShippoClient::mock()->add("refunds/" . $refund->getObjectId(), 200, array(
+        ShippoClient::mock()->add("refunds/" . $refund->getObjectId(), 200, [
             "object_created" =>  "2014-04-21T07:12:41.044Z",
             "object_updated" =>  "2014-04-21T07:12:41.045Z",
             "object_id"      =>  "bd7b8379a2e847bcb0818125943dde5d",
             "object_owner"   =>  "tech@goshippo.com",
             "object_status"  =>  "QUEUED",
             "transaction"    =>  "35ed59f23a514ecfa2faeaed93a00086"
-        ));
+        ]);
 
         $refundResponse = ShippoClient::provider(self::$accessToken)->refunds()->retrieve($refund->getObjectId());
         $this->assertEquals($refund, $refundResponse);
@@ -560,21 +560,21 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function getRefundList()
     {
-        ShippoClient::mock()->add("refunds", 200, array(
+        ShippoClient::mock()->add("refunds", 200, [
             'count'    => 1,
             'next'     => null,
             'previous' => null,
-            'results'  => array(
-                array(
+            'results'  => [
+                [
                     "object_created" =>  "2014-04-21T07:12:41.044Z",
                     "object_updated" =>  "2014-04-21T07:12:41.045Z",
                     "object_id"      =>  "bd7b8379a2e847bcb0818125943dde5d",
                     "object_owner"   =>  "tech@goshippo.com",
                     "object_status"  =>  "QUEUED",
                     "transaction"    =>  "35ed59f23a514ecfa2faeaed93a00086"
-                ),
-            )
-        ));
+                ],
+            ]
+        ]);
 
         $refund = ShippoClient::provider(self::$accessToken)->refunds()->getList();
         $this->assertInstanceOf('ShippoClient\\Http\\Response\\RefundList', $refund);

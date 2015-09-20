@@ -28,7 +28,7 @@ class Rates
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("rates", array('results' => $results));
+        $responseArray = $this->request->get("rates", ['results' => $results]);
 
         return new RateList($responseArray);
     }

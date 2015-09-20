@@ -37,7 +37,7 @@ class Parcels
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("parcels", array('results' => $results));
+        $responseArray = $this->request->get("parcels", ['results' => $results]);
 
         return new ParcelList($responseArray);
     }

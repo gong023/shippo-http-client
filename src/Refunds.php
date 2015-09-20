@@ -17,7 +17,7 @@ class Refunds
 
     public function create($transactionObjectId)
     {
-        $responseArray = $this->request->post('refunds', array('transaction' => $transactionObjectId));
+        $responseArray = $this->request->post('refunds', ['transaction' => $transactionObjectId]);
 
         return new Refund($responseArray);
     }
@@ -35,7 +35,7 @@ class Refunds
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("refunds", array('results' => $results));
+        $responseArray = $this->request->get("refunds", ['results' => $results]);
 
         return new RefundList($responseArray);
     }

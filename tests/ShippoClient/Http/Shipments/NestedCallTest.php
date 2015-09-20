@@ -17,9 +17,9 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNotFalse($this->accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
 
-        $param = array(
+        $param = [
             "object_purpose" => "PURCHASE",
-            "address_from" => array(
+            "address_from" => [
                 "object_purpose" => "PURCHASE",
                 "name"           => "Mr. Hippo",
                 "company"        => "Shippo",
@@ -31,8 +31,8 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
                 "country"        => "US",
                 "phone"          => "+1 555 341 9393",
                 "email"          => "api@goshippo.com"
-            ),
-            "address_to" => array(
+            ],
+            "address_to" => [
                 "object_purpose" => "PURCHASE",
                 "name"           => "Mrs. Hippo",
                 "company"        => "Shippo",
@@ -46,8 +46,8 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
                 "phone"          => "+1 555 341 9393",
                 "email"          => "support@goshippo.com",
                 "metadata"       => "Customer ID 123456"
-            ),
-            "parcel" => array(
+            ],
+            "parcel" => [
                 "length"        => "5",
                 "width"         => "5",
                 "height"        => "5",
@@ -56,11 +56,11 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
                 "mass_unit"     => "lb",
                 "template"      => "",
                 "metadata"      => "Customer ID 123456"
-            ),
+            ],
             "reference_1" => "Created on",
             "reference_2" => "Shippo",
             "metadata" => "Customer ID 123456"
-        );
+        ];
 
         $shipment = ShippoClient::provider($this->accessToken)->shipments()->createByNestedCall($param);
         $this->assertInstanceOf('ShippoClient\\Entity\\Shipment', $shipment);

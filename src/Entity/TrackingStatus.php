@@ -81,7 +81,7 @@ class TrackingStatus extends Entity
 
     public function toArray()
     {
-        return array(
+        return [
             'object_created' => $this->getObjectCreated(),
             'object_updated' => $this->getObjectUpdated(),
             'object_id'      => $this->getObjectId(),
@@ -89,6 +89,6 @@ class TrackingStatus extends Entity
             'status_details' => $this->getStatusDetails(),
             'status_date'    => $this->getStatusDate(),
             'location'       => $this->getLocation()->toArray(),
-        );
+        ];
     }
 }

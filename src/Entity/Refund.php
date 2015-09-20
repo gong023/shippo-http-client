@@ -24,13 +24,13 @@ class Refund extends RootEntity
 
     public function toArray()
     {
-        return array(
+        return [
             'object_created' => $this->getObjectCreated(),
             'object_updated' => $this->getObjectUpdated(),
             'object_id'      => $this->getObjectId(),
             'object_owner'   => $this->getObjectOwner(),
             'object_status'  => $this->getObjectStatus(),
             'transaction'    => $this->getTransaction(),
-        );
+        ];
     }
 }

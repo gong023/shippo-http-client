@@ -56,14 +56,14 @@ class OptionalAttributesTest extends \PHPUnit_Framework_TestCase
     public function asArrayWithEmptyValue($emptyValue)
     {
         $optional = new Optional($emptyValue);
-        $this->assertSame(array(), $optional->asArray());
+        $this->assertSame([], $optional->asArray());
     }
 
     public function emptyValueProvider()
     {
-        return array(
-            array(0), array(''), array(null), array(false)
-        );
+        return [
+            [0], [''], [null], [false]
+        ];
     }
 
     /**
@@ -117,14 +117,14 @@ class OptionalAttributesTest extends \PHPUnit_Framework_TestCase
      */
     public function asArrayWithFalseValidate($falseValidate)
     {
-        $optional = new Optional(array('not empty array'));
-        $this->assertSame(array(), $optional->asArray($falseValidate));
+        $optional = new Optional(['not empty array']);
+        $this->assertSame([], $optional->asArray($falseValidate));
     }
 
     public function falseValidateProvider()
     {
-        return array(
-            array(function () { return false; }),
-        );
+        return [
+            [function () { return false; }],
+        ];
     }
 }

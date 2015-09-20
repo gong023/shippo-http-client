@@ -40,11 +40,11 @@ class Location extends Entity
 
     public function toArray()
     {
-        return array(
+        return [
             'city'    => $this->getCity(),
             'state'   => $this->getState(),
             'zip'     => $this->getZip(),
             'country' => $this->getCountry(),
-        );
+        ];
     }
 }

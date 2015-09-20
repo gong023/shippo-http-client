@@ -96,7 +96,7 @@ class Shipment extends RootEntity
 
     public function toArray()
     {
-        return array(
+        return [
             "object_created"      => $this->getObjectCreated(),
             "object_updated"      => $this->getObjectUpdated(),
             "object_id"           => $this->getObjectId(),
@@ -121,6 +121,6 @@ class Shipment extends RootEntity
             "carrier_accounts"    => $this->getCarrierAccounts(),
             "messages"            => $this->getMessages(),
             "metadata"            => $this->getMetadata()
-        );
+        ];
     }
 }

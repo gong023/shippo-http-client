@@ -175,7 +175,7 @@ class Rate extends RootEntity
 
     public function toArray()
     {
-        return array(
+        return [
             'object_state'             => $this->getObjectState(),
             'object_purpose'           => $this->getObjectPurpose(),
             'object_created'           => $this->getObjectCreated(),
@@ -208,6 +208,6 @@ class Rate extends RootEntity
             'inbound_endpoint'         => $this->getInboundEndpoint(),
             'arrives_by'               => $this->getArrivesBy(),
             'delivery_attempts'        => $this->getDeliveryAttempts(),
-        );
+        ];
     }
 }

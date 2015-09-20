@@ -44,7 +44,7 @@ class Addresses
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("addresses", array('results' => $results));
+        $responseArray = $this->request->get("addresses", ['results' => $results]);
 
         return new AddressList($responseArray);
     }

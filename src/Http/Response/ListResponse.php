@@ -29,12 +29,12 @@ abstract class ListResponse
 
     public function toArray()
     {
-        return array(
+        return [
             'count'    => $this->getCount(),
             'next'     => $this->getNext(),
             'previous' => $this->getPrevious(),
             'results'  => $this->getResults()->toArray(),
-        );
+        ];
     }
 
     /**

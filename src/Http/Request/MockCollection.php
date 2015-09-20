@@ -13,7 +13,7 @@ class MockCollection
      */
     private static $instance = null;
 
-    private static $container = array();
+    private static $container = [];
 
     private function __construct()
     {
@@ -50,16 +50,16 @@ class MockCollection
 
     public function add($path, $statusCode, $response)
     {
-        static::$container[$path] = array(
+        static::$container[$path] = [
             'statusCode' => $statusCode,
             'response'   => $response,
-        );
+        ];
 
         return $this;
     }
 
     public function clear()
     {
-        static::$container = array();
+        static::$container = [];
     }
 }

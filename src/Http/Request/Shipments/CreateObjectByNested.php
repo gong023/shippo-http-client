@@ -49,7 +49,7 @@ class CreateObjectByNested extends CommonParameter
 
     public function toArray()
     {
-        return array_filter(array(
+        return array_filter([
             'object_purpose' => $this->getObjectPurpose(),
             'address_from'   => $this->getAddressFrom(),
             'address_to'     => $this->getAddressTo(),
@@ -57,6 +57,6 @@ class CreateObjectByNested extends CommonParameter
             'reference_1'    => $this->getReference1(),
             'reference_2'    => $this->getReference2(),
             'metadata'       => $this->getMetadata(),
-        ));
+        ]);
     }
 }

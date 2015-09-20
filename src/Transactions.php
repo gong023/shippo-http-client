@@ -18,7 +18,7 @@ class Transactions
 
     public function purchase($rateObjectId)
     {
-        $createObject = new CreateObject(array('rate' => $rateObjectId));
+        $createObject = new CreateObject(['rate' => $rateObjectId]);
         $responseArray = $this->request->post("transactions", $createObject->toArray());
 
         return new Transaction($responseArray);
@@ -37,7 +37,7 @@ class Transactions
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("transactions", array('results' => $results));
+        $responseArray = $this->request->get("transactions", ['results' => $results]);
 
         return new TransactionList($responseArray);
     }

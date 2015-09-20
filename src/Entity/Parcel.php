@@ -58,7 +58,7 @@ class Parcel extends RootEntity
 
     public function toArray()
     {
-        return array(
+        return [
             "object_state"   => $this->getObjectState(),
             "object_created" => $this->getObjectCreated(),
             "object_updated" => $this->getObjectUpdated(),
@@ -74,6 +74,6 @@ class Parcel extends RootEntity
             "value_currency" => $this->getValueCurrency(),
             "mass_unit"      => $this->getMassUnit(),
             "metadata"       => $this->getMetadata(),
-        );
+        ];
     }
 }

@@ -30,9 +30,9 @@ class RequiredAttributesTest extends \PHPUnit_Framework_TestCase
 
     public function emptyValueProvider()
     {
-        return array(
-            array(0), array(''), array(null), array(false)
-        );
+        return [
+            [0], [''], [null], [false]
+        ];
     }
 
     /**
@@ -121,14 +121,14 @@ class RequiredAttributesTest extends \PHPUnit_Framework_TestCase
      */
     public function asArrayThrowsWithFalseValidate($falseValidate)
     {
-        $requireValue = new Required(array('valid array'));
+        $requireValue = new Required(['valid array']);
         $requireValue->asArray($falseValidate);
     }
 
     public function falseValidateProvider()
     {
-        return array(
-            array(function () { return false; }),
-        );
+        return [
+            [function () { return false; }],
+        ];
     }
 }

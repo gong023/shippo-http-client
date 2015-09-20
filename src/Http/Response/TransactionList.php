@@ -12,7 +12,7 @@ class TransactionList extends ListResponse
      */
     public function getResults()
     {
-        $entities = array();
+        $entities = [];
         foreach ($this->attributes->mayHave('results')->asArray() as $attributes) {
             $entities[] = new Transaction($attributes);
         }

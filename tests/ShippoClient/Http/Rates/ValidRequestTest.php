@@ -136,4 +136,3 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->containsOnlyInstancesOf('ShippoClient\\Entity\\Rate', $response->getResults()->getArrayCopy());
     }
 }
-

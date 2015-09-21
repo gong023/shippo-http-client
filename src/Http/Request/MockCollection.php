@@ -21,17 +21,17 @@ class MockCollection
 
     public static function getInstance()
     {
-        if (static::$instance !== null) {
-            return static::$instance;
+        if (self::$instance !== null) {
+            return self::$instance;
         }
-        static::$instance = new static();
+        self::$instance = new self();
 
-        return static::$instance;
+        return self::$instance;
     }
 
     public function has($endPoint)
     {
-        return array_key_exists($endPoint, static::$container);
+        return array_key_exists($endPoint, self::$container);
     }
 
     /**
@@ -40,8 +40,8 @@ class MockCollection
      */
     public function getMockResponse($endPoint)
     {
-        $response = new Response(static::$container[$endPoint]['statusCode']);
-        $response->setBody(json_encode(static::$container[$endPoint]['response']));
+        $response = new Response(self::$container[$endPoint]['statusCode']);
+        $response->setBody(json_encode(self::$container[$endPoint]['response']));
         $mock = new MockPlugin();
         $mock->addResponse($response);
 
@@ -50,7 +50,7 @@ class MockCollection
 
     public function add($path, $statusCode, $response)
     {
-        static::$container[$path] = [
+        self::$container[$path] = [
             'statusCode' => $statusCode,
             'response'   => $response,
         ];
@@ -60,6 +60,6 @@ class MockCollection
 
     public function clear()
     {
-        static::$container = [];
+        self::$container = [];
     }
 }

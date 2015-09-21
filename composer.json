@@ -14,7 +14,8 @@
         "phpunit/phpunit": "4.8.*",
         "fabpot/php-cs-fixer": "1.*",
         "mockery/mockery": "0.9.*",
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": "dev-master",
+        "gong023/assert_chain": "dev-master"
     },
     "autoload": {
         "psr-4": {

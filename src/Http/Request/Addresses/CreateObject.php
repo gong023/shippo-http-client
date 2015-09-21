@@ -27,7 +27,7 @@ class CreateObject extends CommonParameter
      */
     public function getObjectPurpose()
     {
-        $allowed = array(static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE);
+        $allowed = [static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE];
 
         return $this->attributes->mustHave('object_purpose')->asString(function ($value) use ($allowed) {
             return in_array($value, $allowed);
@@ -180,7 +180,7 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter(array(
+        return array_filter([
             'object_purpose' => $this->getObjectPurpose(),
             'name'           => $this->getName(),
             'company'        => $this->getCompany(),
@@ -195,6 +195,6 @@ class CreateObject extends CommonParameter
             'email'          => $this->getEmail(),
             'is_residential' => $this->getIsResidential(),
             'metadata'       => $this->getMetadata(),
-        ));
+        ]);
     }
 }

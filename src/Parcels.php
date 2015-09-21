@@ -2,10 +2,10 @@
 
 namespace ShippoClient;
 
+use ShippoClient\Entity\Parcel;
 use ShippoClient\Http\Request;
 use ShippoClient\Http\Request\Parcels\CreateObject;
-use ShippoClient\Http\Response\Parcels\Parcel as ParcelResponse;
-use ShippoClient\Http\Response\Parcels\ParcelCollection as ParcelResponseCollection;
+use ShippoClient\Http\Response\ParcelList;
 
 class Parcels
 {
@@ -21,24 +21,24 @@ class Parcels
         $createObj = new CreateObject($attributes);
         $responseArray = $this->request->post('parcels', $createObj->toArray());
 
-        return new ParcelResponse($responseArray);
+        return new Parcel($responseArray);
     }
 
     public function retrieve($objectId)
     {
         $responseArray = $this->request->get("parcels/$objectId");
 
-        return new ParcelResponse($responseArray);
+        return new Parcel($responseArray);
     }
 
     /**
      * @param null|int $results
-     * @return ParcelResponseCollection
+     * @return ParcelList
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("parcels", array('results' => $results));
+        $responseArray = $this->request->get("parcels", ['results' => $results]);
 
-        return new ParcelResponseCollection($responseArray);
+        return new ParcelList($responseArray);
     }
 }

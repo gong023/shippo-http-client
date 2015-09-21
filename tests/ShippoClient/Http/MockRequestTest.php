@@ -12,7 +12,7 @@ class MockRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function imitateInternalServerError()
     {
-        ShippoClient::mock()->add('addresses', 500, array());
+        ShippoClient::mock()->add('addresses', 500, []);
         ShippoClient::provider('anything good because mock works')->addresses()->getList();
     }
 }

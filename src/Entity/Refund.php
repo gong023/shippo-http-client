@@ -1,10 +1,8 @@
 <?php
 
-namespace ShippoClient\Http\Response\Refunds;
+namespace ShippoClient\Entity;
 
-use ShippoClient\Http\Response;
-
-class Refund extends Response
+class Refund extends RootEntity
 {
     /**
      * Indicates the status of the Refund.
@@ -26,13 +24,13 @@ class Refund extends Response
 
     public function toArray()
     {
-        return array(
+        return [
             'object_created' => $this->getObjectCreated(),
             'object_updated' => $this->getObjectUpdated(),
             'object_id'      => $this->getObjectId(),
             'object_owner'   => $this->getObjectOwner(),
             'object_status'  => $this->getObjectStatus(),
             'transaction'    => $this->getTransaction(),
-        );
+        ];
     }
 }

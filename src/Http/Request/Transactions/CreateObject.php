@@ -28,9 +28,9 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array(
+        return [
             'rate' => $this->getRate(),
             'metadata' => $this->getMetadata(),
-        );
+        ];
     }
 }

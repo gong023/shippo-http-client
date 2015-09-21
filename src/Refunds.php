@@ -2,9 +2,9 @@
 
 namespace ShippoClient;
 
-use ShippoClient\Http\Response\Refunds\Refund as RefundResponse;
-use ShippoClient\Http\Response\Refunds\RefundCollection as RefundResponseCollection;
+use ShippoClient\Entity\Refund;
 use ShippoClient\Http\Request;
+use ShippoClient\Http\Response\RefundList;
 
 class Refunds
 {
@@ -17,26 +17,26 @@ class Refunds
 
     public function create($transactionObjectId)
     {
-        $responseArray = $this->request->post('refunds', array('transaction' => $transactionObjectId));
+        $responseArray = $this->request->post('refunds', ['transaction' => $transactionObjectId]);
 
-        return new RefundResponse($responseArray);
+        return new Refund($responseArray);
     }
 
     public function retrieve($objectId)
     {
         $responseArray = $this->request->get("refunds/$objectId");
 
-        return new RefundResponse($responseArray);
+        return new Refund($responseArray);
     }
 
     /**
      * @param null|int $results
-     * @return RefundResponseCollection
+     * @return RefundList
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("refunds", array('results' => $results));
+        $responseArray = $this->request->get("refunds", ['results' => $results]);
 
-        return new RefundResponseCollection($responseArray);
+        return new RefundList($responseArray);
     }
 }

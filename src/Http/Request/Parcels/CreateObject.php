@@ -64,7 +64,7 @@ class CreateObject extends CommonParameter
     public function getDistanceUnit()
     {
         return $this->attributes->mustHave('distance_unit')->asString(function ($distanceUnit) {
-            return in_array($distanceUnit, array('cm', 'in', 'ft', 'mm', 'm', 'yd'));
+            return in_array($distanceUnit, ['cm', 'in', 'ft', 'mm', 'm', 'yd']);
         });
     }
 
@@ -88,7 +88,7 @@ class CreateObject extends CommonParameter
     public function getMassUnit()
     {
         return $this->attributes->mustHave('mass_unit')->asString(function ($massUnit) {
-            return in_array($massUnit, array('g', 'oz', 'lb', 'kg'));
+            return in_array($massUnit, ['g', 'oz', 'lb', 'kg']);
         });
     }
 
@@ -107,7 +107,7 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter(array(
+        return array_filter([
             'length'        => $this->getLength(),
             'width'         => $this->getWidth(),
             'height'        => $this->getHeight(),
@@ -116,6 +116,6 @@ class CreateObject extends CommonParameter
             'mass_unit'     => $this->getMassUnit(),
             'template'      => $this->getTemplate(),
             'metadata'      => $this->getMetadata()
-        ));
+        ]);
     }
 }

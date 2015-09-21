@@ -2,7 +2,6 @@
 
 namespace ShippoClient\Http;
 
-use ShippoClient\Http\Response\Transactions\Transaction;
 use ShippoClient\ShippoClient;
 
 /**
@@ -25,7 +24,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNotFalse(self::$accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
 
-        $param = array(
+        $param = [
             "object_purpose" => "PURCHASE",
             "name"           => "Address From User",
             "company"        => "Shippo",
@@ -39,9 +38,9 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "email"          => "api@goshippo.com",
             "is_residential" => true,
             "metadata"       => "integration test"
-        );
+        ];
         $addressFrom = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $addressFrom);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Address', $addressFrom);
 
         $addressFromArray = $addressFrom->toArray();
         $this->assertSame('VALID', $addressFromArray['object_state']);
@@ -66,7 +65,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $addressFromArray['messages']);
         $this->assertSame("integration test", $addressFromArray['metadata']);
 
-        $param = array(
+        $param = [
             "object_purpose" => "PURCHASE",
             "name"           => "Address To User",
             "company"        => "Shippo",
@@ -80,14 +79,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "email"          => "api@goshippo.com",
             "is_residential" => true,
             "metadata"       => "integration test"
-        );
+        ];
         $addressTo = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $addressTo);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Address', $addressTo);
 
-        return array(
+        return [
             'address_from' => $addressFrom->getObjectId(),
             'address_to' => $addressTo->getObjectId(),
-        );
+        ];
     }
 
     /**
@@ -98,7 +97,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveAddress($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->retrieve($objectIds['address_from']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $response);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Address', $response);
     }
 
     /**
@@ -109,7 +108,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function validateAddress($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->validate($objectIds['address_from']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\Address', $response);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Address', $response);
     }
 
     /**
@@ -120,12 +119,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $response = ShippoClient::provider(self::$accessToken)->addresses()->getList();
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Addresses\\AddressCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\AddressList', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Addresses\\Address', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Entity\\Address', $response->getResults()->getArrayCopy());
     }
 
     /**
@@ -135,7 +134,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function createParcel($objectIds)
     {
-        $param = array(
+        $param = [
             'length'        => 5,
             'width'         => 5,
             'height'        => 5,
@@ -144,10 +143,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             'mass_unit'     => 'lb',
             'template'      => '',
             'metadata'      => 'Customer ID 123456',
-        );
+        ];
         $parcel = ShippoClient::provider(self::$accessToken)->parcels()->create($param);
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $parcel);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Parcel', $parcel);
         $parcelArray = $parcel->toArray();
         $this->assertSame('VALID', $parcelArray['object_state']);
         $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $parcelArray['object_created']);
@@ -178,7 +177,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveParcel($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->parcels()->retrieve($objectIds['parcel']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $response);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Parcel', $response);
     }
 
     /**
@@ -188,12 +187,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function getListOfParcel()
     {
         $response = ShippoClient::provider(self::$accessToken)->parcels()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Parcels\\ParcelCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\ParcelList', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Parcels\\Parcel', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Entity\\Parcel', $response->getResults()->getArrayCopy());
     }
 
     /**
@@ -203,18 +202,18 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function createShipment($objectIds)
     {
-        $param = array(
+        $param = [
             'object_purpose'  => 'PURCHASE',
             'address_from'    => $objectIds['address_from'],
             'address_to'      => $objectIds['address_to'],
             'parcel'          => $objectIds['parcel'],
             'submission_type' => 'PICKUP',
             'submission_date' => date(\DateTime::ISO8601),
-        );
+        ];
 
         $shipment = ShippoClient::provider(self::$accessToken)->shipments()->create($param);
 
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $shipment);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Shipment', $shipment);
         $shipmentArray = $shipment->toArray();
         $this->assertInternalType('array', $shipmentArray['carrier_accounts']);
         $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $shipmentArray['object_created']);
@@ -253,7 +252,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function retrieveShipment($objectIds)
     {
         $response = ShippoClient::provider(self::$accessToken)->shipments()->retrieve($objectIds['shipment']);
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $response);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Shipment', $response);
     }
 
     /**
@@ -263,205 +262,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function getListOfShipment()
     {
         $response = ShippoClient::provider(self::$accessToken)->shipments()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Shipments\\ShipmentCollection', $response);
+        $this->assertInstanceOf('ShippoClient\\Http\\Response\\ShipmentList', $response);
         $responseArray = $response->toArray();
         $this->assertGreaterThanOrEqual(1, $responseArray['count']);
         $this->assertArrayHasKey('next', $responseArray);
         $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Shipments\\Shipment', $responseArray['results']);
-    }
-
-    /**
-     * Rates objects are created asynchronously. Below tests may fail.
-     * But they success in most cases.
-     *
-     * @test
-     * @depends createShipment
-     * @param $objectIds
-     */
-    public function getListOfRateByShipment($objectIds)
-    {
-        $response = ShippoClient::provider(self::$accessToken)->shipments()->getRatesList($objectIds['shipment'], 'USD');
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\RateCollection', $response);
-        $responseArray = $response->toArray();
-        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
-        $this->assertArrayHasKey('next', $responseArray);
-        $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Rates\\Rate', $responseArray['results']);
-
-        return $responseArray['results'][0];
-    }
-
-    /**
-     * @test
-     * @depends getListOfRateByShipment
-     * @param \ShippoClient\Http\Response\Rates\Rate $rate
-     * @return \ShippoClient\Http\Response\Rates\Rate
-     */
-    public function retrieveRate($rate)
-    {
-        $response = ShippoClient::provider(self::$accessToken)->rates()->retrieve($rate->getObjectId());
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\Rate', $response);
-        $responseArray = $response->toArray();
-        $this->assertSame("VALID", $responseArray['object_state']);
-        $this->assertSame("PURCHASE", $responseArray['object_purpose']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_created']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $responseArray['object_updated']);
-        $this->assertNotEmpty($responseArray['object_id']);
-        $this->assertNotEmpty($responseArray['object_owner']);
-        $this->assertNotEmpty($responseArray['shipment']);
-        $this->assertTrue($responseArray['available_shippo']);
-        $this->assertInternalType('array', $responseArray['attributes']);
-        $this->assertInternalType('float', $responseArray['amount']);
-        $this->assertSame("USD", $responseArray['currency']);
-        $this->assertInternalType('float', $responseArray['amount_local']);
-        $this->assertSame("USPS", $responseArray['provider']);
-        $this->assertNotEmpty($responseArray['provider_image_75']);
-        $this->assertNotEmpty($responseArray['provider_image_200']);
-        $this->assertArrayHasKey('servicelevel_name', $responseArray);
-        $this->assertArrayHasKey('servicelevel_terms', $responseArray);
-        $this->assertInternalType('int', $responseArray['days']);
-        $this->assertArrayHasKey('arrives_by', $responseArray);
-        $this->assertNotEmpty($responseArray['duration_terms']);
-        $this->assertTrue($responseArray['trackable']);
-        $this->assertFalse($responseArray['insurance']);
-        $this->assertSame(0.0, $responseArray['insurance_amount']);
-        $this->arrayHasKey($responseArray['insurance_currency']);
-        $this->assertSame(0.0, $responseArray['insurance_amount_local']);
-        $this->arrayHasKey($responseArray['insurance_currency_local']);
-        $this->arrayHasKey($responseArray['delivery_attempts']);
-        $this->arrayHasKey($responseArray['outbound_endpoint']);
-        $this->arrayHasKey($responseArray['inbound_endpoint']);
-        $this->assertInternalType('array', $responseArray['messages']);
-        $this->assertNotEmpty($responseArray['carrier_account']);
-
-        return $rate;
-    }
-
-    /**
-     * @test
-     * @depends createShipment
-     */
-    public function getRateList()
-    {
-        $response = ShippoClient::provider(self::$accessToken)->rates()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Rates\\RateCollection', $response);
-        $responseArray = $response->toArray();
-        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
-        $this->assertArrayHasKey('next', $responseArray);
-        $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Rates\\Rate', $responseArray['results']);
-    }
-
-    /**
-     * @test
-     * @depends retrieveRate
-     * @param \ShippoClient\Http\Response\Rates\Rate $rate
-     * @return \ShippoClient\Http\Response\Transactions\Transaction
-     */
-    public function purchaseTransaction($rate)
-    {
-        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->purchase($rate->getObjectId());
-
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $transaction);
-        $transactionArray = $transaction->toArray();
-        $this->assertSame('VALID', $transactionArray['object_state']);
-        $this->assertSame('QUEUED', $transactionArray['object_status']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $transactionArray['object_created']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $transactionArray['object_updated']);
-        $this->assertNotEmpty($transactionArray['object_id']);
-        $this->assertNotEmpty($transactionArray['object_owner']);
-        $this->assertInternalType('bool', $transactionArray['was_test']);
-        $this->assertNotEmpty($transactionArray['rate']);
-        $this->assertArrayHasKey('pickup_date', $transactionArray);
-        $this->assertArrayHasKey('notification_email_from', $transactionArray);
-        $this->assertArrayHasKey('notification_email_to', $transactionArray);
-        $this->assertArrayHasKey('notification_email_other', $transactionArray);
-        $this->assertArrayHasKey('tracking_number', $transactionArray);
-        $this->assertArrayHasKey('tracking_status', $transactionArray);
-        $this->assertInternalType('array', $transactionArray['tracking_history']);
-        $this->assertArrayHasKey('tracking_url_provider', $transactionArray);
-        $this->assertArrayHasKey('label_url', $transactionArray);
-        $this->assertArrayHasKey('commercial_invoice_url', $transactionArray);
-        $this->assertInternalType('array', $transactionArray['messages']);
-        $this->assertArrayHasKey('customs_note', $transactionArray);
-        $this->assertArrayHasKey('submission_note', $transactionArray);
-        $this->assertArrayHasKey('order', $transactionArray);
-        $this->assertArrayHasKey('metadata', $transactionArray);
-
-        return $transaction;
-    }
-
-    /**
-     * @test
-     * @depends purchaseTransaction
-     * @param \ShippoClient\Http\Response\Transactions\Transaction $transaction
-     */
-    public function retrieveTransaction($transaction)
-    {
-        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->retrieve($transaction->getObjectId());
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $transaction);
-    }
-
-    /**
-     * @test
-     * @depends purchaseTransaction
-     */
-    public function getTransactionList()
-    {
-        $transaction = ShippoClient::provider(self::$accessToken)->transactions()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Transactions\\TransactionCollection', $transaction);
-        $responseArray = $transaction->toArray();
-        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
-        $this->assertArrayHasKey('next', $responseArray);
-        $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Transactions\\Transaction', $responseArray['results']);
-    }
-
-    /**
-     * @test
-     * @depends purchaseTransaction
-     * @param Transaction $transaction
-     * @return \ShippoClient\Http\Response\Refunds\Refund
-     */
-    public function createRefund($transaction)
-    {
-        $refund = ShippoClient::provider(self::$accessToken)->refunds()->create($transaction->getObjectId());
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Refunds\\Refund', $refund);
-        $refundArray = $refund->toArray();
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $refundArray['object_created']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $refundArray['object_updated']);
-        $this->assertNotEmpty($refundArray['object_id']);
-        $this->assertNotEmpty($refundArray['object_owner']);
-        $this->assertSame($transaction->getObjectId(), $refundArray['transaction']);
-        $this->assertNotEmpty($refundArray['object_status']); // maybe ERROR
-
-        return $refund;
-    }
-
-    /**
-     * @test
-     * @depends createRefund
-     * @param \SHippoClient\Http\Response\Refunds\Refund $refund
-     */
-    public function retrieveRefund($refund)
-    {
-        $refundResponse = ShippoClient::provider(self::$accessToken)->refunds()->retrieve($refund->getObjectId());
-        $this->assertEquals($refund, $refundResponse);
-    }
-
-    /**
-     * @test
-     * @depends createRefund
-     */
-    public function getRefundList()
-    {
-        $refund = ShippoClient::provider(self::$accessToken)->refunds()->getList();
-        $this->assertInstanceOf('ShippoClient\\Http\\Response\\Refunds\\RefundCollection', $refund);
-        $responseArray = $refund->toArray();
-        $this->assertGreaterThanOrEqual(1, $responseArray['count']);
-        $this->assertArrayHasKey('next', $responseArray);
-        $this->assertArrayHasKey('previous', $responseArray);
-        $this->assertContainsOnlyInstancesOf('ShippoClient\\Http\\Response\\Refunds\\Refund', $responseArray['results']);
+        $this->assertContainsOnlyInstancesOf('ShippoClient\\Entity\\Shipment', $response->getResults()->getArrayCopy());
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response\Parcels;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
-use ShippoClient\Http\Response;
 
-class Parcel extends Response
+class Parcel extends RootEntity
 {
     public function getTemplate()
     {
@@ -59,7 +58,7 @@ class Parcel extends Response
 
     public function toArray()
     {
-        return array(
+        return [
             "object_state"   => $this->getObjectState(),
             "object_created" => $this->getObjectCreated(),
             "object_updated" => $this->getObjectUpdated(),
@@ -75,6 +74,6 @@ class Parcel extends Response
             "value_currency" => $this->getValueCurrency(),
             "mass_unit"      => $this->getMassUnit(),
             "metadata"       => $this->getMetadata(),
-        );
+        ];
     }
 }

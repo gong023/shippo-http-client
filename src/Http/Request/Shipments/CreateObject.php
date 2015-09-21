@@ -28,7 +28,7 @@ class CreateObject extends CommonParameter
      */
     public function getObjectPurpose()
     {
-        $allowed = array(static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE);
+        $allowed = [static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE];
 
         return $this->attributes->mustHave('object_purpose')->asString(function ($value) use ($allowed) {
             return in_array($value, $allowed);
@@ -78,7 +78,7 @@ class CreateObject extends CommonParameter
      */
     public function getSubmissionType()
     {
-        $allowed = array(static::SUBMISSION_TYPE_DROPOFF, static::SUBMISSION_TYPE_PICKUP);
+        $allowed = [static::SUBMISSION_TYPE_DROPOFF, static::SUBMISSION_TYPE_PICKUP];
 
         return $this->attributes->mustHave('submission_type')->asString(function ($value) use ($allowed) {
             return in_array($value, $allowed);
@@ -225,7 +225,7 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter(array(
+        return array_filter([
             'object_purpose'      => $this->getObjectPurpose(),
             'address_from'        => $this->getAddressFrom(),
             'address_to'          => $this->getAddressTo(),
@@ -242,6 +242,6 @@ class CreateObject extends CommonParameter
             'reference_2'         => $this->getReference2(),
             'carrier_accounts'    => $this->getCarrierAccounts(),
             'metadata'            => $this->getMetadata(),
-        ));
+        ]);
     }
 }

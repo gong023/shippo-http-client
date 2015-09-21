@@ -1,11 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response\Addresses;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
-use ShippoClient\Http\Response;
 
-class Address extends Response
+class Address extends RootEntity
 {
     public function getName()
     {
@@ -89,7 +88,7 @@ class Address extends Response
 
     public function toArray()
     {
-        return array(
+        return [
             "object_state"   => $this->getObjectState(),
             "object_purpose" => $this->getObjectPurpose(),
             "object_source"  => $this->getObjectSource(),
@@ -112,6 +111,6 @@ class Address extends Response
             "is_residential" => $this->getIsResidential(),
             "metadata"       => $this->getMetadata(),
             "messages"       => $this->getMessages()
-        );
+        ];
     }
 }

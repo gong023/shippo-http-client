@@ -1,10 +1,8 @@
 <?php
 
-namespace ShippoClient\Http\Response\Shipments;
+namespace ShippoClient\Entity;
 
-use ShippoClient\Http\Response;
-
-class Shipment extends Response
+class Shipment extends RootEntity
 {
     public function getObjectStatus()
     {
@@ -98,7 +96,7 @@ class Shipment extends Response
 
     public function toArray()
     {
-        return array(
+        return [
             "object_created"      => $this->getObjectCreated(),
             "object_updated"      => $this->getObjectUpdated(),
             "object_id"           => $this->getObjectId(),
@@ -123,6 +121,6 @@ class Shipment extends Response
             "carrier_accounts"    => $this->getCarrierAccounts(),
             "messages"            => $this->getMessages(),
             "metadata"            => $this->getMetadata()
-        );
+        ];
     }
 }

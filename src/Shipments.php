@@ -2,12 +2,12 @@
 
 namespace ShippoClient;
 
-use ShippoClient\Http\Response\Shipments\Shipment as ShipmentResponse;
-use ShippoClient\Http\Response\Shipments\ShipmentCollection as ShipmentResponseCollection;
-use ShippoClient\Http\Response\Rates\RateCollection as RateResponseCollection;
+use ShippoClient\Entity\Shipment;
 use ShippoClient\Http\Request;
 use ShippoClient\Http\Request\Shipments\CreateObject;
 use ShippoClient\Http\Request\Shipments\CreateObjectByNested;
+use ShippoClient\Http\Response\RateList;
+use ShippoClient\Http\Response\ShipmentList;
 
 class Shipments
 {
@@ -23,7 +23,7 @@ class Shipments
         $createObj = new CreateObject($attributes);
         $responseArray = $this->request->post('shipments', $createObj->toArray());
 
-        return new ShipmentResponse($responseArray);
+        return new Shipment($responseArray);
     }
 
     public function createByNestedCall(array $attributes)
@@ -31,7 +31,7 @@ class Shipments
         $createObj = new CreateObjectByNested($attributes);
         $responseArray = $this->request->postWithJsonBody('shipments', $createObj->toArray());
 
-        return new ShipmentResponse($responseArray);
+        return new Shipment($responseArray);
     }
 
     public function createReturn()
@@ -43,24 +43,24 @@ class Shipments
     {
         $responseArray = $this->request->get("shipments/$objectId");
 
-        return new ShipmentResponse($responseArray);
+        return new Shipment($responseArray);
     }
 
     /**
      * @param null|int $results
-     * @return ShipmentResponseCollection
+     * @return ShipmentList
      */
     public function getList($results = null)
     {
-        $responseArray = $this->request->get("shipments", array('results' => $results));
+        $responseArray = $this->request->get("shipments", ['results' => $results]);
 
-        return new ShipmentResponseCollection($responseArray);
+        return new ShipmentList($responseArray);
     }
 
-    public function getRatesList($objectId, $currencyCode = '')
+    public function getRateList($objectId, $currencyCode = '')
     {
         $responseArray = $this->request->get("shipments/$objectId/rates/$currencyCode");
 
-        return new RateResponseCollection($responseArray);
+        return new RateList($responseArray);
     }
 }

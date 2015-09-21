@@ -1,11 +1,10 @@
 <?php
 
-namespace ShippoClient\Http\Response\Transactions;
+namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
-use ShippoClient\Http\Response;
 
-class Transaction extends Response
+class Transaction extends RootEntity
 {
     /**
      * Indicates the status of the Transaction.
@@ -45,6 +44,38 @@ class Transaction extends Response
     }
 
     /**
+     * @return mixed|null
+     */
+    public function getPickUpDate()
+    {
+        return $this->attributes->mayHave('pickup_date')->value();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNotificationEmailFrom()
+    {
+        return $this->attributes->mayHave('notification_email_from')->asBoolean();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNotificationEmailTo()
+    {
+        return $this->attributes->mayHave('notification_email_to')->asBoolean();
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationEmailOther()
+    {
+        return $this->attributes->mayHave('notification_email_other')->asString();
+    }
+
+    /**
      * The carrier-specific tracking number that can be used to track the Shipment.
      * A value will only be returned if the Rate is for a trackable Shipment and if the Transactions has been processed successfully.
      *
@@ -58,11 +89,25 @@ class Transaction extends Response
     /**
      * The tracking information we currently have on file for this shipment. We regularly update this information.
      *
-     * @return array
+     * @return TrackingStatus
      */
     public function getTrackingStatus()
     {
-        return $this->attributes->mayHave('tracking_status')->asArray();
+        $attributes = $this->attributes->mayHave('tracking_status')->asArray();
+        return new TrackingStatus($attributes);
+    }
+
+    /**
+     * @return TrackingHistory
+     */
+    public function getTrackingHistory()
+    {
+        $attributes = $this->attributes->mayHave('tracking_history')->asArray();
+        $entities = [];
+        foreach ($attributes as $attribute) {
+            $entities[] = new TrackingStatus($attribute);
+        }
+        return new TrackingHistory($entities);
     }
 
     /**
@@ -91,7 +136,7 @@ class Transaction extends Response
      * A URL pointing to the commercial invoice as a 8.5x11 inch PDF file.
      * A value will only be returned if the Transactions has been processed successfully and if the shipment is international.
      *
-     * @return array
+     * @return string
      */
     public function getCommercialInvoiceUrl()
     {
@@ -103,71 +148,30 @@ class Transaction extends Response
      * "code" (string): an identifier for the corresponding message (not always available")
      * "message" (string): a publishable message containing further information.
      *
-     * @return string
+     * @return array
      */
     public function getMessages()
     {
         return $this->attributes->mayHave('messages')->asArray();
     }
 
+    /**
+     * @return string
+     */
     public function getCustomsNote()
     {
         return $this->attributes->mayHave('customs_note')->asString();
     }
 
+    /**
+     * @return string
+     */
     public function getSubmissionNote()
     {
         return $this->attributes->mayHave('submission_note')->asString();
     }
 
-    public function getMetadata()
-    {
-        return $this->attributes->mayHave('metadata')->asString();
-    }
-
     /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
-     * @return mixed|null
-     */
-    public function getPickUpDate()
-    {
-        return $this->attributes->mayHave('pickup_date')->value();
-    }
-
-    /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
-     * @return mixed|null
-     */
-    public function getNotificationEmailFrom()
-    {
-        return $this->attributes->mayHave('notification_email_from')->value();
-    }
-
-    /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
-     * @return mixed|null
-     */
-    public function getNotificationEmailTo()
-    {
-        return $this->attributes->mayHave('notification_email_to')->value();
-    }
-
-    /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
-     * @return mixed|null
-     */
-    public function getNotificationEmailOther()
-    {
-        return $this->attributes->mayHave('notification_email_other')->value();
-    }
-
-    /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
      * @return mixed|null
      */
     public function getOrder()
@@ -176,18 +180,16 @@ class Transaction extends Response
     }
 
     /**
-     * Description is not found in Shippo API doc, but this key is returned in fact.
-     *
-     * @return mixed|null
+     * @return string
      */
-    public function getTrackingHistory()
+    public function getMetadata()
     {
-        return $this->attributes->mayHave('tracking_history')->asArray();
+        return $this->attributes->mayHave('metadata')->asString();
     }
 
     public function toArray()
     {
-        return array(
+        return [
             'object_state'             => $this->getObjectState(),
             'object_status'            => $this->getObjectStatus(),
             'object_created'           => $this->getObjectCreated(),
@@ -196,21 +198,21 @@ class Transaction extends Response
             'object_owner'             => $this->getObjectOwner(),
             'was_test'                 => $this->getWasTest(),
             'rate'                     => $this->getRate(),
+            'pickup_date'              => $this->getPickUpDate(),
+            'notification_email_from'  => $this->getNotificationEmailFrom(),
+            'notification_email_to'    => $this->getNotificationEmailTo(),
+            'notification_email_other' => $this->getNotificationEmailOther(),
             'tracking_number'          => $this->getTrackingNumber(),
-            'tracking_status'          => $this->getTrackingStatus(),
+            'tracking_status'          => $this->getTrackingStatus()->toArray(),
+            'tracking_history'         => $this->getTrackingHistory()->toArray(),
             'tracking_url_provider'    => $this->getTrackingUrlProvider(),
-            'tracking_history'         => $this->getTrackingHistory(),
             'label_url'                => $this->getLabelUrl(),
             'commercial_invoice_url'   => $this->getCommercialInvoiceUrl(),
             'messages'                 => $this->getMessages(),
             'customs_note'             => $this->getCustomsNote(),
             'submission_note'          => $this->getSubmissionNote(),
-            'pickup_date'              => $this->getPickUpDate(),
-            'notification_email_from'  => $this->getNotificationEmailFrom(),
-            'notification_email_to'    => $this->getNotificationEmailTo(),
-            'notification_email_other' => $this->getNotificationEmailOther(),
             'order'                    => $this->getOrder(),
             'metadata'                 => $this->getMetadata(),
-        );
+        ];
     }
 }

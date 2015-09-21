@@ -10,7 +10,6 @@ use ShippoClient\ShippoClient;
  */
 class ValidRequestTest extends \PHPUnit_Framework_TestCase
 {
-    
     use AssertChain;
 
     /**
@@ -90,4 +89,3 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->containsOnlyInstancesOf('ShippoClient\\Entity\\Refund', $refund->getResults()->getArrayCopy());
     }
 }
-

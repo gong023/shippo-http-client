@@ -156,5 +156,4 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->arrayHasKey('previous', $responseArray)
             ->containsOnlyInstancesOf('ShippoClient\\Entity\\Transaction', $transaction->getResults()->getArrayCopy());
     }
-
 }

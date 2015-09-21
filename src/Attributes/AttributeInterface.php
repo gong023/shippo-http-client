@@ -33,4 +33,11 @@ interface AttributeInterface
      * @return array
      */
     public function asArray(callable $validate = null);
+
+    /**
+     * @param string $className
+     * @param callable|null $validate
+     * @return mixed
+     */
+    public function asInstance($className, callable $validate = null);
 }

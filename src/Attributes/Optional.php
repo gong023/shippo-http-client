@@ -100,6 +100,26 @@ class Optional implements AttributeInterface
     }
 
     /**
+     * If validation result is false, this function returns null.
+     *
+     * @param string $className
+     * @param callable|null $validate
+     * @return mixed|null
+     */
+    public function asInstance($className, callable $validate = null)
+    {
+        if (! $this->optionalValue instanceof $className) {
+            return new $className($this->optionalValue);
+        }
+
+        if ($validate != null && ! $validate($this->optionalValue)) {
+            return null;
+        }
+
+        return $this->optionalValue;
+    }
+
+    /**
      * Only Optional value is allowed to return null
      *
      * @return mixed|null

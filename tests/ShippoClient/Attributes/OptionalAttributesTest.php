@@ -59,6 +59,15 @@ class OptionalAttributesTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([], $optional->asArray());
     }
 
+    /**
+     * @test
+     */
+    public function asInstanceWithEmptyValue()
+    {
+        $optional = new Optional('2015-01-01 00:00:00');
+        $this->assertInstanceOf('\\DateTime', $optional->asInstance('\\DateTime'));
+    }
+
     public function emptyValueProvider()
     {
         return [
@@ -119,6 +128,20 @@ class OptionalAttributesTest extends \PHPUnit_Framework_TestCase
     {
         $optional = new Optional(['not empty array']);
         $this->assertSame([], $optional->asArray($falseValidate));
+    }
+
+    /**
+     * @test
+     */
+    public function asInstanceWithFalseValidate()
+    {
+        $optional = new Optional(new \DateTime('2015-01-01 00:00:00'));
+        $now = new \DateTime('2016-01-01 00:00:00');
+        $ret = $optional->asInstance('\\DateTime', function ($value) use ($now) {
+            return $value === $now;
+        });
+
+        $this->assertNull($ret);
     }
 
     public function falseValidateProvider()

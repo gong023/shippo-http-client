@@ -28,7 +28,7 @@ abstract class RootEntity extends Entity
      */
     public function getObjectCreated()
     {
-        return $this->attributes->mayHave('object_created')->asString();
+        return $this->attributes->mayHave('object_created')->asInstance('\\DateTime');
     }
 
     /**
@@ -38,7 +38,7 @@ abstract class RootEntity extends Entity
      */
     public function getObjectUpdated()
     {
-        return $this->attributes->mayHave('object_updated')->asString();
+        return $this->attributes->mayHave('object_updated')->asInstance('\\DateTime');
     }
 
     /**

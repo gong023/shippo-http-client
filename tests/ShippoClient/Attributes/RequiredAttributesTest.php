@@ -28,6 +28,27 @@ class RequiredAttributesTest extends \PHPUnit_Framework_TestCase
         $requiredValue->asArray();
     }
 
+    /**
+     * @test
+     */
+    public function asInstance()
+    {
+        $requiredValue = new Required(new \DateTime('2015-01-01 00:00:00'));
+        $this->assertInstanceOf('\\DateTime', $requiredValue->asInstance('\\DateTime'));
+    }
+
+    /**
+     * @test
+     * @dataProvider emptyValueProvider
+     * @expectedException \ShippoClient\Attributes\InvalidAttributeException
+     * @param $emptyValue
+     */
+    public function asInstanceThrowsWithEmptyValid($emptyValue)
+    {
+        $requiredValue = new Required($emptyValue);
+        $requiredValue->asInstance('\\DateTime');
+    }
+
     public function emptyValueProvider()
     {
         return [
@@ -123,6 +144,18 @@ class RequiredAttributesTest extends \PHPUnit_Framework_TestCase
     {
         $requireValue = new Required(['valid array']);
         $requireValue->asArray($falseValidate);
+    }
+
+    /**
+     * @test
+     * @dataProvider falseValidateProvider
+     * @expectedException \ShippoClient\Attributes\InvalidAttributeException
+     * @param $falseValidate
+     */
+    public function asInstanceThrowsWithFalseValidate($falseValidate)
+    {
+        $requireValue = new Required(new \DateTime('2015-01-01 00:00:00'));
+        $requireValue->asInstance('\\DateTime', $falseValidate);
     }
 
     public function falseValidateProvider()

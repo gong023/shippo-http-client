@@ -93,8 +93,7 @@ class Transaction extends RootEntity
      */
     public function getTrackingStatus()
     {
-        $attributes = $this->attributes->mayHave('tracking_status')->asArray();
-        return new TrackingStatus($attributes);
+        return new TrackingStatus($this->attributes->mayHave('tracking_status')->asArray());
     }
 
     /**
@@ -102,11 +101,11 @@ class Transaction extends RootEntity
      */
     public function getTrackingHistory()
     {
-        $attributes = $this->attributes->mayHave('tracking_history')->asArray();
         $entities = [];
-        foreach ($attributes as $attribute) {
+        foreach ($this->attributes->mayHave('tracking_history')->asArray() as $attribute) {
             $entities[] = new TrackingStatus($attribute);
         }
+
         return new TrackingHistory($entities);
     }
 

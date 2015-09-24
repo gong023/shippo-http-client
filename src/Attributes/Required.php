@@ -87,6 +87,25 @@ class Required implements AttributeInterface
     }
 
     /**
+     * @param string $className
+     * @param callable|null $validate
+     * @return mixed
+     * @throws InvalidAttributeException
+     */
+    public function asInstance($className, callable $validate = null)
+    {
+        if (! $this->requiredValue instanceof $className) {
+            throw new InvalidAttributeException($this->requiredValue);
+        }
+
+        if ($validate !== null && ! $validate($this->requiredValue)) {
+            throw new InvalidAttributeException(get_class($this->requiredValue));
+        }
+
+        return $this->requiredValue;
+    }
+
+    /**
      * @param callable|null $validate
      * @return array
      * @throws InvalidAttributeException

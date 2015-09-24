@@ -66,8 +66,8 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ShippoClient\\Entity\\Shipment', $shipment);
         $shipmentArray = $shipment->toArray();
         $this->assertInternalType('array', $shipmentArray['carrier_accounts']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $shipmentArray['object_created']);
-        $this->assertRegExp('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $shipmentArray['object_updated']);
+        $this->assertInstanceOf('\\DateTime', $shipmentArray['object_created']);
+        $this->assertInstanceOf('\\DateTime', $shipmentArray['object_updated']);
         $this->assertNotEmpty($shipmentArray['object_id']);
         $this->assertNotEmpty($shipmentArray['object_owner']);
         $this->assertSame('VALID', $shipmentArray['object_state']);

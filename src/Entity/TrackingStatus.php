@@ -9,21 +9,21 @@ class TrackingStatus extends Entity
     /**
      * Date and time of object creation.
      *
-     * @return string
+     * @return \DateTime
      */
     public function getObjectCreated()
     {
-        return $this->attributes->mayHave('object_created')->asString();
+        return $this->attributes->mayHave('object_created')->asInstance('\\DateTime');
     }
 
     /**
      * Date and time of last object update.
      *
-     * @return string
+     * @return \DateTime
      */
     public function getObjectUpdated()
     {
-        return $this->attributes->mayHave('object_updated')->asString();
+        return $this->attributes->mayHave('object_updated')->asInstance('\\DateTime');
     }
 
     /**

@@ -24,7 +24,7 @@ abstract class RootEntity extends Entity
     /**
      * Date and time of object creation.
      *
-     * @return string
+     * @return \DateTime
      */
     public function getObjectCreated()
     {
@@ -34,7 +34,7 @@ abstract class RootEntity extends Entity
     /**
      * Date and time of last object update.
      *
-     * @return string
+     * @return \DateTime
      */
     public function getObjectUpdated()
     {

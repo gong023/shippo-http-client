@@ -23,6 +23,8 @@ class CreateObject extends CommonParameter
      * Purchase Shipment can be used to obtain Rates and purchase Labels,
      * but only accept purchase Address that have been fully entered.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
@@ -31,12 +33,14 @@ class CreateObject extends CommonParameter
         $allowed = [static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE];
 
         return $this->attributes->mustHave('object_purpose')->asString(function ($value) use ($allowed) {
-            return in_array($value, $allowed);
+            return in_array($value, $allowed, true);
         });
     }
 
     /**
      * ID of the Address object that should be used as sender Address.
+     *
+     * Required
      *
      * @return string
      * @throws InvalidAttributeException
@@ -49,6 +53,8 @@ class CreateObject extends CommonParameter
     /**
      * ID of the Address object that should be used as recipient Address.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
@@ -59,6 +65,8 @@ class CreateObject extends CommonParameter
 
     /**
      * ID of the Parcel object to be shipped.
+     *
+     * Required
      *
      * @return string
      * @throws InvalidAttributeException
@@ -73,6 +81,8 @@ class CreateObject extends CommonParameter
      * Selecting 'PICKUP' does not request a carrier pickup.
      * A pickup always needs to be requested separately.
      *
+     * Optional, defaults to DROPOFF
+     *
      * @return string
      * @throws InvalidAttributeException
      */
@@ -80,8 +90,13 @@ class CreateObject extends CommonParameter
     {
         $allowed = [static::SUBMISSION_TYPE_DROPOFF, static::SUBMISSION_TYPE_PICKUP];
 
-        return $this->attributes->mustHave('submission_type')->asString(function ($value) use ($allowed) {
-            return in_array($value, $allowed);
+        $submission_type = $this->attributes->mayHave('submission_type');
+        if ($submission_type->value() === null) {
+            return static::SUBMISSION_TYPE_DROPOFF;
+        }
+
+        return $submission_type->asString(function ($value) use ($allowed) {
+            return in_array($value, $allowed, true);
         });
     }
 
@@ -89,6 +104,8 @@ class CreateObject extends CommonParameter
      * ID of the Transaction object of the outbound shipment.
      * This field triggers the creation of a scan-based return shipments.
      * See the Create a return shipment section for more details.
+     *
+     * Required for return labels
      *
      * @return string
      */
@@ -104,6 +121,8 @@ class CreateObject extends CommonParameter
      * If no pickup_date is given, the value will default to tomorrow's date
      * (including Saturday or Sunday, which can lead to no carrier availability).
      *
+     * Required if submission_type is 'PICKUP'. Defaults to current date (UTC) for 'DROPOFF'
+     *
      * @return string
      * @throws InvalidAttributeException
      */
@@ -114,17 +133,24 @@ class CreateObject extends CommonParameter
             return preg_match('/^(\d{4}-\d{2}-\d{2}|\d{8})[t|T]\d{2}:\d{2}:\d{2}([,|\.]\d+[z|Z]|\+\d+)$/', $datetime);
         };
 
-        if ($this->getSubmissionType() === static::SUBMISSION_TYPE_PICKUP) {
-            return $this->attributes->mustHave('submission_date')->asString($isIOS8601Format);
+        $submission_date = $this->attributes->mayHave('submission_date');
+        if ($submission_date->value() === null) {
+            if ($this->getSubmissionType() !== static::SUBMISSION_TYPE_PICKUP) {
+                return null;
+            }
+
+            return (new \DateTime('now', new \DateTimeZone('UTC')))->format(\DateTime::ISO8601);
         }
 
-        return $this->attributes->mayHave('submission_date')->asString($isIOS8601Format);
+        return $submission_date->asString($isIOS8601Format);
     }
 
     /**
      * ID of the Address object where the shipment will be sent back to if it is not delivered
      * (Only available for UPS, USPS, and Fedex shipments).
      * If this field is not set, your shipments will be returned to the address_form.
+     *
+     * Optional
      *
      * @return string
      */
@@ -135,6 +161,8 @@ class CreateObject extends CommonParameter
 
     /**
      * ID of the Customs Declarations object for an international shipment.
+     *
+     * Optional
      *
      * @return string
      */
@@ -148,16 +176,20 @@ class CreateObject extends CommonParameter
      * Please note that you need to specify the "insurance_currency" as well as the "insurance_content"
      * (via the extra field below, if your package content is not general cargo) as well.
      *
-     * @return int
+     * Optional
+     *
+     * @return float
      */
     public function getInsuranceAmount()
     {
-        return $this->attributes->mayHave('insurance_amount')->asInteger();
+        return $this->attributes->mayHave('insurance_amount')->asFloat();
     }
 
     /**
      * Currency used for insurance_amount.
      * The official ISO 4217 currency codes are used, e.g. "USD" or "EUR".
+     *
+     * Required if insurance_amount is set
      *
      * @return string
      * @throws InvalidAttributeException
@@ -184,6 +216,8 @@ class CreateObject extends CommonParameter
      *     - request_retail_rates (boolean, request retail/list rates. Available for FedEx.)
      *     - use_manifests (boolean, shipment to be linked with a manifest (Canada Post only), if applicable)
      *
+     * Optional
+     *
      * @return array
      */
     public function getExtra()
@@ -194,6 +228,8 @@ class CreateObject extends CommonParameter
     /**
      * Optional text to be printed on the shipping label.
      *
+     * Optional
+     *
      * @return string
      */
     public function getReference1()
@@ -203,6 +239,8 @@ class CreateObject extends CommonParameter
 
     /**
      * Optional text to be printed on the shipping label.
+     *
+     * Optional
      *
      * @return string
      */

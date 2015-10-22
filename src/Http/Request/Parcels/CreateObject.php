@@ -19,6 +19,8 @@ class CreateObject extends CommonParameter
      * our API will automatically order them if this is not the case.
      * Up to six digits in front and four digits after the decimal separator are accepted.
      *
+     * Required
+     *
      * @return int
      * @throws InvalidAttributeException
      */
@@ -32,6 +34,8 @@ class CreateObject extends CommonParameter
      * The width should always be the second largest of the three dimensions length, width and height;
      * our API will automatically order them if this is not the case.
      * Up to six digits in front and four digits after the decimal separator are accepted.
+     *
+     * Required
      *
      * @return int
      * @throws InvalidAttributeException
@@ -47,6 +51,8 @@ class CreateObject extends CommonParameter
      * our API will automatically order them if this is not the case.
      * Up to six digits in front and four digits after the decimal separator are accepted.
      *
+     * Required
+     *
      * @return int
      * @throws InvalidAttributeException
      */
@@ -58,18 +64,22 @@ class CreateObject extends CommonParameter
     /**
      * The unit used for length, width and height.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getDistanceUnit()
     {
         return $this->attributes->mustHave('distance_unit')->asString(function ($distanceUnit) {
-            return in_array($distanceUnit, ['cm', 'in', 'ft', 'mm', 'm', 'yd']);
+            return in_array($distanceUnit, ['cm', 'in', 'ft', 'mm', 'm', 'yd'], true);
         });
     }
 
     /**
      * Weight of the parcel. Up to six digits in front and four digits after the decimal separator are accepted.
+     *
+     * Required
      *
      * @return int
      * @throws InvalidAttributeException
@@ -82,13 +92,15 @@ class CreateObject extends CommonParameter
     /**
      * The unit used for weight.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getMassUnit()
     {
         return $this->attributes->mustHave('mass_unit')->asString(function ($massUnit) {
-            return in_array($massUnit, ['g', 'oz', 'lb', 'kg']);
+            return in_array($massUnit, ['g', 'oz', 'lb', 'kg'], true);
         });
     }
 
@@ -97,6 +109,8 @@ class CreateObject extends CommonParameter
      * See the table below for all available values and the corresponding tokens.
      * When a template is given, the parcel dimensions have to be sent, but will not be used for the Rate generation.
      * The dimensions below will instead be used. The parcel weight is not affected by the use of a template.
+     *
+     * Optional
      *
      * @return string
      */

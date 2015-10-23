@@ -206,7 +206,7 @@ class CreateObject extends CommonParameter
         if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
             return $this->attributes->mustHave('email')->asString($validation);
         }
-        return $this->attributes->mayHave('email')->asString();
+        return $this->attributes->mayHave('email')->asString($validation);
     }
 
     /**

@@ -2,10 +2,13 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
+use ShippoClient\Attributes\InvalidAttributeException;
+
 class CreateReturnObject extends CreateObject
 {
     /**
      * {@inheritdoc}
+     * @throws InvalidAttributeException
      */
     public function getReturnOf()
     {

@@ -22,6 +22,8 @@ class CreateObject extends CommonParameter
      * Address that should be used for purchases must be fully entered,
      * i.e., a complete street address with all required fields must be passed.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
@@ -30,23 +32,30 @@ class CreateObject extends CommonParameter
         $allowed = [static::OBJECT_PURPOSE_QUOTE, static::OBJECT_PURPOSE_PURCHASE];
 
         return $this->attributes->mustHave('object_purpose')->asString(function ($value) use ($allowed) {
-            return in_array($value, $allowed);
+            return in_array($value, $allowed, true);
         });
     }
 
     /**
      * First and Last Name of the addressee
      *
+     * Required for purchase
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getName()
     {
-        return $this->attributes->mustHave('name')->asString();
+        if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
+            return $this->attributes->mustHave('name')->asString();
+        }
+        return $this->attributes->mayHave('name')->asString();
     }
 
     /**
      * Company Name
+     *
+     * Optional
      *
      * @return string
      */
@@ -59,17 +68,24 @@ class CreateObject extends CommonParameter
      * First street line, which is usually the street name.
      * Note that a building's street number should be passed separately (see below).
      *
+     * Required for purchase
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getStreet1()
     {
-        return $this->attributes->mustHave('street1')->asString();
+        if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
+            return $this->attributes->mustHave('street1')->asString();
+        }
+        return $this->attributes->mayHave('street1')->asString();
     }
 
     /**
      * Street number of the addressed building.
      * This field can be included in street1 for all carriers except for DHL Paket (Germany).
+     *
+     * Optional
      *
      * @return string
      */
@@ -80,6 +96,8 @@ class CreateObject extends CommonParameter
 
     /**
      * Second street line.
+     *
+     * Optional
      *
      * @return string
      */
@@ -93,23 +111,34 @@ class CreateObject extends CommonParameter
      * Please bear in mind that city names may be ambiguous (there are 34 Springfields in the US).
      * Passing a state or a ZIP code (see below), if known, will yield more accurate results.
      *
+     * Required for purchase
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getCity()
     {
-        return $this->attributes->mustHave('city')->asString();
+        if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
+            return $this->attributes->mustHave('city')->asString();
+        }
+        return $this->attributes->mayHave('city')->asString();
     }
 
     /**
      * Postal code of an Address. When creating a Quote Address,
      * sending a ZIP is optional but will yield more accurate Rates.
      *
+     * Required for purchase
+     *
      * @return string
+     * @throws InvalidAttributeException
      */
     public function getZip()
     {
-        return $this->attributes->mustHave('zip')->asString();
+        if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
+            return $this->attributes->mustHave('zip')->asString();
+        }
+        return $this->attributes->mayHave('zip')->asString();
     }
 
     /**
@@ -117,12 +146,17 @@ class CreateObject extends CommonParameter
      * the United States and Canada(most carriers only accept two-character state abbreviations).
      * However, to receive more accurate quotes, passing it is generally recommended.
      *
+     * Required for purchase for some countries
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getState()
     {
-        return $this->attributes->mustHave('state')->asString();
+        if (in_array($this->getCountry(), ['US', 'CA'], true)) {
+            return $this->attributes->mustHave('state')->asString();
+        }
+        return $this->attributes->mayHave('state')->asString();
     }
 
     /**
@@ -130,41 +164,55 @@ class CreateObject extends CommonParameter
      * All accepted values can be found on the Official ISO Website(http://www.iso.org/).
      * Sending a country is always required.
      *
+     * Required
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getCountry()
     {
-        return $this->attributes->mustHave('country')->asString();
+        return $this->attributes->mustHave('country')->asString(function ($country) {
+            return (bool)preg_match('/^[A-Z]{2}$/', $country);
+        });
     }
 
     /**
      * Address containing a phone number allow carriers to call the recipient when delivering the Parcel.
      * This increases the probability of delivery and helps to avoid accessorial charges after a Parcel has been shipped.
      *
+     * Optional for domestic, required for international
+     *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getPhone()
     {
-        return $this->attributes->mustHave('phone')->asString();
+        return $this->attributes->mayHave('phone')->asString();
     }
 
     /**
      * E-mail address of the contact person, RFC3696/5321-compliant.
+     *
+     * Required for purchase
      *
      * @return string
      * @throws InvalidAttributeException
      */
     public function getEmail()
     {
-        return $this->attributes->mustHave('email')->asString(function ($email) {
+        $validation = function ($email) {
             return filter_var($email, FILTER_VALIDATE_EMAIL);
-        });
+        };
+        if ($this->getObjectPurpose() === static::OBJECT_PURPOSE_PURCHASE) {
+            return $this->attributes->mustHave('email')->asString($validation);
+        }
+        return $this->attributes->mayHave('email')->asString($validation);
     }
 
     /**
      * Indicates whether the address provided is a residential address or not
+     *
+     * Optional
      *
      * @return null|bool
      */

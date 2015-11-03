@@ -3,22 +3,16 @@
 namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
+use TurmericSpice\ReadableAttributes;
 
 abstract class RootEntity extends Entity
 {
-    public function getObjectState()
-    {
-        return $this->attributes->mayHave('object_state')->asString();
-    }
-
-    public function getObjectPurpose()
-    {
-        return $this->attributes->mayHave('object_purpose')->asString();
-    }
-
-    public function getObjectSource()
-    {
-        return $this->attributes->mayHave('object_source')->asString();
+    use ReadableAttributes {
+        mayHaveAsString as public getObjectState;
+        mayHaveAsString as public getObjectPurpose;
+        mayHaveAsString as public getObjectSource;
+        mayHaveAsString as public getObjectId;
+        mayHaveAsString as public getObjectOwner;
     }
 
     /**
@@ -28,7 +22,7 @@ abstract class RootEntity extends Entity
      */
     public function getObjectCreated()
     {
-        return $this->attributes->mayHave('object_created')->asInstance('\\DateTime');
+        return $this->attributes->mayHave('object_created')->asInstanceOf('\\DateTime');
     }
 
     /**
@@ -38,26 +32,6 @@ abstract class RootEntity extends Entity
      */
     public function getObjectUpdated()
     {
-        return $this->attributes->mayHave('object_updated')->asInstance('\\DateTime');
-    }
-
-    /**
-     * Unique identifier of the given object.
-     *
-     * @return string
-     */
-    public function getObjectId()
-    {
-        return $this->attributes->mayHave('object_id')->asString();
-    }
-
-    /**
-     * Username of the user who created the object.
-     *
-     * @return string
-     */
-    public function getObjectOwner()
-    {
-        return $this->attributes->mayHave('object_owner')->asString();
+        return $this->attributes->mayHave('object_updated')->asInstanceOf('\\DateTime');
     }
 }

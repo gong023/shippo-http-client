@@ -2,16 +2,11 @@
 
 namespace ShippoClient\Http\Request;
 
-use ShippoClient\Attributes;
+use TurmericSpice\ReadWriteAttributes;
 
 abstract class CommonParameter
 {
-    protected $attributes;
-
-    public function __construct(array $attributes)
-    {
-        $this->attributes = new Attributes($attributes);
-    }
+    use ReadWriteAttributes;
 
     /**
      * A string of up to 100 characters
@@ -22,10 +17,7 @@ abstract class CommonParameter
     public function getMetadata()
     {
         return $this->attributes->mayHave('metadata')->asString(function ($metadata) {
-//            return mb_strlen($metadata) <= 100;
-            return strlen($metadata) <= 100;
+            return mb_strlen($metadata) <= 100;
         });
     }
-
-    abstract public function toArray();
 }

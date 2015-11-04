@@ -2,9 +2,8 @@
 
 namespace ShippoClient\Http\Request\Transactions;
 
-use ShippoClient\Attributes\InvalidAttributeException;
-use ShippoClient\Attributes;
 use ShippoClient\Http\Request\CommonParameter;
+use TurmericSpice\Container\InvalidAttributeException;
 
 /**
  * A Transaction is the purchase of a Shipment Label for a given Shipment Rate.
@@ -24,13 +23,5 @@ class CreateObject extends CommonParameter
     public function getRate()
     {
         return $this->attributes->mustHave('rate')->asString();
-    }
-
-    public function toArray()
-    {
-        return [
-            'rate' => $this->getRate(),
-            'metadata' => $this->getMetadata(),
-        ];
     }
 }

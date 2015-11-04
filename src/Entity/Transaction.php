@@ -2,7 +2,6 @@
 
 namespace ShippoClient\Entity;
 
-use ShippoClient\Attributes;
 use TurmericSpice\ReadableAttributes;
 
 class Transaction extends RootEntity

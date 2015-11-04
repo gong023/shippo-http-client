@@ -2,7 +2,7 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
-use ShippoClient\Attributes\InvalidAttributeException;
+use TurmericSpice\Container\InvalidAttributeException;
 
 class CreateReturnObject extends CreateObject
 {

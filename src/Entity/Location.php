@@ -2,10 +2,9 @@
 
 namespace ShippoClient\Entity;
 
-use ShippoClient\Attributes;
 use TurmericSpice\ReadableAttributes;
 
-class Location extends Entity
+class Location
 {
     use ReadableAttributes {
         mayHaveAsString as public getCity;

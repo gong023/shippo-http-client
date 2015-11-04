@@ -2,10 +2,9 @@
 
 namespace ShippoClient\Entity;
 
-use ShippoClient\Attributes;
 use TurmericSpice\ReadableAttributes;
 
-class TrackingStatus extends Entity
+class TrackingStatus
 {
     use ReadableAttributes {
         mayHaveAsString as public getStatusDetails;

@@ -3,9 +3,15 @@
 namespace ShippoClient\Entity;
 
 use ShippoClient\Attributes;
+use TurmericSpice\ReadableAttributes;
 
 class TrackingStatus extends Entity
 {
+    use ReadableAttributes {
+        mayHaveAsString as public getStatusDetails;
+        mayHaveAsString as public getStatusDate;
+    }
+
     /**
      * Date and time of object creation.
      *
@@ -13,7 +19,7 @@ class TrackingStatus extends Entity
      */
     public function getObjectCreated()
     {
-        return $this->attributes->mayHave('object_created')->asInstance('\\DateTime');
+        return $this->attributes->mayHave('object_created')->asInstanceOf('\\DateTime');
     }
 
     /**
@@ -23,7 +29,7 @@ class TrackingStatus extends Entity
      */
     public function getObjectUpdated()
     {
-        return $this->attributes->mayHave('object_updated')->asInstance('\\DateTime');
+        return $this->attributes->mayHave('object_updated')->asInstanceOf('\\DateTime');
     }
 
     /**
@@ -55,40 +61,11 @@ class TrackingStatus extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getStatusDetails()
-    {
-        return $this->attributes->mayHave('status_details')->asString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatusDate()
-    {
-        return $this->attributes->mayHave('status_date')->asString();
-    }
-
-    /**
      * @return Location
      */
     public function getLocation()
     {
         $attributes = $this->attributes->mayHave('location')->asArray();
         return new Location($attributes);
-    }
-
-    public function toArray()
-    {
-        return [
-            'object_created' => $this->getObjectCreated(),
-            'object_updated' => $this->getObjectUpdated(),
-            'object_id'      => $this->getObjectId(),
-            'status'         => $this->getStatus(),
-            'status_details' => $this->getStatusDetails(),
-            'status_date'    => $this->getStatusDate(),
-            'location'       => $this->getLocation()->toArray(),
-        ];
     }
 }

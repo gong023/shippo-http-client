@@ -4,7 +4,7 @@ namespace ShippoClient\Entity;
 
 use TurmericSpice\ReadableAttributes;
 
-class Address extends RootEntity
+class Address extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString as public getName;

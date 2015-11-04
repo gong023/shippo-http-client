@@ -4,7 +4,7 @@ namespace ShippoClient\Entity;
 
 use TurmericSpice\ReadableAttributes;
 
-class Shipment extends RootEntity
+class Shipment extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString as public getObjectStatus;

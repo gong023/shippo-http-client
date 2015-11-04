@@ -4,7 +4,7 @@ namespace ShippoClient\Http\Request;
 
 use TurmericSpice\ReadWriteAttributes;
 
-abstract class CommonParameter
+class CommonParameter
 {
     use ReadWriteAttributes;
 

@@ -4,7 +4,7 @@ namespace ShippoClient\Entity;
 
 use TurmericSpice\ReadableAttributes;
 
-class Transaction extends RootEntity
+class Transaction extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString  as public getCustomsNote;

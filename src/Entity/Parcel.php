@@ -4,7 +4,7 @@ namespace ShippoClient\Entity;
 
 use TurmericSpice\ReadableAttributes;
 
-class Parcel extends RootEntity
+class Parcel extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString as public getTemplate;

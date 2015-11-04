@@ -16,7 +16,7 @@ use TurmericSpice\ReadableAttributes;
  *
  * Rates are created asynchronously. The response time depends exclusively on the carrier's server.
  */
-class Rate extends RootEntity
+class Rate extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString  as public getShipment;

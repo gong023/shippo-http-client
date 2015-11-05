@@ -2,16 +2,28 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
-use TurmericSpice\Container\InvalidAttributeException;
+use TurmericSpice\Container;
+use TurmericSpice\ReadableAttributes;
 
 class CreateReturnObject extends CreateObject
 {
+    use ReadableAttributes {
+        mustHaveAsString as public getReturnOf;
+        toArray          as public __toArray;
+    }
+
     /**
-     * {@inheritdoc}
-     * @throws InvalidAttributeException
+     * @var Container
      */
-    public function getReturnOf()
+    protected $attributes;
+
+    /**
+     * avoid error 'define the same property in the composition' in php < 5.6.13
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
     {
-        $this->attributes->mustHave('return_of')->asString();
+        parent::__construct($attributes);
     }
 }

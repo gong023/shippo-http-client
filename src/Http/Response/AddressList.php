@@ -4,12 +4,10 @@ namespace ShippoClient\Http\Response;
 
 use ShippoClient\Entity\Address;
 use ShippoClient\Entity\AddressCollection;
-use TurmericSpice\ReadableAttributes;
+use TurmericSpice\Container;
 
 class AddressList extends ListResponse
 {
-    use ReadableAttributes;
-
     /**
      * @return AddressCollection
      */

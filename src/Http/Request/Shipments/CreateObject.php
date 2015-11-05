@@ -3,6 +3,7 @@
 namespace ShippoClient\Http\Request\Shipments;
 
 use ShippoClient\Http\Request\CommonParameter;
+use TurmericSpice\Container;
 use TurmericSpice\Container\InvalidAttributeException;
 use TurmericSpice\ReadWriteAttributes;
 
@@ -20,6 +21,21 @@ class CreateObject extends CommonParameter
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';
     const SUBMISSION_TYPE_DROPOFF = 'DROPOFF';
     const SUBMISSION_TYPE_PICKUP = 'PICKUP';
+
+    /**
+     * @var Container
+     */
+    protected $attributes;
+
+    /**
+     * avoid error 'define the same property in the composition' in php < 5.6.13
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
 
     /**
      * Quote Shipment can only be used to obtain quote Rates;

@@ -2,6 +2,7 @@
 
 namespace ShippoClient\Entity;
 
+use TurmericSpice\Container;
 use TurmericSpice\ReadableAttributes;
 
 /**
@@ -38,6 +39,21 @@ class Rate extends ObjectInformation
         mayHaveAsString  as public getCarrierAccount;
         mayHaveAsString  as public getDurationTerms;
         mayHaveAsArray   as public getMessages;
+    }
+
+    /**
+     * @var Container
+     */
+    protected $attributes;
+
+    /**
+     * avoid error 'define the same property in the composition' in php < 5.6.13
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
     }
 
     public function getProviderImage75()

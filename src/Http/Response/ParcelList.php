@@ -4,12 +4,10 @@ namespace ShippoClient\Http\Response;
 
 use ShippoClient\Entity\Parcel;
 use ShippoClient\Entity\ParcelCollection;
-use TurmericSpice\ReadableAttributes;
+use TurmericSpice\Container;
 
 class ParcelList extends ListResponse
 {
-    use ReadableAttributes;
-
     /**
      * @return ParcelCollection
      */

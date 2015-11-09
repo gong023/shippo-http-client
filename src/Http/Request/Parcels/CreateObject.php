@@ -19,21 +19,6 @@ class CreateObject extends CommonParameter
     }
 
     /**
-     * @var Container
-     */
-    protected $attributes;
-
-    /**
-     * avoid error 'define the same property in the composition' in php < 5.6.13
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
-
-    /**
      * First dimension of the Parcel.
      * The length should always be the largest of the three dimensions length, width and height;
      * our API will automatically order them if this is not the case.

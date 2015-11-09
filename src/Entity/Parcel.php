@@ -19,19 +19,4 @@ class Parcel extends ObjectInformation
         mayHaveAsString as public getValueCurrency;
         mayHaveAsString as public getMetadata;
     }
-
-    /**
-     * @var Container
-     */
-    protected $attributes;
-
-    /**
-     * avoid error 'define the same property in the composition' in php < 5.6.13
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
 }

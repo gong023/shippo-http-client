@@ -26,21 +26,6 @@ class Shipment extends ObjectInformation
         mayHaveAsString as public getMetadata;
     }
 
-    /**
-     * @var Container
-     */
-    protected $attributes;
-
-    /**
-     * avoid error 'define the same property in the composition' in php < 5.6.13
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
-
     public function getReference1()
     {
         return $this->attributes->mayHave('reference_1')->asString();

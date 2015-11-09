@@ -23,21 +23,6 @@ class CreateObject extends CommonParameter
     const SUBMISSION_TYPE_PICKUP = 'PICKUP';
 
     /**
-     * @var Container
-     */
-    protected $attributes;
-
-    /**
-     * avoid error 'define the same property in the composition' in php < 5.6.13
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
-
-    /**
      * Quote Shipment can only be used to obtain quote Rates;
      * at the same time, they accept any valid or completed Address object.
      * Purchase Shipment can be used to obtain Rates and purchase Labels,

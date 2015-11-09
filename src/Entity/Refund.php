@@ -9,7 +9,6 @@ class Refund extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString as public getTransaction;
-        __construct as public __t_construct;
     }
 
     /**

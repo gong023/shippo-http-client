@@ -15,6 +15,7 @@ class Transaction extends ObjectInformation
         mayHaveAsBoolean as public getNotificationEmailTo;
         mayHaveAsString  as public getNotificationEmailOther;
         toArray          as public __toArray;
+        __construct as public __t_construct;
     }
 
     /**

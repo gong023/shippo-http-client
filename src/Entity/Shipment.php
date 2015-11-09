@@ -24,6 +24,7 @@ class Shipment extends ObjectInformation
         mayHaveAsArray  as public getCarrierAccounts;
         mayHaveAsArray  as public getMessages;
         mayHaveAsString as public getMetadata;
+        __construct as public __t_construct;
     }
 
     public function getReference1()

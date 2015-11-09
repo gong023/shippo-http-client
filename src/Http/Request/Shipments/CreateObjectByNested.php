@@ -13,6 +13,7 @@ class CreateObjectByNested extends CommonParameter
     use ReadableAttributes {
         mustHaveAsString as public getObjectPurpose;
         toArray          as public __toArray;
+        __construct as public __t_construct;
     }
 
     public function getAddressFrom()

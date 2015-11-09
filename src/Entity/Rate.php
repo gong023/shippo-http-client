@@ -39,6 +39,7 @@ class Rate extends ObjectInformation
         mayHaveAsString  as public getCarrierAccount;
         mayHaveAsString  as public getDurationTerms;
         mayHaveAsArray   as public getMessages;
+        __construct as public __t_construct;
     }
 
     public function getProviderImage75()

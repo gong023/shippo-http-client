@@ -22,6 +22,7 @@ class Address extends ObjectInformation
         mayHaveAsString as public getIp;
         mayHaveAsString as public getMetadata;
         mayHaveAsArray  as public getMessages;
+        __construct as public __t_construct;
     }
 
     public function getIsResidential()

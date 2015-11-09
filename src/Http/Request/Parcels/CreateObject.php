@@ -16,6 +16,7 @@ class CreateObject extends CommonParameter
 {
     use ReadWriteAttributes {
         toArray as public __toArray;
+        __construct as public __t_construct;
     }
 
     /**

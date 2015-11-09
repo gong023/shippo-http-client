@@ -18,5 +18,6 @@ class Parcel extends ObjectInformation
         mayHaveAsString as public getValueAmount;
         mayHaveAsString as public getValueCurrency;
         mayHaveAsString as public getMetadata;
+        __construct as public __t_construct;
     }
 }

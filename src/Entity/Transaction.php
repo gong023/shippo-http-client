@@ -2,10 +2,21 @@
 
 namespace ShippoClient\Entity;
 
-use ShippoClient\Attributes;
+use TurmericSpice\Container;
+use TurmericSpice\ReadableAttributes;
 
-class Transaction extends RootEntity
+class Transaction extends ObjectInformation
 {
+    use ReadableAttributes {
+        mayHaveAsString  as public getCustomsNote;
+        mayHaveAsString  as public getSubmissionNote;
+        mayHaveAsString  as public getMetadata;
+        mayHaveAsBoolean as public getNotificationEmailFrom;
+        mayHaveAsBoolean as public getNotificationEmailTo;
+        mayHaveAsString  as public getNotificationEmailOther;
+        toArray          as public __toArray;
+    }
+
     /**
      * Indicates the status of the Transaction.
      *  - "WAITING"
@@ -52,30 +63,6 @@ class Transaction extends RootEntity
     }
 
     /**
-     * @return bool
-     */
-    public function getNotificationEmailFrom()
-    {
-        return $this->attributes->mayHave('notification_email_from')->asBoolean();
-    }
-
-    /**
-     * @return bool
-     */
-    public function getNotificationEmailTo()
-    {
-        return $this->attributes->mayHave('notification_email_to')->asBoolean();
-    }
-
-    /**
-     * @return string
-     */
-    public function getNotificationEmailOther()
-    {
-        return $this->attributes->mayHave('notification_email_other')->asString();
-    }
-
-    /**
      * The carrier-specific tracking number that can be used to track the Shipment.
      * A value will only be returned if the Rate is for a trackable Shipment and if the Transactions has been processed successfully.
      *
@@ -101,10 +88,8 @@ class Transaction extends RootEntity
      */
     public function getTrackingHistory()
     {
-        $entities = [];
-        foreach ($this->attributes->mayHave('tracking_history')->asArray() as $attribute) {
-            $entities[] = new TrackingStatus($attribute);
-        }
+        $entities = $this->attributes->mayHave('tracking_history')
+            ->asInstanceArray('ShippoClient\\Entity\\TrackingStatus');
 
         return new TrackingHistory($entities);
     }
@@ -155,22 +140,6 @@ class Transaction extends RootEntity
     }
 
     /**
-     * @return string
-     */
-    public function getCustomsNote()
-    {
-        return $this->attributes->mayHave('customs_note')->asString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getSubmissionNote()
-    {
-        return $this->attributes->mayHave('submission_note')->asString();
-    }
-
-    /**
      * @return mixed|null
      */
     public function getOrder()
@@ -188,30 +157,10 @@ class Transaction extends RootEntity
 
     public function toArray()
     {
-        return [
-            'object_state'             => $this->getObjectState(),
-            'object_status'            => $this->getObjectStatus(),
-            'object_created'           => $this->getObjectCreated(),
-            'object_updated'           => $this->getObjectUpdated(),
-            'object_id'                => $this->getObjectId(),
-            'object_owner'             => $this->getObjectOwner(),
-            'was_test'                 => $this->getWasTest(),
-            'rate'                     => $this->getRate(),
-            'pickup_date'              => $this->getPickUpDate(),
-            'notification_email_from'  => $this->getNotificationEmailFrom(),
-            'notification_email_to'    => $this->getNotificationEmailTo(),
-            'notification_email_other' => $this->getNotificationEmailOther(),
-            'tracking_number'          => $this->getTrackingNumber(),
-            'tracking_status'          => $this->getTrackingStatus()->toArray(),
-            'tracking_history'         => $this->getTrackingHistory()->toArray(),
-            'tracking_url_provider'    => $this->getTrackingUrlProvider(),
-            'label_url'                => $this->getLabelUrl(),
-            'commercial_invoice_url'   => $this->getCommercialInvoiceUrl(),
-            'messages'                 => $this->getMessages(),
-            'customs_note'             => $this->getCustomsNote(),
-            'submission_note'          => $this->getSubmissionNote(),
-            'order'                    => $this->getOrder(),
-            'metadata'                 => $this->getMetadata(),
-        ];
+        $array = $this->__toArray();
+        $array['tracking_status'] = $this->getTrackingStatus()->toArray();
+        $array['tracking_history'] = $this->getTrackingHistory()->toArray();
+
+        return $array;
     }
 }

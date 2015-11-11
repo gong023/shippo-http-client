@@ -2,9 +2,10 @@
 
 namespace ShippoClient\Http\Request\Addresses;
 
-use ShippoClient\Attributes\InvalidAttributeException;
-use ShippoClient\Attributes;
 use ShippoClient\Http\Request\CommonParameter;
+use TurmericSpice\Container;
+use TurmericSpice\Container\InvalidAttributeException;
+use TurmericSpice\ReadWriteAttributes;
 
 /**
  * Address objects are used for creating Shipment, obtaining Rates and printing Labels,
@@ -12,6 +13,10 @@ use ShippoClient\Http\Request\CommonParameter;
  */
 class CreateObject extends CommonParameter
 {
+    use ReadWriteAttributes {
+        toArray as public __toArray;
+    }
+
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';
 
@@ -228,21 +233,6 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter([
-            'object_purpose' => $this->getObjectPurpose(),
-            'name'           => $this->getName(),
-            'company'        => $this->getCompany(),
-            'street1'        => $this->getStreet1(),
-            'street_no'      => $this->getStreetNo(),
-            'street2'        => $this->getStreet2(),
-            'city'           => $this->getCity(),
-            'state'          => $this->getState(),
-            'zip'            => $this->getZip(),
-            'country'        => $this->getCountry(),
-            'phone'          => $this->getPhone(),
-            'email'          => $this->getEmail(),
-            'is_residential' => $this->getIsResidential(),
-            'metadata'       => $this->getMetadata(),
-        ]);
+        return array_filter($this->__toArray());
     }
 }

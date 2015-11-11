@@ -2,9 +2,10 @@
 
 namespace ShippoClient\Http\Request\Parcels;
 
-use ShippoClient\Attributes;
-use ShippoClient\Attributes\InvalidAttributeException;
 use ShippoClient\Http\Request\CommonParameter;
+use TurmericSpice\Container;
+use TurmericSpice\Container\InvalidAttributeException;
+use TurmericSpice\ReadWriteAttributes;
 
 /**
  * Parcel objects are used for creating Shipment, obtaining Rates and printing Labels,
@@ -13,6 +14,10 @@ use ShippoClient\Http\Request\CommonParameter;
  */
 class CreateObject extends CommonParameter
 {
+    use ReadWriteAttributes {
+        toArray as public __toArray;
+    }
+
     /**
      * First dimension of the Parcel.
      * The length should always be the largest of the three dimensions length, width and height;
@@ -121,15 +126,6 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter([
-            'length'        => $this->getLength(),
-            'width'         => $this->getWidth(),
-            'height'        => $this->getHeight(),
-            'distance_unit' => $this->getDistanceUnit(),
-            'weight'        => $this->getWeight(),
-            'mass_unit'     => $this->getMassUnit(),
-            'template'      => $this->getTemplate(),
-            'metadata'      => $this->getMetadata()
-        ]);
+        return array_filter($this->__toArray());
     }
 }

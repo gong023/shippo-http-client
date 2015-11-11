@@ -2,9 +2,9 @@
 
 namespace ShippoClient\Http\Response;
 
-use ShippoClient\Attributes;
 use ShippoClient\Entity\Address;
 use ShippoClient\Entity\AddressCollection;
+use TurmericSpice\Container;
 
 class AddressList extends ListResponse
 {

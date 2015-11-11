@@ -5,12 +5,14 @@ namespace ShippoClient\Http\Request\Shipments;
 use ShippoClient\Http\Request\CommonParameter;
 use ShippoClient\Http\Request\Addresses\CreateObject as AddressCreate;
 use ShippoClient\Http\Request\Parcels\CreateObject as ParcelCreate;
+use TurmericSpice\Container;
+use TurmericSpice\ReadableAttributes;
 
 class CreateObjectByNested extends CommonParameter
 {
-    public function getObjectPurpose()
-    {
-        return $this->attributes->mustHave('object_purpose')->asString();
+    use ReadableAttributes {
+        mustHaveAsString as public getObjectPurpose;
+        toArray          as public __toArray;
     }
 
     public function getAddressFrom()
@@ -49,14 +51,6 @@ class CreateObjectByNested extends CommonParameter
 
     public function toArray()
     {
-        return array_filter([
-            'object_purpose' => $this->getObjectPurpose(),
-            'address_from'   => $this->getAddressFrom(),
-            'address_to'     => $this->getAddressTo(),
-            'parcel'         => $this->getParcel(),
-            'reference_1'    => $this->getReference1(),
-            'reference_2'    => $this->getReference2(),
-            'metadata'       => $this->getMetadata(),
-        ]);
+        return array_filter($this->__toArray());
     }
 }

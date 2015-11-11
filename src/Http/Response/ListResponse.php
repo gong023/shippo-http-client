@@ -2,19 +2,14 @@
 
 namespace ShippoClient\Http\Response;
 
-use ShippoClient\Attributes;
 use ShippoClient\Entity\EntityCollection;
+use TurmericSpice\ReadWriteAttributes;
 
 abstract class ListResponse
 {
-    public function __construct(array $attributes)
-    {
-        $this->attributes = new Attributes($attributes);
-    }
-
-    public function getCount()
-    {
-        return $this->attributes->mayHave('count')->asInteger();
+    use ReadWriteAttributes {
+        mayHaveAsInt as public getCount;
+        toArray      as public __toArray;
     }
 
     public function getNext()
@@ -29,12 +24,10 @@ abstract class ListResponse
 
     public function toArray()
     {
-        return [
-            'count'    => $this->getCount(),
-            'next'     => $this->getNext(),
-            'previous' => $this->getPrevious(),
-            'results'  => $this->getResults()->toArray(),
-        ];
+        $array = $this->__toArray();
+        $array['results'] = $this->getResults()->toArray();
+
+        return $array;
     }
 
     /**

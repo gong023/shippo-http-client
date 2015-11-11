@@ -2,16 +2,13 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
-use ShippoClient\Attributes\InvalidAttributeException;
+use TurmericSpice\Container;
+use TurmericSpice\ReadableAttributes;
 
 class CreateReturnObject extends CreateObject
 {
-    /**
-     * {@inheritdoc}
-     * @throws InvalidAttributeException
-     */
-    public function getReturnOf()
-    {
-        $this->attributes->mustHave('return_of')->asString();
+    use ReadableAttributes {
+        mustHaveAsString as public getReturnOf;
+        toArray          as public __toArray;
     }
 }

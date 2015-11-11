@@ -2,9 +2,10 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
-use ShippoClient\Attributes;
-use ShippoClient\Attributes\InvalidAttributeException;
 use ShippoClient\Http\Request\CommonParameter;
+use TurmericSpice\Container;
+use TurmericSpice\Container\InvalidAttributeException;
+use TurmericSpice\ReadWriteAttributes;
 
 /**
  * The heart of the Shippo API, a Shipment is made up of "to" and "from" Address and the Parcel to be shipped.
@@ -12,6 +13,10 @@ use ShippoClient\Http\Request\CommonParameter;
  */
 class CreateObject extends CommonParameter
 {
+    use ReadWriteAttributes {
+        toArray as public __toArray;
+    }
+
     const OBJECT_PURPOSE_QUOTE = 'QUOTE';
     const OBJECT_PURPOSE_PURCHASE = 'PURCHASE';
     const SUBMISSION_TYPE_DROPOFF = 'DROPOFF';
@@ -263,23 +268,6 @@ class CreateObject extends CommonParameter
 
     public function toArray()
     {
-        return array_filter([
-            'object_purpose'      => $this->getObjectPurpose(),
-            'address_from'        => $this->getAddressFrom(),
-            'address_to'          => $this->getAddressTo(),
-            'parcel'              => $this->getParcel(),
-            'submission_type'     => $this->getSubmissionType(),
-            'return_of'           => $this->getReturnOf(),
-            'submission_date'     => $this->getSubmissionDate(),
-            'address_return'      => $this->getAddressReturn(),
-            'customs_declaration' => $this->getCustomsDeclaration(),
-            'insurance_amount'    => $this->getInsuranceAmount(),
-            'insurance_currency'  => $this->getInsuranceCurrency(),
-            'extra'               => $this->getExtra(),
-            'reference_1'         => $this->getReference1(),
-            'reference_2'         => $this->getReference2(),
-            'carrier_accounts'    => $this->getCarrierAccounts(),
-            'metadata'            => $this->getMetadata(),
-        ]);
+        return array_filter($this->__toArray());
     }
 }

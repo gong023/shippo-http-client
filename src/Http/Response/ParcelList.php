@@ -2,9 +2,9 @@
 
 namespace ShippoClient\Http\Response;
 
-use ShippoClient\Attributes;
 use ShippoClient\Entity\Parcel;
 use ShippoClient\Entity\ParcelCollection;
+use TurmericSpice\Container;
 
 class ParcelList extends ListResponse
 {

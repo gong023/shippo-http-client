@@ -2,49 +2,14 @@
 
 namespace ShippoClient\Entity;
 
-use ShippoClient\Attributes;
+use TurmericSpice\ReadableAttributes;
 
-class Location extends Entity
+class Location
 {
-    /**
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->attributes->mayHave('city')->asString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->attributes->mayHave('state')->asString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getZip()
-    {
-        return $this->attributes->mayHave('zip')->asString();
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->attributes->mayHave('country')->asString();
-    }
-
-    public function toArray()
-    {
-        return [
-            'city'    => $this->getCity(),
-            'state'   => $this->getState(),
-            'zip'     => $this->getZip(),
-            'country' => $this->getCountry(),
-        ];
+    use ReadableAttributes {
+        mayHaveAsString as public getCity;
+        mayHaveAsString as public getState;
+        mayHaveAsString as public getZip;
+        mayHaveAsString as public getCountry;
     }
 }

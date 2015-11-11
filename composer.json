@@ -8,14 +8,15 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "guzzle/guzzle": "~3.7"
+        "guzzle/guzzle": "~3.7",
+        "gong023/turmeric-spice": "0.2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
         "fabpot/php-cs-fixer": "1.*",
         "mockery/mockery": "0.9.*",
         "satooshi/php-coveralls": "dev-master",
-        "gong023/assert_chain": "dev-master"
+        "gong023/assert_chain": "0.1.0"
     },
     "autoload": {
         "psr-4": {

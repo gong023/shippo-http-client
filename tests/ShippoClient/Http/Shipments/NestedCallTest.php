@@ -84,8 +84,8 @@ class NestedCallTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $shipmentArray['insurance_amount']);
         $this->assertSame('', $shipmentArray['insurance_currency']);
         $this->assertInternalType('array', $shipmentArray['extra']);
-        $this->assertSame('Created on', $shipmentArray['reference_1']);
-        $this->assertSame('Shippo', $shipmentArray['reference_2']);
+        $this->assertArrayHasKey('reference_1', $shipmentArray);
+        $this->assertArrayHasKey('reference_2', $shipmentArray);
         $this->assertNotEmpty($shipmentArray['rates_url']);
         $this->assertInternalType('array', $shipmentArray['messages']);
         $this->assertSame('Customer ID 123456', $shipmentArray['metadata']);

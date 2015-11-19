@@ -57,7 +57,7 @@ class Transaction extends ObjectInformation
     /**
      * @return mixed|null
      */
-    public function getPickUpDate()
+    public function getPickupDate()
     {
         return $this->attributes->mayHave('pickup_date')->value();
     }

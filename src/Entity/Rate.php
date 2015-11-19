@@ -39,16 +39,8 @@ class Rate extends ObjectInformation
         mayHaveAsString  as public getCarrierAccount;
         mayHaveAsString  as public getDurationTerms;
         mayHaveAsArray   as public getMessages;
-    }
-
-    public function getProviderImage75()
-    {
-        return $this->attributes->mayHave('provider_image_75')->asString();
-    }
-
-    public function getProviderImage200()
-    {
-        return $this->attributes->mayHave('provider_image_200')->asString();
+        mayHaveAsString  as public getProviderImage_75;
+        mayHaveAsString  as public getProviderImage_200;
     }
 
     /**

@@ -39,7 +39,12 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
             "is_residential" => true,
             "metadata"       => "integration test"
         ];
-        $addressFrom = ShippoClient::provider(self::$accessToken)->addresses()->create($param);
+        $addressFrom = ShippoClient::provider(self::$accessToken)
+            ->setRequestOption('curl.options', [
+                CURLOPT_ENCODING          => 'gzip',
+                CURLE_OPERATION_TIMEOUTED => 30,
+            ])
+            ->addresses()->create($param);
         $this->assertInstanceOf('ShippoClient\\Entity\\Address', $addressFrom);
 
         $addressFromArray = $addressFrom->toArray();

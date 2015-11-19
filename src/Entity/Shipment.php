@@ -24,15 +24,7 @@ class Shipment extends ObjectInformation
         mayHaveAsArray  as public getCarrierAccounts;
         mayHaveAsArray  as public getMessages;
         mayHaveAsString as public getMetadata;
-    }
-
-    public function getReference1()
-    {
-        return $this->attributes->mayHave('reference_1')->asString();
-    }
-
-    public function getReference2()
-    {
-        return $this->attributes->mayHave('reference_2')->asString();
+        mayHaveAsString as public getReference_1;
+        mayHaveAsString as public getReference_2;
     }
 }

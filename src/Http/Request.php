@@ -55,6 +55,11 @@ class Request
         return $guzzleResponse->json();
     }
 
+    public function setDefaultOption($keyOrPath, $value)
+    {
+        $this->delegated->setDefaultOption($keyOrPath, $value);
+    }
+
     private function sendWithCheck(RequestInterface $request)
     {
         try {

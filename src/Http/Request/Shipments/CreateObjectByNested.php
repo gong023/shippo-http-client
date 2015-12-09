@@ -12,6 +12,7 @@ class CreateObjectByNested extends CommonParameter
 {
     use ReadableAttributes {
         mustHaveAsString as public getObjectPurpose;
+        mayHaveAsArray   as public getExtra;
         toArray          as public __toArray;
     }
 

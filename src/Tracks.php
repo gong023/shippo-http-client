@@ -21,4 +21,3 @@ class Tracks
         return new StandaloneTrack($responseArray);
     }
 }
-

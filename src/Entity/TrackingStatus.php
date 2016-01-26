@@ -9,6 +9,7 @@ class TrackingStatus
     use ReadableAttributes {
         mayHaveAsString as public getStatusDetails;
         mayHaveAsString as public getStatusDate;
+        toArray as __toArray;
     }
 
     /**
@@ -66,5 +67,16 @@ class TrackingStatus
     {
         $attributes = $this->attributes->mayHave('location')->asArray();
         return new Location($attributes);
+    }
+
+    public function toArray()
+    {
+        return [
+            'object_created' => $this->getObjectCreated(),
+            'object_updated' => $this->getObjectUpdated(),
+            'object_id'      => $this->getObjectId(),
+            'status'         => $this->getStatus(),
+            'location'       => $this->getLocation()->toArray(),
+        ];
     }
 }

@@ -56,6 +56,11 @@ class ShippoClient
         return new Refunds($this->request);
     }
 
+    public function tracks()
+    {
+        return new Tracks($this->request);
+    }
+
     public function getAccessToken()
     {
         return $this->accessToken;

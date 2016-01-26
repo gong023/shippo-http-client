@@ -9,7 +9,7 @@ abstract class EntityCollection extends \ArrayObject
         $ret = [];
         /** @var Entity $entity */
         foreach ($this->getArrayCopy() as $entity) {
-            $ret[] = $entity->toArray();
+            $ret[] = $entity;
         }
         return $ret;
     }

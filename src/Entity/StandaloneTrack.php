@@ -26,8 +26,10 @@ class StandaloneTrack
      */
     public function getTrackingHistory()
     {
-        return $this->attributes->mayHave('tracking_history')
-            ->asInstanceOf('\\ShippoClient\\Entity\\TrackingHistory');
+        $entities = $this->attributes->mayHave('tracking_history')
+            ->asInstanceArray('ShippoClient\\Entity\\TrackingStatus');
+
+        return new TrackingHistory($entities);
     }
 
     public function toArray()

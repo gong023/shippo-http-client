@@ -76,6 +76,8 @@ class TrackingStatus
             'object_updated' => $this->getObjectUpdated(),
             'object_id'      => $this->getObjectId(),
             'status'         => $this->getStatus(),
+            'status_date'    => $this->getStatusDate(),
+            'status_details' => $this->getStatusDetails(),
             'location'       => $this->getLocation()->toArray(),
         ];
     }

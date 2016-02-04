@@ -17,8 +17,13 @@ class StandaloneTrack
      */
     public function getTrackingStatus()
     {
-        return $this->attributes->mayHave('tracking_status')
-            ->asInstanceOf('\\ShippoClient\\Entity\\TrackingStatus');
+        $tracking_status = $this->attributes->mayHave('tracking_status');
+
+        if (!$tracking_status->value()) {
+            return new TrackingStatus();
+        }
+
+        return $tracking_status->asInstanceOf('\\ShippoClient\\Entity\\TrackingStatus');
     }
 
     /**

@@ -16,7 +16,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     {
         $address = new Address([
             'name'      => 'Hello world!',
-            'company'   => 'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"`\'^~',
+            'company'   => 'ŠŒŽšœžŸµÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïñòóôõöùúûüýÿ"`\'^~',
             'street1'   => 'ŻŹĆŃĄŚŁĘÓżźćńąśłęó"`\'^~',
             'street2'   => 'Γειά σου Κόσμε!',
             'street_no' => '세계 안녕하세요!',
@@ -26,7 +26,7 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 
         $this->assert()
             ->same('Hello world!', $address->getName())
-            ->same('SOEZsoezYyenuAAAAAAAECEEEEIIIIDNOOOOOOUUUUYssaaaaaaaeceeeeiiiidnoooooouuuuyy"`\'^~', $address->getCompany())
+            ->same('SOEZsoezYuAAAAAAAECEEEEIIIIDNOOOOOOUUUUYssaaaaaaaeceeeeiiiinooooouuuuyy"`\'^~', $address->getCompany())
             ->same('ZZCNASLEOzzcnasleo"`\'^~', $address->getStreet1())
             ->same('  !', $address->getStreet2())
             ->same(' !', $address->getStreetNo())

@@ -122,7 +122,7 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ShippoClient::provider($accessToken)->tracks()->create('invalid carrier', 12345);
             $this->fail('shippo will return 400 if carrier is invalid');
         } catch (ClientErrorException $e) {
-            $this->assertSame(400, $e->getMessage());
+            $this->assertSame(400, $e->getStatusCode());
         }
     }
 }

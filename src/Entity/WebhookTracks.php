@@ -2,6 +2,6 @@
 
 namespace ShippoClient\Entity;
 
-class Webhook extends Transaction
+class WebhookTracks extends Tracks
 {
 }

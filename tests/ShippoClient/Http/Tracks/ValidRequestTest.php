@@ -15,6 +15,23 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
         ShippoClient::mock()->add('tracks/usps/12345', 200, [
             "tracking_number" => "12345",
             "carrier" =>  "usps",
+            "eta" => "2016-06-29T12:00:00.000Z",
+            "servicelevel" => [
+                "token" => "usps_priority",
+                "name" => "Priority Mail"
+            ],
+            "address_from" => [
+                "city" => "Dayton",
+                "state" => "NJ",
+                "zip" => "08810",
+                "country" => "US"
+            ],
+            "address_to" => [
+                "city" => "Richmond",
+                "state" => "VA",
+                "zip" => "23227",
+                "country" => "US"
+            ],
             "tracking_status" =>  [
                 "object_created" => "2014-11-29T16:31:19.511Z",
                 "status" => "DELIVERED",
@@ -94,7 +111,11 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->arrayHasKey('carrier', $responseArray)
             ->arrayHasKey('tracking_status', $responseArray)
             ->arrayHasKey('tracking_history', $responseArray)
-            ->arrayHasKey('tracking_number', $responseArray);
+            ->arrayHasKey('tracking_number', $responseArray)
+            ->arrayHasKey('eta', $responseArray)
+            ->arrayHasKey('servicelevel', $responseArray)
+            ->arrayHasKey('address_from', $responseArray)
+            ->arrayHasKey('address_to', $responseArray);
     }
 
     /**
@@ -107,7 +128,7 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
         $response = ShippoClient::provider($accessToken)->tracks()->create('usps', 12345);
 
         // shippo return 200 even if tracking number is invalid
-        $this->assertInstanceOf('ShippoClient\\Entity\\StandaloneTrack', $response);
+        $this->assertInstanceOf('ShippoClient\\Entity\\Tracks', $response);
     }
 
     /**

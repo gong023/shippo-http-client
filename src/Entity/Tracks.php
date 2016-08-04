@@ -18,8 +18,7 @@ class Tracks
      */
     public function getTrackingStatus()
     {
-        return $this->attributes->mayHave('tracking_status')
-            ->asInstanceOf('\\ShippoClient\\Entity\\TrackingStatus');
+        return new TrackingStatus($this->attributes->mayHave('tracking_status')->asArray());
     }
 
     /**
@@ -58,7 +57,9 @@ class Tracks
      */
     public function getServiceLevel()
     {
-        return $this->attributes->mayHave('servicelevel')->asInstanceOf('\\ShippoClient\\Entity\\ServiceLevel');
+        $serviceLevel = $this->attributes->mayHave('servicelevel')->asArray();
+
+        return new ServiceLevel($serviceLevel);
     }
 
     public function toArray()

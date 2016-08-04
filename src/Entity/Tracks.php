@@ -9,6 +9,7 @@ class Tracks
     use ReadableAttributes {
         mayHaveAsString as public getCarrier;
         mayHaveAsString as public getTrackingNumber;
+        mayHaveAsString as public getEta;
         toArray as public __toArray;
     }
 
@@ -30,14 +31,6 @@ class Tracks
             ->asInstanceArray('ShippoClient\\Entity\\TrackingStatus');
 
         return new TrackingHistory($entities);
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEta()
-    {
-        return $this->attributes->mayHave('eta')->asInstanceOf('\\DateTime');
     }
 
     /**

@@ -38,7 +38,9 @@ class Tracks
      */
     public function getAddressFrom()
     {
-        return $this->attributes->mayHave('address_from')->asInstanceOf('\\ShippoClient\\Entity\\Location');
+        $addressFrom = $this->attributes->mayHave('address_from')->asArray();
+
+        return new Location($addressFrom);
     }
 
     /**
@@ -46,7 +48,9 @@ class Tracks
      */
     public function getAddressTo()
     {
-        return $this->attributes->mayHave('address_to')->asInstanceOf('\\ShippoClient\\Entity\\Location');
+        $addressTo = $this->attributes->mayHave('address_to')->asArray();
+
+        return new Location($addressTo);
     }
 
     /**

@@ -20,4 +20,14 @@ class Tracks
 
         return new StandaloneTrack($responseArray);
     }
+
+    public function create($carrier, $trackingNumber)
+    {
+        $responseArray = $this->request->post('tracks/', [
+            'carrier'         => $carrier,
+            'tracking_number' => $trackingNumber,
+        ]);
+
+        return new StandaloneTrack($responseArray);
+    }
 }

@@ -3,6 +3,7 @@
 namespace ShippoClient\Http\Tracks;
 
 use AssertChain\AssertChain;
+use ShippoClient\Http\Response\Exception\ClientErrorException;
 use ShippoClient\ShippoClient;
 
 class ValidRequestTest extends \PHPUnit_Framework_TestCase
@@ -94,5 +95,34 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->arrayHasKey('tracking_status', $responseArray)
             ->arrayHasKey('tracking_history', $responseArray)
             ->arrayHasKey('tracking_number', $responseArray);
+    }
+
+    /**
+     * shippo return 200 even if tracking number is invalid
+     */
+    public function testCreateWithInvalidTrackingNumber()
+    {
+        $accessToken = getenv('SHIPPO_PRIVATE_ACCESS_TOKEN');
+        $this->assertNotFalse($accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+        $response = ShippoClient::provider($accessToken)->tracks()->create('usps', 12345);
+
+        // shippo return 200 even if tracking number is invalid
+        $this->assertInstanceOf('ShippoClient\\Entity\\StandaloneTrack', $response);
+    }
+
+    /**
+     * shippo return 400 if carrier is invalid
+     */
+    public function testCreateWithInvalidTrackingCarrier()
+    {
+        try {
+            // shippo return 400 if carrier is invalid
+            $accessToken = getenv('SHIPPO_PRIVATE_ACCESS_TOKEN');
+            $this->assertNotFalse($accessToken, 'You should set env SHIPPO_PRIVATE_ACCESS_TOKEN.');
+            ShippoClient::provider($accessToken)->tracks()->create('invalid carrier', 12345);
+            $this->fail('shippo will return 400 if carrier is invalid');
+        } catch (ClientErrorException $e) {
+            $this->assertSame(400, $e->getStatusCode());
+        }
     }
 }

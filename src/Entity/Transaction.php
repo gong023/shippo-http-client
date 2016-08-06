@@ -14,9 +14,6 @@ class Transaction extends ObjectInformation
         mayHaveAsString  as public getCustomsNote;
         mayHaveAsString  as public getSubmissionNote;
         mayHaveAsString  as public getMetadata;
-        mayHaveAsBoolean as public getNotificationEmailFrom;
-        mayHaveAsBoolean as public getNotificationEmailTo;
-        mayHaveAsString  as public getNotificationEmailOther;
         toArray          as public __toArray;
     }
 

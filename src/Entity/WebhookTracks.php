@@ -14,7 +14,6 @@ class WebhookTracks
     use ReadableAttributes {
         // tracks object properties
         mayHaveAsString as public getCarrier;
-        mayHaveAsString as public getTrackingNumber;
         mayHaveAsString as public getEta;
         // transaction object properties
         mayHaveAsString as public getObjectState;

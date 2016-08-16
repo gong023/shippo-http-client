@@ -2,7 +2,7 @@
 
 namespace ShippoClient;
 
-use ShippoClient\Entity\StandaloneTrack;
+use ShippoClient\Entity\Tracks as TracksResponse;
 use ShippoClient\Http\Request;
 
 class Tracks
@@ -18,7 +18,7 @@ class Tracks
     {
         $responseArray = $this->request->get("tracks/$carrier/$trackingNumber");
 
-        return new StandaloneTrack($responseArray);
+        return new TracksResponse($responseArray);
     }
 
     public function create($carrier, $trackingNumber)
@@ -28,6 +28,6 @@ class Tracks
             'tracking_number' => $trackingNumber,
         ]);
 
-        return new StandaloneTrack($responseArray);
+        return new TracksResponse($responseArray);
     }
 }

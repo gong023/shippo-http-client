@@ -5,15 +5,15 @@ namespace ShippoClient\Entity;
 use TurmericSpice\Container;
 use TurmericSpice\ReadableAttributes;
 
+/**
+ * @property \TurmericSpice\Container attributes
+ */
 class Transaction extends ObjectInformation
 {
     use ReadableAttributes {
         mayHaveAsString  as public getCustomsNote;
         mayHaveAsString  as public getSubmissionNote;
         mayHaveAsString  as public getMetadata;
-        mayHaveAsBoolean as public getNotificationEmailFrom;
-        mayHaveAsBoolean as public getNotificationEmailTo;
-        mayHaveAsString  as public getNotificationEmailOther;
         toArray          as public __toArray;
     }
 
@@ -52,14 +52,6 @@ class Transaction extends ObjectInformation
     public function getRate()
     {
         return $this->attributes->mayHave('rate')->asString();
-    }
-
-    /**
-     * @return mixed|null
-     */
-    public function getPickupDate()
-    {
-        return $this->attributes->mayHave('pickup_date')->value();
     }
 
     /**

@@ -37,10 +37,6 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             "order"                    => "",
             "submission_note"          => "",
             "metadata"                 => "",
-            "pickup_date"              => '2014-07-25T02:09:34.422Z',
-            "notification_email_from"  => 'api@goshippo.com',
-            "notification_email_to"    => 'api@goshippo.com',
-            "notification_email_other" => 'api@goshippo.com',
         ]);
         $transaction = ShippoClient::provider('dummy token')->transactions()->purchase('dummy rate object id');
 
@@ -55,10 +51,6 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             ->notEmpty($transactionArray['object_owner'])
             ->internalType('bool', $transactionArray['was_test'])
             ->notEmpty($transactionArray['rate'])
-            ->arrayHasKey('pickup_date', $transactionArray)
-            ->arrayHasKey('notification_email_from', $transactionArray)
-            ->arrayHasKey('notification_email_to', $transactionArray)
-            ->arrayHasKey('notification_email_other', $transactionArray)
             ->arrayHasKey('tracking_number', $transactionArray)
             ->arrayHasKey('tracking_status', $transactionArray)
             ->internalType('array', $transactionArray['tracking_history'])
@@ -98,10 +90,6 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
             "order"                    => "",
             "submission_note"          => "",
             "metadata"                 => "",
-            "pickup_date"              => '2014-07-25T02:09:34.422Z',
-            "notification_email_from"  => 'api@goshippo.com',
-            "notification_email_to"    => 'api@goshippo.com',
-            "notification_email_other" => 'api@goshippo.com',
         ];
         ShippoClient::mock()->add("transactions/" . $dummyObjectId, 200, $mockObject);
 
@@ -139,10 +127,6 @@ class ValidRequestTest extends \PHPUnit_Framework_TestCase
                     "order"                    => "",
                     "submission_note"          => "",
                     "metadata"                 => "",
-                    "pickup_date"              => '2014-07-25T02:09:34.422Z',
-                    "notification_email_from"  => 'api@goshippo.com',
-                    "notification_email_to"    => 'api@goshippo.com',
-                    "notification_email_other" => 'api@goshippo.com',
                 ],
             ],
         ]);

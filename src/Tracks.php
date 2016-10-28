@@ -21,11 +21,12 @@ class Tracks
         return new TracksResponse($responseArray);
     }
 
-    public function create($carrier, $trackingNumber)
+    public function create($carrier, $trackingNumber, $metadata = null)
     {
         $responseArray = $this->request->post('tracks/', [
             'carrier'         => $carrier,
             'tracking_number' => $trackingNumber,
+            'metadata'        => $metadata,
         ]);
 
         return new TracksResponse($responseArray);

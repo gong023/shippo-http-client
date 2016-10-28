@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class ShippoClient\Entity\Rate</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-ShippoClient.html">
+						ShippoClient<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-ShippoClient.Entity.html">
+						Entity					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.html">
+						Http<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.html">
+						Request<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Addresses.html">
+						Addresses					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Parcels.html">
+						Parcels					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Shipments.html">
+						Shipments					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Transactions.html">
+						Transactions					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Response.html">
+						Response<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Http.Response.Exception.html">
+						Exception					</a>
+
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-ShippoClient.Entity.Address.html">Address</a></li>
+				<li><a href="class-ShippoClient.Entity.AddressCollection.html">AddressCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.EntityCollection.html">EntityCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.Location.html">Location</a></li>
+				<li><a href="class-ShippoClient.Entity.ObjectInformation.html">ObjectInformation</a></li>
+				<li><a href="class-ShippoClient.Entity.Parcel.html">Parcel</a></li>
+				<li><a href="class-ShippoClient.Entity.ParcelCollection.html">ParcelCollection</a></li>
+				<li class="active"><a href="class-ShippoClient.Entity.Rate.html">Rate</a></li>
+				<li><a href="class-ShippoClient.Entity.RateCollection.html">RateCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.Refund.html">Refund</a></li>
+				<li><a href="class-ShippoClient.Entity.RefundCollection.html">RefundCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.ServiceLevel.html">ServiceLevel</a></li>
+				<li><a href="class-ShippoClient.Entity.Shipment.html">Shipment</a></li>
+				<li><a href="class-ShippoClient.Entity.ShipmentCollection.html">ShipmentCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.TrackingHistory.html">TrackingHistory</a></li>
+				<li><a href="class-ShippoClient.Entity.TrackingStatus.html">TrackingStatus</a></li>
+				<li><a href="class-ShippoClient.Entity.Tracks.html">Tracks</a></li>
+				<li><a href="class-ShippoClient.Entity.Transaction.html">Transaction</a></li>
+				<li><a href="class-ShippoClient.Entity.TransactionCollection.html">TransactionCollection</a></li>
+				<li><a href="class-ShippoClient.Entity.WebhookTracks.html">WebhookTracks</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-ShippoClient.Entity.html" title="Summary of ShippoClient\Entity"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Rate</h1>
+
+
+	<div class="description">
+	<p>Each valid Shipment object will automatically trigger the calculation of all available Rates.
+Depending on your Addresses and Parcel, there may be none, one or multiple Rates.</p>
+
+<p>By default, the calculated Rates will return the price in two currencies under the "amount" and "amount_local" keys, respectively.
+The "amount" key will contain the price of a Rate expressed in the currency that is used in the country from which Parcel originates,
+and the "amount_local" key will contain the price expressed in the currency that is used in the country the Parcel is shipped to.
+You can request Rates with prices expressed in a different currency by adding the desired currency code in the end of the resource URL.
+The full list of supported currencies along with their codes can be viewed on open exchange rates.</p>
+
+<p>Rates are created asynchronously. The response time depends exclusively on the carrier's server.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-ShippoClient.Entity.ObjectInformation.html"><span>ShippoClient\Entity\ObjectInformation</span></a>
+			
+			
+			 uses 
+					TurmericSpice\ReadableAttributes (not available)
+
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>ShippoClient\Entity\Rate</span></b>			
+			
+			 uses 
+					TurmericSpice\ReadableAttributes (not available)
+
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-ShippoClient.html">ShippoClient</a>\<a href="namespace-ShippoClient.Entity.html">Entity</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-ShippoClient.Entity.Rate.html#8-95" title="Go to source code">Entity/Rate.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="getAvailableShippo" id="_getAvailableShippo">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAvailableShippo">#</a>
+		<code><a href="source-class-ShippoClient.Entity.Rate.html#46-54" title="Go to source code">getAvailableShippo</a>( )</code>
+
+		<div class="description short">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getOutboundEndpoint" id="_getOutboundEndpoint">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getOutboundEndpoint">#</a>
+		<code><a href="source-class-ShippoClient.Entity.Rate.html#56-64" title="Go to source code">getOutboundEndpoint</a>( )</code>
+
+		<div class="description short">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInboundEndpoint" id="_getInboundEndpoint">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInboundEndpoint">#</a>
+		<code><a href="source-class-ShippoClient.Entity.Rate.html#66-74" title="Go to source code">getInboundEndpoint</a>( )</code>
+
+		<div class="description short">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getArrivesBy" id="_getArrivesBy">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getArrivesBy">#</a>
+		<code><a href="source-class-ShippoClient.Entity.Rate.html#76-84" title="Go to source code">getArrivesBy</a>( )</code>
+
+		<div class="description short">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDeliveryAttempts" id="_getDeliveryAttempts">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDeliveryAttempts">#</a>
+		<code><a href="source-class-ShippoClient.Entity.Rate.html#86-94" title="Go to source code">getDeliveryAttempts</a>( )</code>
+
+		<div class="description short">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Description is not found in Shippo API doc, but this key is returned in fact.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-ShippoClient.Entity.ObjectInformation.html#methods">ShippoClient\Entity\ObjectInformation</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-ShippoClient.Entity.ObjectInformation.html#_getObjectCreated">getObjectCreated()</a>, 
+			<a href="class-ShippoClient.Entity.ObjectInformation.html#_getObjectUpdated">getObjectUpdated()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

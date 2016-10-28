@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class ShippoClient\Http\Request\Shipments\CreateObject</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-ShippoClient.html">
+						ShippoClient<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Entity.html">
+						Entity					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-ShippoClient.Http.html">
+						Http<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-ShippoClient.Http.Request.html">
+						Request<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Addresses.html">
+						Addresses					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Parcels.html">
+						Parcels					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-ShippoClient.Http.Request.Shipments.html">
+						Shipments					</a>
+
+						</li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Request.Transactions.html">
+						Transactions					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-ShippoClient.Http.Response.html">
+						Response<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-ShippoClient.Http.Response.Exception.html">
+						Exception					</a>
+
+						</li>
+							</ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-ShippoClient.Http.Request.Shipments.CreateObject.html">CreateObject</a></li>
+				<li><a href="class-ShippoClient.Http.Request.Shipments.CreateObjectByNested.html">CreateObjectByNested</a></li>
+				<li><a href="class-ShippoClient.Http.Request.Shipments.CreateReturnObject.html">CreateReturnObject</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-ShippoClient.Http.Request.Shipments.html" title="Summary of ShippoClient\Http\Request\Shipments"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class CreateObject</h1>
+
+
+	<div class="description">
+	<p>The heart of the Shippo API, a Shipment is made up of "to" and "from" Address and the Parcel to be shipped.
+Once created, a Shipment object can be used to retrieve shipping Rates and purchase a shipping Label.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-ShippoClient.Http.Request.CommonParameter.html"><span>ShippoClient\Http\Request\CommonParameter</span></a>
+			
+			
+			 uses 
+					TurmericSpice\ReadWriteAttributes (not available)
+
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>ShippoClient\Http\Request\Shipments\CreateObject</span></b>			
+			
+			 uses 
+					TurmericSpice\ReadWriteAttributes (not available)
+
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-ShippoClient.Http.Request.Shipments.CreateObjectByNested.html">ShippoClient\Http\Request\Shipments\CreateObjectByNested</a>, 
+			<a href="class-ShippoClient.Http.Request.Shipments.CreateReturnObject.html">ShippoClient\Http\Request\Shipments\CreateReturnObject</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-ShippoClient.html">ShippoClient</a>\<a href="namespace-ShippoClient.Http.html">Http</a>\<a href="namespace-ShippoClient.Http.Request.html">Request</a>\<a href="namespace-ShippoClient.Http.Request.Shipments.html">Shipments</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#10-273" title="Go to source code">Http/Request/Shipments/CreateObject.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="getObjectPurpose" id="_getObjectPurpose">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getObjectPurpose">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#25-43" title="Go to source code">getObjectPurpose</a>( )</code>
+
+		<div class="description short">
+			<p>Quote Shipment can only be used to obtain quote Rates;
+at the same time, they accept any valid or completed Address object.
+Purchase Shipment can be used to obtain Rates and purchase Labels,
+but only accept purchase Address that have been fully entered.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Quote Shipment can only be used to obtain quote Rates;
+at the same time, they accept any valid or completed Address object.
+Purchase Shipment can be used to obtain Rates and purchase Labels,
+but only accept purchase Address that have been fully entered.</p>
+
+<p>Required</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAddressFrom" id="_getAddressFrom">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAddressFrom">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#45-56" title="Go to source code">getAddressFrom</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Address object that should be used as sender Address.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Address object that should be used as sender Address.</p>
+
+<p>Required</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAddressTo" id="_getAddressTo">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAddressTo">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#58-69" title="Go to source code">getAddressTo</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Address object that should be used as recipient Address.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Address object that should be used as recipient Address.</p>
+
+<p>Required</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getParcel" id="_getParcel">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getParcel">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#71-82" title="Go to source code">getParcel</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Parcel object to be shipped.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Parcel object to be shipped.</p>
+
+<p>Required</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSubmissionType" id="_getSubmissionType">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSubmissionType">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#84-106" title="Go to source code">getSubmissionType</a>( )</code>
+
+		<div class="description short">
+			<p>Indicates whether the parcel will be dropped off at a carrier location or will be picked up.
+Selecting 'PICKUP' does not request a carrier pickup.
+A pickup always needs to be requested separately.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Indicates whether the parcel will be dropped off at a carrier location or will be picked up.
+Selecting 'PICKUP' does not request a carrier pickup.
+A pickup always needs to be requested separately.</p>
+
+<p>Optional, defaults to DROPOFF</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getReturnOf" id="_getReturnOf">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getReturnOf">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#108-120" title="Go to source code">getReturnOf</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Transaction object of the outbound shipment.
+This field triggers the creation of a scan-based return shipments.
+See the Create a return shipment section for more details.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Transaction object of the outbound shipment.
+This field triggers the creation of a scan-based return shipments.
+See the Create a return shipment section for more details.</p>
+
+<p>Required for return labels</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSubmissionDate" id="_getSubmissionDate">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSubmissionDate">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#122-151" title="Go to source code">getSubmissionDate</a>( )</code>
+
+		<div class="description short">
+			<p>Desired pickup date. Must be in the format "2014-01-18T00:35:03.463Z" (ISO 8601 date).
+Please note that for some carriers, not all pickup dates are available.
+The API will return the corresponding error message if not available.
+If no pickup_date is given, the value will default to tomorrow's date
+(including Saturday or Sunday, which can lead to no carrier availability).</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Desired pickup date. Must be in the format "2014-01-18T00:35:03.463Z" (ISO 8601 date).
+Please note that for some carriers, not all pickup dates are available.
+The API will return the corresponding error message if not available.
+If no pickup_date is given, the value will default to tomorrow's date
+(including Saturday or Sunday, which can lead to no carrier availability).</p>
+
+<p>Required if submission_type is 'PICKUP'. Defaults to current date (UTC) for 'DROPOFF'</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAddressReturn" id="_getAddressReturn">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAddressReturn">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#153-165" title="Go to source code">getAddressReturn</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Address object where the shipment will be sent back to if it is not delivered
+(Only available for UPS, USPS, and Fedex shipments).
+If this field is not set, your shipments will be returned to the address_form.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Address object where the shipment will be sent back to if it is not delivered
+(Only available for UPS, USPS, and Fedex shipments).
+If this field is not set, your shipments will be returned to the address_form.</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCustomsDeclaration" id="_getCustomsDeclaration">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCustomsDeclaration">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#167-177" title="Go to source code">getCustomsDeclaration</a>( )</code>
+
+		<div class="description short">
+			<p>ID of the Customs Declarations object for an international shipment.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>ID of the Customs Declarations object for an international shipment.</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInsuranceAmount" id="_getInsuranceAmount">
+
+		<td class="attributes"><code>
+			 public 
+
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInsuranceAmount">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#179-191" title="Go to source code">getInsuranceAmount</a>( )</code>
+
+		<div class="description short">
+			<p>Total Parcel value to be insured.
+Please note that you need to specify the "insurance_currency" as well as the "insurance_content"
+(via the extra field below, if your package content is not general cargo) as well.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Total Parcel value to be insured.
+Please note that you need to specify the "insurance_currency" as well as the "insurance_content"
+(via the extra field below, if your package content is not general cargo) as well.</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					float
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInsuranceCurrency" id="_getInsuranceCurrency">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInsuranceCurrency">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#193-209" title="Go to source code">getInsuranceCurrency</a>( )</code>
+
+		<div class="description short">
+			<p>Currency used for insurance_amount.
+The official ISO 4217 currency codes are used, e.g. "USD" or "EUR".</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Currency used for insurance_amount.
+The official ISO 4217 currency codes are used, e.g. "USD" or "EUR".</p>
+
+<p>Required if insurance_amount is set</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					TurmericSpice\Container\InvalidAttributeException
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getExtra" id="_getExtra">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getExtra">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#211-231" title="Go to source code">getExtra</a>( )</code>
+
+		<div class="description short">
+			<p>An array of extra services to be requested.
+The following services are currently available. We are continuously adding new ones.
+    - signature_confirmation (string, "standard" for standard signature confirmation, "adult" for adult signature)
+    - insurance_content (string, specify package content for insurance)
+    - saturday_delivery (boolean, marks shipment as to be delivered on a Saturday)
+    - bypass_address_validation (boolean, bypassed address validation, if applicable)
+    - use_manifests (boolean, shipment to be linked with a manifest (Canada Post only), if applicable)
+    - saturday_delivery (boolean, marks shipment as to be delivered on a Saturday. Available for UPS and FedEx.)
+    - bypass_address_validation (boolean, bypassed address validation. Available for USPS, FedEx and UPS.)
+    - request_retail_rates (boolean, request retail/list rates. Available for FedEx.)
+    - use_manifests (boolean, shipment to be linked with a manifest (Canada Post only), if applicable)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>An array of extra services to be requested.
+The following services are currently available. We are continuously adding new ones. - signature_confirmation (string, "standard" for standard signature confirmation, "adult" for adult signature) - insurance_content (string, specify package content for insurance) - saturday_delivery (boolean, marks shipment as to be delivered on a Saturday) - bypass_address_validation (boolean, bypassed address validation, if applicable) - use_manifests (boolean, shipment to be linked with a manifest (Canada Post only), if applicable) - saturday_delivery (boolean, marks shipment as to be delivered on a Saturday. Available for UPS and FedEx.) - bypass_address_validation (boolean, bypassed address validation. Available for USPS, FedEx and UPS.) - request_retail_rates (boolean, request retail/list rates. Available for FedEx.) - use_manifests (boolean, shipment to be linked with a manifest (Canada Post only), if applicable)</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getReference1" id="_getReference1">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getReference1">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#233-243" title="Go to source code">getReference1</a>( )</code>
+
+		<div class="description short">
+			<p>Optional text to be printed on the shipping label.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Optional text to be printed on the shipping label.</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getReference2" id="_getReference2">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getReference2">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#245-255" title="Go to source code">getReference2</a>( )</code>
+
+		<div class="description short">
+			<p>Optional text to be printed on the shipping label.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Optional text to be printed on the shipping label.</p>
+
+<p>Optional</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCarrierAccounts" id="_getCarrierAccounts">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCarrierAccounts">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#257-267" title="Go to source code">getCarrierAccounts</a>( )</code>
+
+		<div class="description short">
+			<p>An array of object_ids of the carrier account objects to be used for getting shipping rates for this shipment.
+If no carrier account object_ids are set in this field,
+Shippo will attempt to generate rates using all the carrier accounts that have the 'active' field set.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>An array of object_ids of the carrier account objects to be used for getting shipping rates for this shipment.
+If no carrier account object_ids are set in this field,
+Shippo will attempt to generate rates using all the carrier accounts that have the 'active' field set.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toArray" id="_toArray">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toArray">#</a>
+		<code><a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#269-272" title="Go to source code">toArray</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-ShippoClient.Http.Request.CommonParameter.html#methods">ShippoClient\Http\Request\CommonParameter</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-ShippoClient.Http.Request.CommonParameter.html#_getMetadata">getMetadata()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+	<table class="summary constants" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="OBJECT_PURPOSE_QUOTE" id="OBJECT_PURPOSE_QUOTE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#20" title="Go to source code"><b>OBJECT_PURPOSE_QUOTE</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#OBJECT_PURPOSE_QUOTE" class="anchor">#</a>
+				<code><span class="php-quote">'QUOTE'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="OBJECT_PURPOSE_PURCHASE" id="OBJECT_PURPOSE_PURCHASE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#21" title="Go to source code"><b>OBJECT_PURPOSE_PURCHASE</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#OBJECT_PURPOSE_PURCHASE" class="anchor">#</a>
+				<code><span class="php-quote">'PURCHASE'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="SUBMISSION_TYPE_DROPOFF" id="SUBMISSION_TYPE_DROPOFF">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#22" title="Go to source code"><b>SUBMISSION_TYPE_DROPOFF</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#SUBMISSION_TYPE_DROPOFF" class="anchor">#</a>
+				<code><span class="php-quote">'DROPOFF'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="SUBMISSION_TYPE_PICKUP" id="SUBMISSION_TYPE_PICKUP">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-ShippoClient.Http.Request.Shipments.CreateObject.html#23" title="Go to source code"><b>SUBMISSION_TYPE_PICKUP</b></a>
+			</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#SUBMISSION_TYPE_PICKUP" class="anchor">#</a>
+				<code><span class="php-quote">'PICKUP'</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

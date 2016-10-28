@@ -10,6 +10,7 @@ class Tracks
         mayHaveAsString as public getCarrier;
         mayHaveAsString as public getTrackingNumber;
         mayHaveAsString as public getEta;
+        mayHaveAsString as public getMetadata;
         toArray as public __toArray;
     }
 

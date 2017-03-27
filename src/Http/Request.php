@@ -13,7 +13,7 @@ class Request
 {
     const BASE_URI = 'https://api.goshippo.com/v1/';
 
-    private $delegated;
+    protected $delegated;
     private $mockContainer;
 
     public function __construct($accessToken)

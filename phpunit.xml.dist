@@ -5,6 +5,9 @@
         <testsuite name="ShippoClient Test Suite">
             <directory suffix="Test.php">tests/ShippoClient/</directory>
         </testsuite>
+        <testsuite name="ShippoClientV2 Test Suite">
+            <directory suffix="Test.php">tests/ShippoClientV2/</directory>
+        </testsuite>
     </testsuites>
 
     <filter>

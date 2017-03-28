@@ -4,7 +4,6 @@ namespace ShippoClient\Http\Request;
 
 use Guzzle\Http\Message\Response;
 use Guzzle\Plugin\Mock\MockPlugin;
-use ShippoClient\Http\Request;
 
 class MockCollection
 {

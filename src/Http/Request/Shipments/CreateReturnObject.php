@@ -2,7 +2,6 @@
 
 namespace ShippoClient\Http\Request\Shipments;
 
-use TurmericSpice\Container;
 use TurmericSpice\ReadableAttributes;
 
 class CreateReturnObject extends CreateObject

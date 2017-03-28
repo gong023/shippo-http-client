@@ -3,7 +3,6 @@
 namespace ShippoClient\Http\Request\Shipments;
 
 use ShippoClient\Http\Request\CommonParameter;
-use TurmericSpice\Container;
 use TurmericSpice\Container\InvalidAttributeException;
 use TurmericSpice\ReadWriteAttributes;
 

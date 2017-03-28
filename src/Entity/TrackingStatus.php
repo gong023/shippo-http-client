@@ -8,7 +8,6 @@ class TrackingStatus
 {
     use ReadableAttributes {
         mayHaveAsString as public getStatusDetails;
-        mayHaveAsString as public getStatusDate;
         toArray as __toArray;
     }
 
@@ -30,6 +29,16 @@ class TrackingStatus
     public function getObjectUpdated()
     {
         return $this->attributes->mayHave('object_updated')->asInstanceOf('\\DateTime');
+    }
+
+    /**
+     * Date and time when the carrier has scanned this tracking event.
+     *
+     * @return \DateTime
+     */
+    public function getStatusDate()
+    {
+        return $this->attributes->mayHave('status_date')->asInstanceOf('\\DateTime');
     }
 
     /**

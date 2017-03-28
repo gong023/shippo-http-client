@@ -2,7 +2,6 @@
 
 namespace ShippoClient\Entity;
 
-use TurmericSpice\Container;
 use TurmericSpice\ReadableAttributes;
 
 /**

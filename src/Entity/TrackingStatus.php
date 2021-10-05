@@ -69,6 +69,16 @@ class TrackingStatus
         return new Location($attributes);
     }
 
+    /**
+     * @return Substatus
+     */
+    public function getSubstatus()
+    {
+        $attributes = $this->attributes->mayHave('substatus')->asArray();
+
+        return new Substatus($attributes);
+    }
+
     public function toArray()
     {
         return [
@@ -78,6 +88,7 @@ class TrackingStatus
             'status'         => $this->getStatus(),
             'status_date'    => $this->getStatusDate(),
             'status_details' => $this->getStatusDetails(),
+            'substatus'      => $this->getSubstatus()->toArray(),
             'location'       => $this->getLocation()->toArray(),
         ];
     }

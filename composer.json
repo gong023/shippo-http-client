@@ -7,20 +7,26 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "guzzle/guzzle": "~3.7",
+        "php": ">=8.0",
+        "guzzle/guzzle": "dev-master",
         "gong023/turmeric-spice": "^0.2"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
-        "fabpot/php-cs-fixer": "1.*",
         "mockery/mockery": "0.9.*",
-        "satooshi/php-coveralls": "dev-master",
-        "gong023/assert_chain": "0.1.0"
+        "gong023/assert_chain": "0.1.0",
+        "php-coveralls/php-coveralls": "^2.5",
+        "fabpot/php-cs-fixer": "^3.8"
     },
     "autoload": {
         "psr-4": {
             "ShippoClient\\": "src"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:ATOM594/guzzle3.git"
+        }
+    ]
 }

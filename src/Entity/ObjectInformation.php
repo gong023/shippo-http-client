@@ -2,6 +2,7 @@
 
 namespace ShippoClient\Entity;
 
+use TurmericSpice\Container\OptionalValue;
 use TurmericSpice\ReadableAttributes;
 
 class ObjectInformation
@@ -21,7 +22,12 @@ class ObjectInformation
      */
     public function getObjectCreated()
     {
-        return $this->attributes->mayHave('object_created')->asInstanceOf('\\DateTime');
+        $optionalValue = $this->attributes->mayHave('object_created');
+        if ($optionalValue->value() === null) {
+            $optionalValue = new OptionalValue('object_created', '');
+        }
+
+        return $optionalValue->asInstanceOf('\\DateTime');
     }
 
     /**
@@ -31,6 +37,11 @@ class ObjectInformation
      */
     public function getObjectUpdated()
     {
-        return $this->attributes->mayHave('object_updated')->asInstanceOf('\\DateTime');
+        $optionalValue = $this->attributes->mayHave('object_updated');
+        if ($optionalValue->value() === null) {
+            $optionalValue = new OptionalValue('object_updated', '');
+        }
+
+        return $optionalValue->asInstanceOf('\\DateTime');
     }
 }
